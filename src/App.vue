@@ -9,18 +9,19 @@
       </div>
     </transition>
 
-    <RouterView />
+    <baseLayout />
   </div>
 </template>
 
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import { ref, onMounted } from 'vue'
+import baseLayout from '@/components/baseLayout.vue'
 
 const isIntroVisible = ref(true)
 
 onMounted(() => {
-  // 4초 후 intro를 숨기고 메인 화면으로 전환
+  // 3초 후 intro를 숨기고 메인 화면으로 전환
   setTimeout(() => {
     isIntroVisible.value = false
   }, 3000)
@@ -40,7 +41,7 @@ onMounted(() => {
   align-items: center;
   background-color: white;
   overflow: hidden;
-  z-index: 1000;
+  z-index: 1001;
   .intro-text {
     color: black;
     font-size: 24px;
@@ -50,15 +51,15 @@ onMounted(() => {
     border-right: 2px solid;
     width: 21ch;
     animation:
-      typing 1.5s steps(21, end),
+      typing 2s steps(21, end),
       blink-caret 0.5s step-end infinite;
   }
   .intro-myName {
-    color: transparent; /* 처음에는 투명하게 설정 */
+    color: transparent;
     padding-top: 4px;
     font-size: 24px;
     animation: fadeIn 1s ease forwards;
-    animation-delay: 1s; /* 2초 뒤에 시작 */
+    animation-delay: 1.5s;
   }
 }
 
@@ -94,7 +95,7 @@ onMounted(() => {
 }
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 1s ease;
+  transition: opacity 1.5s ease;
 }
 .fade-enter,
 .fade-leave-to {

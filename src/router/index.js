@@ -6,12 +6,12 @@ const router = createRouter({
     {
       path: '/',
       name: 'mainView',
-      component: import('@/views/mainView/mainView.vue')
-    }
-  ]
+      component: () => import('@/views/mainView/mainView.vue'),
+    },
+  ],
 })
 
 router.beforeEach(async (to, from, next) => {
- next()
-}) 
+  next()
+})
 export default router
