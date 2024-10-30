@@ -4,7 +4,7 @@
       <div v-if="isIntroVisible" class="intro-background">
         <p class="intro-text medium-text">The journey is the reward.</p>
         <p class="intro-myName bold-text">
-          <b>프론트엔드 개발자</b> 이채원 <b>입니다. 수정 테스트</b>
+          <b>프론트엔드 개발자</b> 이채원 <b>입니다.</b>
         </p>
       </div>
     </transition>
