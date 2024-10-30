@@ -23,7 +23,7 @@ onMounted(() => {
   // 4초 후 intro를 숨기고 메인 화면으로 전환
   setTimeout(() => {
     isIntroVisible.value = false
-  }, 5000)
+  }, 3000)
 })
 </script>
 
@@ -50,7 +50,7 @@ onMounted(() => {
     border-right: 2px solid;
     width: 21ch;
     animation:
-      typing 2s steps(21, end),
+      typing 1.5s steps(21, end),
       blink-caret 0.5s step-end infinite;
   }
   .intro-myName {
@@ -58,7 +58,7 @@ onMounted(() => {
     padding-top: 4px;
     font-size: 24px;
     animation: fadeIn 1s ease forwards;
-    animation-delay: 2s; /* 2초 뒤에 시작 */
+    animation-delay: 1s; /* 2초 뒤에 시작 */
   }
 }
 
