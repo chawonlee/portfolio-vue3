@@ -1,5 +1,7 @@
 <template>
-  <section class="header">header</section>
+  <section class="header">
+    <img src="../assets/image/Logo.png" />
+  </section>
 </template>
 <script setup></script>
 <style lang="scss">
@@ -11,8 +13,9 @@
   height: 68px;
   line-height: 68px;
   backdrop-filter: blur(10px);
-  color: #fff;
-  background-color: black;
+  color: black;
+  background: rgb(255 255 255 / 29%);
   z-index: 1000;
+  padding: 0 18%;
 }
 </style>
