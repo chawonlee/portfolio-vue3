@@ -58,11 +58,14 @@
 }
 
 body {
-  min-height: 100vh;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* 전체 높이 사용 */
   margin: 0;
   padding: 0;
-  color: var(--color-text);
-  background: var(--color-background);
+  overflow-y: auto;
   transition:
     color 0.5s,
     background-color 0.5s;
