@@ -5,16 +5,16 @@
     <!-- 메뉴 -->
     <nav>
       <ul>
-        <li>
+        <li data-text="About">
           <a>About</a>
         </li>
-        <li>
+        <li data-text="Skills">
           <a>Skills</a>
         </li>
-        <li>
+        <li data-text="Projects">
           <a>Projects</a>
         </li>
-        <li>
+        <li data-text="Contact">
           <a>Contact</a>
         </li>
       </ul>
@@ -38,22 +38,34 @@
   z-index: 1000;
   ul li {
     color: #433878;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     display: inline-block;
     margin: 0 15px;
-    transition:
-      font-size 1s ease,
-      color 1s ease; /* font-size와 color 변경 시 부드럽게 변하도록 설정 */
-  }
-  ul li:hover {
-    font-size: 1.3rem;
-    color: #e4b1f0;
-  }
-  ul li:last-child {
-    margin: 0 0 0 15px;
-  }
-  a {
-    font-weight: 600;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.3s ease;
+
+    &::after {
+      content: attr(data-text); /* 현재 텍스트 내용을 그대로 표시 */
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-weight: 600; /* hover 시 강조될 font-weight */
+      // color: #87a2ff;
+      color: #433878;
+      white-space: nowrap;
+      overflow: hidden;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    &:hover::after {
+      opacity: 1;
+    }
+
+    &:hover {
+      color: transparent; /* 본래 글자를 투명하게 처리해 겹쳐보이지 않도록 함 */
+    }
   }
 }
 </style>
