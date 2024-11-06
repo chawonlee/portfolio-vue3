@@ -3,10 +3,17 @@
     <img src="@/assets/image/myPhoto1.jpg" width="30%" class="myPhoto" />
     <div class="intro">
       <div class="title">About</div>
-      <div>
+      <div class="main-text">
         저는 {{ displayText }} 입니다.
-        <button @click="shuffleText" :disabled="isRunning">🔀</button>
+        <v-btn
+          @click="shuffleText"
+          variant="text"
+          :disabled="isRunning"
+          color="#626463"
+          ><v-icon icon="mdi-shuffle-variant" color="secondary"
+        /></v-btn>
       </div>
+      <div>~~~</div>
     </div>
   </section>
 </template>
@@ -29,18 +36,19 @@ const displayText = ref('꾸준히 성장하는 개발자')
 const intervalId = ref(null)
 const isRunning = ref(false)
 
+//👉셔플 버튼 클릭 시
 const shuffleText = () => {
   if (!isRunning.value) {
     isRunning.value = true
     runShuffle()
 
-    // 3초 후 자동 멈춤
+    // 2초 후 자동 멈춤
     setTimeout(() => {
       stopShuffle()
     }, 2000)
   }
 }
-
+//👉 텍스트 랜덤 제공
 const runShuffle = () => {
   if (isRunning.value) {
     displayText.value =
@@ -50,7 +58,7 @@ const runShuffle = () => {
     }, 100)
   }
 }
-
+//👉2초 후 텍스트 랜덤 제공 중지
 const stopShuffle = () => {
   clearTimeout(intervalId.value)
   isRunning.value = false
@@ -73,6 +81,11 @@ const stopShuffle = () => {
       font-weight: 600;
       color: #433878;
       opacity: 0.5;
+    }
+    .main-text {
+      border-bottom: 1.5px solid;
+      padding-bottom: 2px;
+      margin-bottom: 10px;
     }
   }
 }
