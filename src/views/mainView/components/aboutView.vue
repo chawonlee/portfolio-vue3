@@ -112,7 +112,7 @@ const stopShuffle = () => {
       display: flex;
       justify-content: space-between;
       border-bottom: 1.5px solid;
-      padding-bottom: 2px;
+      padding: 8px 0 2px 0;
       margin-bottom: 10px;
     }
     .detail-text {
