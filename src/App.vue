@@ -15,18 +15,36 @@
 </template>
 
 <script setup>
+import Lenis from '@studio-freight/lenis'
 import { RouterLink, RouterView } from 'vue-router'
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import baseLayout from '@/components/baseLayout.vue'
+//componets
 import CursorCustom from './components/cursorCustom.vue'
 
 const isIntroVisible = ref(true)
 
+const lenis = new Lenis({
+  duration: 1.2, // 부드러운 스크롤 속도
+  easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // easing 함수
+  smooth: true, // 기본 부드러운 스크롤 활성화
+  direction: 'vertical', // 스크롤 방향
+})
+
 onMounted(() => {
+  lenis.stop()
   // 3초 후 intro를 숨기고 메인 화면으로 전환
   setTimeout(() => {
     isIntroVisible.value = false
   }, 3000)
+  lenis.start()
+
+  function raf(time) {
+    lenis.raf(time)
+    requestAnimationFrame(raf)
+  }
+
+  requestAnimationFrame(raf)
 })
 </script>
 
