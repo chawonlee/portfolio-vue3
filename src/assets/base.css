@@ -75,6 +75,7 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -ms-overflow-style: none;
 }
 
 .p {
@@ -90,4 +91,13 @@ body {
 
 .bold-text {
   font-weight: 700; /* Bold 폰트 */
+}
+
+::selection {
+  color: white;
+  background-color: #a594f9;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }

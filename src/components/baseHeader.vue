@@ -35,6 +35,7 @@
   backdrop-filter: blur(1.5px);
   color: black;
   background: rgb(255 255 255 / 29%);
+  border-bottom: 1px solid #f8f0fc;
   z-index: 101;
   ul li {
     color: #433878;
@@ -45,26 +46,24 @@
     position: relative;
     transition: color 0.3s ease;
 
+    /* 하단 바 설정 */
     &::after {
-      content: attr(data-text); /* 현재 텍스트 내용을 그대로 표시 */
+      content: '';
       position: absolute;
+      bottom: -20px; /* 글자 아래에 배치 */
       left: 0;
-      top: 0;
-      font-weight: 600; /* hover 시 강조될 font-weight */
-      // color: #87a2ff;
-      color: #433878;
-      white-space: nowrap;
-      overflow: hidden;
-      opacity: 0;
-      transition: opacity 0.3s ease;
+      width: 0%; /* 초기 너비는 0% */
+      height: 3px; /* 바 높이 */
+      background-color: #433878; /* 바 색상 */
+      transition:
+        width 0.5s ease,
+        left 0.5s ease; /* 애니메이션 설정 */
     }
 
+    /* hover 효과 */
     &:hover::after {
-      opacity: 1;
-    }
-
-    &:hover {
-      color: transparent; /* 본래 글자를 투명하게 처리해 겹쳐보이지 않도록 함 */
+      width: 100%; /* 전체 너비로 확장 */
+      left: 0; /* 왼쪽에서 시작 */
     }
   }
 }
