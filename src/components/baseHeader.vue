@@ -35,7 +35,7 @@
   backdrop-filter: blur(1.5px);
   color: black;
   background: rgb(255 255 255 / 29%);
-  z-index: 1000;
+  z-index: 101;
   ul li {
     color: #433878;
     font-size: 1.1rem;

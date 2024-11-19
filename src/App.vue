@@ -10,13 +10,15 @@
     </transition>
 
     <baseLayout />
+    <CursorCustom />
   </div>
 </template>
 
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import baseLayout from '@/components/baseLayout.vue'
+import CursorCustom from './components/cursorCustom.vue'
 
 const isIntroVisible = ref(true)
 
@@ -41,7 +43,7 @@ onMounted(() => {
   align-items: center;
   background-color: white;
   overflow: hidden;
-  z-index: 1001;
+  z-index: 200;
   .intro-text {
     color: black;
     font-size: 24px;
@@ -104,5 +106,30 @@ onMounted(() => {
 .main-content {
   padding: 20px;
   text-align: center;
+}
+
+/* 커서 스타일 */
+.Cursor {
+  pointer-events: none;
+  position: fixed;
+  display: block;
+  border-radius: 0;
+  transform-origin: center center;
+  mix-blend-mode: difference;
+  top: 0;
+  left: 0;
+  z-index: 3000;
+  filter: url('#goo');
+}
+
+.Cursor span {
+  position: absolute;
+  display: block;
+  width: 26px;
+  height: 26px;
+  border-radius: 20px;
+  background-color: white;
+  transform-origin: center center;
+  transform: translate(-50%, -50%);
 }
 </style>

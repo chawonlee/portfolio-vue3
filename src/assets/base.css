@@ -58,6 +58,7 @@
 }
 
 body {
+  cursor: none; /* 기본 커서 숨김 */
   background: white;
   display: flex;
   align-items: center;
