@@ -60,10 +60,6 @@
 body {
   cursor: none; /* 기본 커서 숨김 */
   background: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh; /* 전체 높이 사용 */
   margin: 0;
   padding: 0;
   overflow-y: auto;

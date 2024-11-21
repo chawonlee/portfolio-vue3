@@ -1,69 +1,61 @@
 <template>
-  <section class="header">
-    <!-- 로고 -->
-    <img src="../assets/image/Logo.png" />
-    <!-- 메뉴 -->
-    <nav>
-      <ul>
-        <li data-text="About">
-          <a>About</a>
+  <header class="header">
+    <nav class="nav">
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a href="#logo"><img src="../assets/image/Logo.png" /></a>
         </li>
-        <li data-text="Skills">
-          <a>Skills</a>
-        </li>
-        <li data-text="Projects">
-          <a>Projects</a>
-        </li>
-        <li data-text="Contact">
-          <a>Contact</a>
-        </li>
+        <li class="nav-item"><a href="#about">About</a></li>
+        <li class="nav-item"><a href="#skills">Skills</a></li>
+        <li class="nav-item"><a href="#projects">Projects</a></li>
+        <li class="nav-item"><a href="#contact">Contact</a></li>
       </ul>
     </nav>
-  </section>
+  </header>
 </template>
 <script setup></script>
 <style lang="scss">
 .header {
-  position: absolute; /* 부모 요소(#app)를 기준으로 위치 */
-  justify-content: space-between; /* img와 nav를 양쪽 끝에 배치 */
-  align-items: center; /* 수직 중앙 정렬 */
-  display: flex;
+  position: sticky; /* 부모 요소(#app)를 기준으로 위치 */
   top: 0;
-  left: auto;
   width: 100%;
   height: 68px;
-  backdrop-filter: blur(1.5px);
+  backdrop-filter: blur(3px);
   color: black;
   background: rgb(255 255 255 / 29%);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
   border-bottom: 1px solid #f8f0fc;
   z-index: 101;
-  ul li {
-    color: #433878;
-    font-size: 1.1rem;
-    display: inline-block;
-    margin: 0 15px;
-    font-weight: 500;
-    position: relative;
-    transition: color 0.3s ease;
 
-    /* 하단 바 설정 */
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: -20px; /* 글자 아래에 배치 */
-      left: 0;
-      width: 0%; /* 초기 너비는 0% */
-      height: 3px; /* 바 높이 */
-      background-color: #433878; /* 바 색상 */
-      transition:
-        width 0.5s ease,
-        left 0.5s ease; /* 애니메이션 설정 */
-    }
+  .nav-list {
+    display: flex; /* 가로 정렬 */
+    justify-content: space-around; /* 항목 간 균등 간격 */
+    align-items: center; /* 세로 정렬 */
+    width: 100%; /* 전체 너비 */
+    height: 68px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 
-    /* hover 효과 */
-    &:hover::after {
-      width: 100%; /* 전체 너비로 확장 */
-      left: 0; /* 왼쪽에서 시작 */
+    .nav-item {
+      font-size: 16px;
+      font-weight: 500;
+      text-align: center;
+      height: 100%; /* 헤더 높이와 동일하게 */
+      display: flex; /* 플렉스를 사용해 자식 요소 정렬 */
+      align-items: center; /* 세로 중앙 정렬 */
+      justify-content: center; /* 가로 중앙 정렬 */
+
+      a {
+        text-decoration: none;
+        color: #433878; /* 기본 텍스트 색상 */
+        font-weight: 500;
+        transition: color 0.3s;
+
+        &:hover {
+          color: #007bff; /* 호버 시 색상 변경 */
+        }
+      }
     }
   }
 }
