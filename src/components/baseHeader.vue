@@ -16,7 +16,7 @@
 <script setup></script>
 <style lang="scss">
 .header {
-  position: sticky; /* 부모 요소(#app)를 기준으로 위치 */
+  position: fixed; /* 부모 요소(#app)를 기준으로 위치 */
   top: 0;
   width: 100%;
   height: 68px;

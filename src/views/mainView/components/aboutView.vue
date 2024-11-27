@@ -231,10 +231,11 @@ const handleMouseLeave = () => {
 <style lang="scss">
 .about-wrap {
   background-color: #fff;
-  position: absolute;
+  position: relative;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  left: 25%;
+  height: 100vh;
+  // transform: translate(-50%, -50%);
   display: flex;
   justify-content: space-between;
   align-items: center;
