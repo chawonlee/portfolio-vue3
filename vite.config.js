@@ -21,5 +21,5 @@ export default defineConfig({
       },
     },
   },
-  publicPath: '/portfolio-vue3/',
+  base: '/portfolio-vue3/',
 })
