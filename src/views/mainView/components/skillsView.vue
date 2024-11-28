@@ -38,6 +38,12 @@
         </SwiperSlide>
       </Swiper>
     </section>
+    <!-- drag 설명 이미지 -->
+    <img
+      class="drag-instruction"
+      src="@/assets/image/dragBox.png"
+      alt="Drag Box!"
+    />
   </section>
 </template>
 
@@ -120,7 +126,6 @@ onBeforeUnmount(() => {
   z-index: 2;
 
   .skills-title {
-    padding-top: 30px;
     height: 20%;
     font-size: 5rem;
     text-shadow:
@@ -144,7 +149,7 @@ onBeforeUnmount(() => {
     align-items: center;
     justify-content: center;
     width: 100vw;
-    height: calc(80vh / 1.2);
+    height: calc(80vh / 1.4);
     overflow: visible;
 
     .swiper {
@@ -189,6 +194,30 @@ onBeforeUnmount(() => {
         }
       }
     }
+  }
+}
+
+// 이미지 스타일 추가
+.drag-instruction {
+  position: absolute;
+  top: 15%; /* 위에서 20% */
+  left: 15%; /* 왼쪽에서 10% */
+  width: 100px; /* 이미지 크기 */
+  height: auto; /* 비율 유지 */
+  z-index: 3; /* 글자 위로 올라오도록 설정 */
+  animation: moveSideToSide 3s ease-in-out infinite;
+}
+
+/* 좌우 이동 애니메이션 */
+@keyframes moveSideToSide {
+  0% {
+    transform: translateX(0); /* 초기 위치 */
+  }
+  50% {
+    transform: translateX(20px); /* 오른쪽으로 이동 */
+  }
+  100% {
+    transform: translateX(0); /* 다시 초기 위치 */
   }
 }
 </style>
