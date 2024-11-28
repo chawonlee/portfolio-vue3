@@ -1,11 +1,13 @@
 <template>
   <section class="skills-wrap">
-    <section class="skills-title">SKILLS</section>
+    <section class="skills-title">
+      <div>SKILLS</div>
+    </section>
     <section class="swiper-container">
       <Swiper
         ref="serviceSwiper"
         :slides-per-view="2"
-        :space-between="20"
+        :space-between="0"
         :loop="true"
         :centered-slides="true"
         :free-mode="false"
@@ -172,7 +174,7 @@ onBeforeUnmount(() => {
         text-align: center;
         line-height: 1.5;
         border-radius: 30px;
-        box-shadow: 0px 3px 30px 0px rgba(0, 0, 0, 0.15);
+        box-shadow: -3px 3px 8px rgba(0, 0, 0, 0.15);
         background-color: white;
         opacity: 0.8;
 
@@ -188,7 +190,7 @@ onBeforeUnmount(() => {
         }
 
         &.swiper-slide-active {
-          transform: scale(1);
+          transform: scale(0.96);
           opacity: 1;
           transition: all 0.7s ease;
           z-index: 2; /* 활성 슬라이드가 앞에 보이도록 설정 */

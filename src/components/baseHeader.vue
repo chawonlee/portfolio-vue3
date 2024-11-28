@@ -10,7 +10,9 @@
     </nav>
   </header>
 </template>
-<script setup></script>
+<script setup>
+import { ref, onMounted, onUnmounted } from 'vue'
+</script>
 <style lang="scss">
 .header {
   position: fixed; /* 부모 요소(#app)를 기준으로 위치 */
@@ -20,7 +22,7 @@
   backdrop-filter: blur(3px);
   color: black;
   background: rgb(255 255 255 / 29%);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08); /* 그림자 효과 */
   border-bottom: 1px solid #f8f0fc;
   z-index: 101;
 

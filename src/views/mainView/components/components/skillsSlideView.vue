@@ -1,5 +1,6 @@
 <template>
   <section>
+    <div class="skills-title-circle"></div>
     <span class="skillsTitle" v-html="animatedText"></span>
   </section>
 </template>
@@ -36,6 +37,15 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
+.skills-title-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #ffc107;
+  left: 15px;
+  top: 15px;
+  position: absolute;
+}
 .skillsTitle {
   position: relative;
   text-transform: uppercase;
