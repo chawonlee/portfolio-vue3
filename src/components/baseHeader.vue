@@ -2,13 +2,10 @@
   <header class="header">
     <nav class="nav">
       <ul class="nav-list">
-        <li class="nav-item">
-          <a href="#logo"><img src="../assets/image/Logo.png" /></a>
-        </li>
-        <li class="nav-item"><a href="#about">About</a></li>
-        <li class="nav-item"><a href="#skills">Skills</a></li>
-        <li class="nav-item"><a href="#projects">Projects</a></li>
-        <li class="nav-item"><a href="#contact">Contact</a></li>
+        <li class="nav-item"><a>About</a></li>
+        <li class="nav-item"><a>Skills</a></li>
+        <li class="nav-item"><a>Projects</a></li>
+        <li class="nav-item"><a>Contact</a></li>
       </ul>
     </nav>
   </header>

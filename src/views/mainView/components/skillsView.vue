@@ -58,6 +58,7 @@ const clickSlide = (path, event) => {
   const next = currentTarget.contains('swiper-slide-next')
   const prev = currentTarget.contains('swiper-slide-prev')
   const active = currentTarget.contains('swiper-slide-active')
+
   if (next) {
     serviceSwiper.value.slideNext() // 클릭한 슬라이드가 prev면 이전 슬라이드로 슬라이딩
   } else if (prev) {
@@ -88,15 +89,16 @@ const slideStart = event => {
 }
 const slideEnd = event => {
   event.preventDefault() // 기본 동작 방지
+
   if (event.changedTouches && event.changedTouches.length > 0) {
     endX.value = event.changedTouches[0].clientX
     if (Math.abs(startX.value - endX.value) > 130) {
       if (startX.value - endX.value > 0) {
-        // 오른쪽에서 왼쪽으로 드래그하면 next슬라이딩
+        // 오른쪽에서 왼쪽으로 드래그 시 next슬라이딩
         serviceSwiper.value.slideNext()
       }
       if (startX.value - endX.value < 0) {
-        // 왼쪽에서 오른쪽으로 드래그하면 prev슬라이딩
+        // 왼쪽에서 오른쪽으로 드래그 시 prev슬라이딩
         serviceSwiper.value.slidePrev()
       }
     }
@@ -105,7 +107,6 @@ const slideEnd = event => {
 
 // 이벤트 및 타이머 해제
 onBeforeUnmount(() => {
-  // 컴포넌트가 해제되면 이벤트 제거
   if (serviceSwiper.value && serviceSwiper.value.wrapperEl) {
     serviceSwiper.value.wrapperEl.removeEventListener('touchstart', slideStart)
     serviceSwiper.value.wrapperEl.removeEventListener('touchend', slideEnd)
