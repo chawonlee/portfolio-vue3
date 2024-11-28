@@ -90,7 +90,7 @@ const slideEnd = event => {
   event.preventDefault() // 기본 동작 방지
   if (event.changedTouches && event.changedTouches.length > 0) {
     endX.value = event.changedTouches[0].clientX
-    if (Math.abs(startX.value - endX.value) > 50) {
+    if (Math.abs(startX.value - endX.value) > 130) {
       if (startX.value - endX.value > 0) {
         // 오른쪽에서 왼쪽으로 드래그하면 next슬라이딩
         serviceSwiper.value.slideNext()
