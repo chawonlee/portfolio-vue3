@@ -14,7 +14,7 @@
           ><v-icon icon="mdi-shuffle-variant" color="secondary"
         /></v-btn>
       </div>
-      <div class="detail-text">
+      <div class="detail-text draggable">
         안녕하세요. 프론트엔드 개발자 이채원입니다. <br />
 
         바람과 비에 흔들리면서도 곧게 뻗어 아름답게 피어나는 꽃처럼,<br />

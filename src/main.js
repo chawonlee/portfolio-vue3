@@ -6,6 +6,10 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 
+import 'swiper/css' // swiper style
+import 'swiper/css/autoplay' // swiper style
+import 'swiper/swiper-bundle.css' // swiper style
+
 /** ✏️ Vuetify Plugins (i18n, vuetify) */
 import vuetifyPlugins from '@/plugin/vuetify'
 
