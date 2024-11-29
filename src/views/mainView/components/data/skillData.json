@@ -2,52 +2,52 @@
   "Framework & Library": [
     {
       "skillNm": "Vue.js",
-      "img": "",
+      "img": "src/assets/icon/vue.png",
       "detail": "Vue의 Composition API와 Options API를 활용해 직관적이고 모듈화된 UI를 개발한 경험이 있습니다."
     },
     {
       "skillNm": "Vuetify",
-      "img": "",
+      "img": "src/assets/icon/vuetify.png",
       "detail": "Vue.js 기반의 Material Design UI 프레임워크를 활용하여 반응형 UI를 설계한 경험이 있습니다."
     },
     {
       "skillNm": "Vue Router",
-      "img": "",
+      "img": "src/assets/icon/vue.png",
       "detail": "동적 라우팅 구현 및 SPA 라우팅을 효율적으로 처리한 경험이 있습니다."
     },
     {
       "skillNm": "Pinia",
-      "img": "",
+      "img": "src/assets/icon/pinia.png",
       "detail": "간단하고 효율적인 데이터 관리를 위해 Vue의 상태 관리 라이브러리를 활용한 경험이 있습니다."
     },
     {
       "skillNm": "Vuex",
-      "img": "",
+      "img": "src/assets/icon/vuex.png",
       "detail": "Vue.js 프로젝트에서 중앙 집중식 상태 관리를 통해 복잡한 데이터 흐름을 처리한 경험이 있습니다."
     },
     {
       "skillNm": "Lodash",
-      "img": "",
+      "img": "src/assets/icon/lodash.png",
       "detail": "배열 및 객체 데이터의 효율적인 조작과 복잡한 데이터 변환 작업을 처리한 경험이 있습니다."
     },
     {
       "skillNm": "Tailwind CSS",
-      "img": "",
+      "img": "src/assets/icon/tailwind.png",
       "detail": "유틸리티 클래스 기반으로 반응형 웹페이지와 다크모드 UI를 빠르게 설계한 경험이 있습니다."
     },
     {
       "skillNm": "ECharts",
-      "img": "",
+      "img": "src/assets/icon/echart.png",
       "detail": "중규모 데이터 시각화를 위해 대시보드에서 막대 차트, 파이 차트, 라인 차트를 동적으로 렌더링한 경험이 있습니다."
     },
     {
       "skillNm": "GSAP",
-      "img": "",
+      "img": "src/assets/icon/gasp.png",
       "detail": "간단한 애니메이션 효과와 사용자 인터랙션을 구현한 경험이 있습니다."
     },
     {
       "skillNm": "Axios",
-      "img": "",
+      "img": "src/assets/icon/axios.png",
       "detail": "Promise 기반의 HTTP 요청을 작성하고, 요청 헤더나 토큰 관리, 오류 처리 등을 구현한 경험이 있습니다."
     }
   ],
@@ -69,22 +69,22 @@
     },
     {
       "skillNm": "TypeScript",
-      "img": "",
+      "img": "src/assets/icon/typescript.png",
       "detail": "타입 안전성을 제공하기 위해 TypeScript를 도입하여 프로젝트를 유지보수성 있게 관리한 경험이 있습니다."
     },
     {
       "skillNm": "MQTT",
-      "img": "",
+      "img": "src/assets/icon/mqtt.png",
       "detail": "센서 데이터를 실시간으로 웹 애플리케이션에 시각화한 프로젝트 경험이 있습니다."
     },
     {
       "skillNm": "Ajax",
-      "img": "",
+      "img": "src/assets/icon/ajax.png",
       "detail": "페이지를 새로고침하지 않고 서버와 데이터를 비동기적으로 교환하며, 이를 기반으로 UI 업데이트를 구현한 경험이 있습니다."
     },
     {
       "skillNm": "Local Storage / Session Storage",
-      "img": "",
+      "img": "src/assets/icon/storage.png",
       "detail": "브라우저 저장소를 사용해 사용자 데이터를 캐싱하거나, 로그인 상태와 같은 세션 데이터를 유지한 경험이 있습니다."
     }
   ],
@@ -96,79 +96,79 @@
     },
     {
       "skillNm": "Spring Framework",
-      "img": "",
+      "img": "src/assets/icon/spring.png",
       "detail": "Spring Boot를 활용해 간단한 API를 작성하고, 컨트롤러, 서비스, 리포지토리 계층을 분리하여 구조적인 백엔드 애플리케이션을 설계한 경험이 있습니다."
     },
     {
       "skillNm": "JSP",
-      "img": "",
+      "img": "src/assets/icon/jsp.png",
       "detail": "동적인 웹 페이지를 생성하고, 서버에서 데이터베이스와 연동하여 사용자 요청에 따라 HTML 콘텐츠를 렌더링한 경험이 있습니다."
     },
     {
       "skillNm": "MySQL",
-      "img": "",
+      "img": "src/assets/icon/mysql.png",
       "detail": "관계형 데이터베이스를 설계하고, SQL 쿼리를 작성하여 데이터를 관리한 경험이 있습니다."
     },
     {
       "skillNm": "PostgreSQL",
-      "img": "",
+      "img": "src/assets/icon/postgresql.png",
       "detail": "쿼리 작성, 데이터 처리 및 간단한 트랜잭션 관리를 통해 프로젝트에 활용한 경험이 있습니다."
     },
     {
       "skillNm": "InfluxDB",
-      "img": "",
+      "img": "src/assets/icon/influxdb.png",
       "detail": "시계열 데이터베이스를 활용해 IoT 및 로그 데이터를 효율적으로 저장하고, 쿼리를 통해 실시간 데이터를 제공한 경험이 있습니다."
     },
     {
       "skillNm": "SQLite",
-      "img": "",
+      "img": "src/assets/icon/sqlite.png",
       "detail": "경량 데이터베이스를 활용해 소규모 애플리케이션의 데이터를 저장하고 관리한 경험이 있습니다."
     },
     {
       "skillNm": "Oracle Database",
-      "img": "",
+      "img": "src/assets/icon/oracle.png",
       "detail": "중규모 데이터베이스 환경에서 SQL 쿼리를 작성하고, 데이터 관리를 수행한 경험이 있습니다."
     },
     {
       "skillNm": "MariaDB",
-      "img": "",
+      "img": "src/assets/icon/mariadb.png",
       "detail": "관계형 데이터를 처리하고, 간단한 웹 애플리케이션에서 활용한 경험이 있습니다."
     },
     {
       "skillNm": "Firebase Realtime Database",
-      "img": "",
+      "img": "src/assets/icon/firebase.png",
       "detail": "실시간 데이터 동기화 기능을 사용하여 모바일 및 웹 애플리케이션의 데이터를 저장하고 관리한 경험이 있습니다."
     }
   ],
   "ETC": [
     {
       "skillNm": "Git",
-      "img": "",
+      "img": "src/assets/icon/git.png",
       "detail": "협업 프로젝트에서 Git을 사용해 코드 버전을 효율적으로 관리하였으며, Git Flow와 Branch 전략을 활용해 충돌을 최소화하고 안정적인 배포를 구현한 경험이 있습니다."
     },
     {
       "skillNm": "GitHub",
-      "img": "",
+      "img": "src/assets/icon/github.png",
       "detail": "프로젝트 저장소를 관리하고, Pull Request와 코드 리뷰를 통해 협업을 진행한 경험이 있습니다."
     },
     {
       "skillNm": "GitLab",
-      "img": "",
+      "img": "src/assets/icon/gitlab.png",
       "detail": "프로젝트의 이슈를 체계적으로 관리하며 작업을 분담하고, 팀과의 협업 과정에서 코드 변경 사항을 효율적으로 추적한 경험이 있습니다. CI/CD 파이프라인은 팀에서 설정한 것을 활용하여 자동 테스트 및 배포 과정을 경험했습니다."
     },
     {
       "skillNm": "Vercel",
-      "img": "",
+      "img": "src/assets/icon/vercel.png",
       "detail": "프론트엔드 애플리케이션을 빠르게 배포하고 지속적인 배포(CI/CD)를 구현한 경험이 있습니다."
     },
     {
       "skillNm": "WinSCP",
-      "img": "",
+      "img": "src/assets/icon/winscp.png",
       "detail": "배포 중 환경 설정 파일을 업데이트하거나, 서버에서 필요한 파일을 추가 및 교체한 경험이 있습니다."
     },
     {
       "skillNm": "Figma",
-      "img": "",
+      "img": "src/assets/icon/figma.png",
       "detail": "UI/UX 디자인 협업 도구로, 디자이너와 개발자 간의 원활한 소통을 위해 프로토타입 및 디자인 시안을 확인하고, 개발 과정에서 디자인 요소를 정확히 구현한 경험이 있습니다."
     }
   ]

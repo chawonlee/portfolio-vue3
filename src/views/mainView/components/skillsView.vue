@@ -132,7 +132,7 @@ onBeforeUnmount(() => {
     font-family: 'Black Han Sans', sans-serif;
     font-weight: 400;
     font-style: normal;
-    height: 20%;
+    height: 15%;
     font-size: 5rem;
     text-shadow:
       1px 1px 1px #fff,
@@ -150,7 +150,7 @@ onBeforeUnmount(() => {
     align-items: center;
     justify-content: center;
     width: 100vw;
-    height: calc(80vh / 1.4);
+    height: calc(80vh / 1.2);
     overflow: visible;
 
     .swiper {

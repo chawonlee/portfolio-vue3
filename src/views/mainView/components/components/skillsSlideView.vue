@@ -8,7 +8,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import skillData from '../data/skillData.json'
-
+//https://icon-sets.iconify.design/
 // 텍스트를 props로 받아옴
 const props = defineProps({
   subject: { type: String, default: '' },
@@ -56,7 +56,7 @@ onMounted(() => {
   text-transform: uppercase;
   font-size: 2.5rem;
   font-weight: 900;
-  color: #2e3440;
+  color: #212121;
   text-shadow:
     1px 1px 1px #919191,
     1px 2px 1px #919191,
