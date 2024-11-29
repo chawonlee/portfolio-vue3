@@ -14,8 +14,8 @@
         :allow-touch-move="true"
         @swiper="onSwiper"
       >
-        <SwiperSlide @click="clickSlide('library', $event)">
-          <skillSlideView subject="library" />
+        <SwiperSlide @click="clickSlide('FrLi', $event)">
+          <skillSlideView subject="Framework & Library" />
         </SwiperSlide>
         <SwiperSlide @click="clickSlide('FrontEnd', $event)">
           <skillSlideView subject="FrontEnd" />
@@ -26,8 +26,8 @@
         <SwiperSlide @click="clickSlide('ETC', $event)">
           <skillSlideView subject="ETC" />
         </SwiperSlide>
-        <SwiperSlide @click="clickSlide('library', $event)">
-          <skillSlideView subject="library" />
+        <SwiperSlide @click="clickSlide('FrLi', $event)">
+          <skillSlideView subject="Framework & Library" />
         </SwiperSlide>
         <SwiperSlide @click="clickSlide('FrontEnd', $event)">
           <skillSlideView subject="FrontEnd" />
