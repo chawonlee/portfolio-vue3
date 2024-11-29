@@ -1,12 +1,13 @@
 <template>
   <section>
     <div class="skills-title-circle"></div>
-    <span class="skillsTitle" v-html="animatedText"></span>
+    <div class="skillsTitle" v-html="animatedText"></div>
   </section>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import skillData from '../data/skillData.json'
 
 // 텍스트를 props로 받아옴
 const props = defineProps({
@@ -47,11 +48,15 @@ onMounted(() => {
   position: absolute;
 }
 .skillsTitle {
-  position: relative;
+  top: 20px;
+  left: 0;
+  align-items: center;
+  width: 100%;
+  position: absolute;
   text-transform: uppercase;
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 900;
-  color: black;
+  color: #2e3440;
   text-shadow:
     1px 1px 1px #919191,
     1px 2px 1px #919191,
