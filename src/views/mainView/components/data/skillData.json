@@ -37,12 +37,12 @@
     },
     {
       "skillNm": "ECharts",
-      "img": "src/assets/icon/echart.png",
+      "img": "src/assets/icon/echarts.png",
       "detail": "중규모 데이터 시각화를 위해 대시보드에서 막대 차트, 파이 차트, 라인 차트를 동적으로 렌더링한 경험이 있습니다."
     },
     {
       "skillNm": "GSAP",
-      "img": "src/assets/icon/gasp.png",
+      "img": "src/assets/icon/gsap.png",
       "detail": "간단한 애니메이션 효과와 사용자 인터랙션을 구현한 경험이 있습니다."
     },
     {
@@ -54,12 +54,12 @@
   "FrontEnd": [
     {
       "skillNm": "HTML5",
-      "img": "src/assets/icon/html.png",
+      "img": "src/assets/icon/html5.png",
       "detail": "기본적인 HTML 태그와 시맨틱 태그를 사용하여 웹페이지 구조를 설계할 수 있으며, 접근성을 고려한 마크업을 작성한 경험이 있습니다."
     },
     {
       "skillNm": "CSS3",
-      "img": "src/assets/icon/css.png",
+      "img": "src/assets/icon/css3.png",
       "detail": "Flexbox와 Grid를 활용한 레이아웃 설계가 가능하며, 반응형 웹 디자인을 구현한 경험이 있습니다. Keyframes와 transitions을 이용한 CSS 애니메이션도 구현할 수 있습니다."
     },
     {

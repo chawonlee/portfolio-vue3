@@ -2,13 +2,16 @@
   <section>
     <div class="skills-title-circle"></div>
     <div class="skillsTitle" v-html="animatedText"></div>
+    <!-- skill grid -->
+    <section></section>
   </section>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
 import skillData from '../data/skillData.json'
-//https://icon-sets.iconify.design/
+//아이콘 다운로드: https://icon-sets.iconify.design/
+
 // 텍스트를 props로 받아옴
 const props = defineProps({
   subject: { type: String, default: '' },
