@@ -230,7 +230,6 @@ const handleMouseLeave = () => {
 </script>
 <style lang="scss">
 .about-wrap {
-  background-color: #fff;
   position: relative;
   top: 50%;
   left: 25%;
@@ -240,7 +239,6 @@ const handleMouseLeave = () => {
   justify-content: space-between;
   align-items: center;
   width: 1000px; /* 원하는 너비 조정 */
-  z-index: 2; /* Canvas보다 위에 위치 */
 
   .myPhoto {
     width: 32%;
@@ -249,6 +247,7 @@ const handleMouseLeave = () => {
   }
 
   .intro {
+    background-color: #fff;
     font-size: 1.2rem;
     opacity: 0.9;
     z-index: 2;

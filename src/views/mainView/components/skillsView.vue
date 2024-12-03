@@ -51,8 +51,17 @@
 
 <script setup>
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import { ref, onBeforeUnmount } from 'vue'
+import { ref, onBeforeUnmount, onMounted } from 'vue'
 import skillSlideView from './components/skillsSlideView.vue'
+const serviceSwiper = ref(null)
+
+// 이벤트 및 타이머 해제
+onBeforeUnmount(() => {
+  if (serviceSwiper.value && serviceSwiper.value.wrapperEl) {
+    serviceSwiper.value.wrapperEl.removeEventListener('touchstart', slideStart)
+    serviceSwiper.value.wrapperEl.removeEventListener('touchend', slideEnd)
+  }
+})
 
 // 슬라이드 클릭
 const clickSlide = (path, event) => {
@@ -70,7 +79,7 @@ const clickSlide = (path, event) => {
 }
 
 // 자동 슬라이드
-const serviceSwiper = ref(null)
+
 const onSwiper = swiperInstance => {
   serviceSwiper.value = swiperInstance
   // DOM 요소에 직접 터치 이벤트 추가
@@ -106,14 +115,6 @@ const slideEnd = event => {
     }
   }
 }
-
-// 이벤트 및 타이머 해제
-onBeforeUnmount(() => {
-  if (serviceSwiper.value && serviceSwiper.value.wrapperEl) {
-    serviceSwiper.value.wrapperEl.removeEventListener('touchstart', slideStart)
-    serviceSwiper.value.wrapperEl.removeEventListener('touchend', slideEnd)
-  }
-})
 </script>
 
 <style lang="scss">
@@ -133,7 +134,7 @@ onBeforeUnmount(() => {
     font-weight: 400;
     font-style: normal;
     height: 15%;
-    font-size: 5rem;
+    font-size: 4rem;
     text-shadow:
       1px 1px 1px #fff,
       1px 2px 1px #fff,
@@ -167,9 +168,6 @@ onBeforeUnmount(() => {
         width: calc((100% - 60px) / 2.4);
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
         line-height: 1.5;
         border-radius: 30px;
         box-shadow: -3px 3px 8px rgba(0, 0, 0, 0.15);
@@ -201,10 +199,10 @@ onBeforeUnmount(() => {
 // 이미지 스타일 추가
 .drag-instruction {
   position: absolute;
-  top: 15%; /* 위에서 20% */
-  left: 15%; /* 왼쪽에서 10% */
-  width: 100px; /* 이미지 크기 */
-  height: auto; /* 비율 유지 */
+  top: 15%;
+  left: 15%;
+  width: 100px;
+  height: auto;
   z-index: 3; /* 글자 위로 올라오도록 설정 */
   animation: moveSideToSide 3s ease-in-out infinite;
 }
