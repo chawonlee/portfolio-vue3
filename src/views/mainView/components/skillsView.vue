@@ -201,7 +201,7 @@ const slideEnd = event => {
   position: absolute;
   top: 15%;
   left: 15%;
-  width: 100px;
+  width: 5vw;
   height: auto;
   z-index: 3; /* 글자 위로 올라오도록 설정 */
   animation: moveSideToSide 3s ease-in-out infinite;

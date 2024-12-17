@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 import skillData from '../data/skillData.json'
 
 const props = defineProps({
@@ -29,35 +29,26 @@ const props = defineProps({
 
 const animatedText = ref('')
 
-onMounted(() => {
+onMounted(async () => {
   animatedText.value = `Skills in ${props.subject} Development`
     .split('')
     .map((char, index) => {
-      // props.subject를 별도로 처리
       if (index >= 10 && index < 10 + props.subject.length) {
-        return `<span class="animated-char" style="animation-delay: ${
-          index * 0.1
-        }s; color: #ffc107; -webkit-text-stroke: 2px black;">${char}</span>` // 글자 색상 변경
+        return `<span class="animated-char" style="animation-delay: ${index * 0.1}s; color: #ffc107; -webkit-text-stroke: 1px black;">${char}</span>`;
       }
-
       if (char === ' ') {
-        // 공백 처리: 공백을 실제로 렌더링하면서 애니메이션 유지
-        return `<span class="animated-space" style="display: inline-block; width: 0.5rem;"></span>`
+        return `<span class="animated-space" style="display: inline-block; width: 0.5rem;"></span>`;
       }
-
-      return `<span class="animated-char" style="animation-delay: ${
-        index * 0.1
-      }s;">${char}</span>`
+      return `<span class="animated-char" style="animation-delay: ${index * 0.1}s;">${char}</span>`;
     })
-    .join('')
+    .join('');
 
-  // DOM이 렌더링된 뒤 애니메이션 클래스 추가
-  setTimeout(() => {
-    document.querySelectorAll('.animated-char').forEach(el => {
-      el.classList.add('jump')
-    })
-  }, 100) // 100ms 이후 애니메이션 시작
-})
+  await nextTick(); // DOM이 완전히 렌더링된 후 실행
+
+  document.querySelectorAll('.animated-char').forEach(el => {
+    el.classList.add('jump'); // jump 클래스를 추가
+  });
+});
 </script>
 
 <style lang="scss">
@@ -86,15 +77,43 @@ onMounted(() => {
 
 .skills-sub-title {
   position: relative;
-  margin-left: 65px; /* 원(circle) 오른쪽으로 이동 */
-  margin-top: 15px; /* 상단 여백 */
-  font-size: 1.8rem;
+  margin-left: 45px; /* 원(circle) 오른쪽으로 이동 */
+  margin-top: .1vw; /* 상단 여백 */
+  font-size: 1.5vw;
   font-weight: bold;
   color: #212121;
   text-transform: uppercase;
   text-shadow: 1px 1px 2px #fff;
   z-index: 2; /* 타이틀이 위로 보이게 */
   margin-bottom: 0.6rem; /* 타이틀 아래 여백 */
+  text-shadow:
+   1px 1px 1px #fff,
+   1px 2px 1px #fff,
+   1px 3px 1px #fff,
+   1px 18px 6px rgba(16, 16, 16, 0.4),
+   1px 25px 35px rgba(16, 16, 16, 0.2),
+   1px 30px 60px rgba(16, 16, 16, 0.4);
+
+   span{
+    display: inline-block;
+    transform: translateY(0);
+    transition: transform 1s ease;
+
+    &.jump {
+      animation: jump 2s ease infinite; //무한반복
+    }
+   }
+}
+@keyframes jump {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 .skill-grid {
@@ -132,6 +151,7 @@ onMounted(() => {
   }
 
   .skill-detail {
+    height: 100%;
     position: absolute;
     bottom: -100%; /* 초기 상태: 스킬 박스 바닥에서 숨김 */
     left: 0;
@@ -154,7 +174,7 @@ onMounted(() => {
   }
 
   img {
-    width: 4rem;
+    width: 3vw;
     aspect-ratio: 1 / 1;
     height: auto;
     margin-bottom: 0.5rem;
@@ -164,8 +184,6 @@ onMounted(() => {
   }
 
   &:hover img {
-    scale: 0.8;
-    transform: translateY(-100%); /* hover 시 이미지 살짝 위로 이동 */
   }
 
   .skill-name {
@@ -176,7 +194,6 @@ onMounted(() => {
     transition: transform 0.6s ease;
   }
   &:hover .skill-name {
-    transform: translateY(-250%);
   }
 }
 </style>
