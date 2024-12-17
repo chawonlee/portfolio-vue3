@@ -5,6 +5,7 @@
         <li class="nav-item"><a>About</a></li>
         <li class="nav-item"><a>Skills</a></li>
         <li class="nav-item"><a>Projects</a></li>
+        <li class="nav-item"><a>Career</a></li>
         <li class="nav-item"><a>Contact</a></li>
       </ul>
     </nav>
