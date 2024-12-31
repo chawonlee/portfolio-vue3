@@ -201,7 +201,11 @@ const slideEnd = event => {
   position: absolute;
   top: 15%;
   left: 15%;
+<<<<<<< Updated upstream
   width: 5vw;
+=======
+  width: 4.2rem;
+>>>>>>> Stashed changes
   height: auto;
   z-index: 3; /* 글자 위로 올라오도록 설정 */
   animation: moveSideToSide 3s ease-in-out infinite;

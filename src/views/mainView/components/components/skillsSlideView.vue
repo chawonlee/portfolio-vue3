@@ -34,21 +34,21 @@ onMounted(async () => {
     .split('')
     .map((char, index) => {
       if (index >= 10 && index < 10 + props.subject.length) {
-        return `<span class="animated-char" style="animation-delay: ${index * 0.1}s; color: #ffc107; -webkit-text-stroke: 1px black;">${char}</span>`;
+        return `<span class="animated-char" style="animation-delay: ${index * 0.1}s; color: #ffc107; -webkit-text-stroke: 1px black;">${char}</span>`
       }
       if (char === ' ') {
-        return `<span class="animated-space" style="display: inline-block; width: 0.5rem;"></span>`;
+        return `<span class="animated-space" style="display: inline-block; width: 0.5rem;"></span>`
       }
-      return `<span class="animated-char" style="animation-delay: ${index * 0.1}s;">${char}</span>`;
+      return `<span class="animated-char" style="animation-delay: ${index * 0.1}s;">${char}</span>`
     })
-    .join('');
+    .join('')
 
-  await nextTick(); // DOM이 완전히 렌더링된 후 실행
+  await nextTick() // DOM이 완전히 렌더링된 후 실행
 
   document.querySelectorAll('.animated-char').forEach(el => {
-    el.classList.add('jump'); // jump 클래스를 추가
-  });
-});
+    el.classList.add('jump') // jump 클래스를 추가
+  })
+})
 </script>
 
 <style lang="scss">
@@ -78,8 +78,8 @@ onMounted(async () => {
 .skills-sub-title {
   position: relative;
   margin-left: 45px; /* 원(circle) 오른쪽으로 이동 */
-  margin-top: .1vw; /* 상단 여백 */
-  font-size: 1.5vw;
+  margin-top: 0.1vw; /* 상단 여백 */
+  font-size: 1.4vw;
   font-weight: bold;
   color: #212121;
   text-transform: uppercase;
@@ -87,14 +87,14 @@ onMounted(async () => {
   z-index: 2; /* 타이틀이 위로 보이게 */
   margin-bottom: 0.6rem; /* 타이틀 아래 여백 */
   text-shadow:
-   1px 1px 1px #fff,
-   1px 2px 1px #fff,
-   1px 3px 1px #fff,
-   1px 18px 6px rgba(16, 16, 16, 0.4),
-   1px 25px 35px rgba(16, 16, 16, 0.2),
-   1px 30px 60px rgba(16, 16, 16, 0.4);
+    1px 1px 1px #fff,
+    1px 2px 1px #fff,
+    1px 3px 1px #fff,
+    1px 18px 6px rgba(16, 16, 16, 0.4),
+    1px 25px 35px rgba(16, 16, 16, 0.2),
+    1px 30px 60px rgba(16, 16, 16, 0.4);
 
-   span{
+  span {
     display: inline-block;
     transform: translateY(0);
     transition: transform 1s ease;
@@ -102,7 +102,7 @@ onMounted(async () => {
     &.jump {
       animation: jump 2s ease infinite; //무한반복
     }
-   }
+  }
 }
 @keyframes jump {
   0% {
@@ -141,6 +141,7 @@ onMounted(async () => {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   position: relative; /* detail을 박스 내부에 위치하도록 설정 */
   overflow: hidden;
+  width: 100%;
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
@@ -156,21 +157,23 @@ onMounted(async () => {
     bottom: -100%; /* 초기 상태: 스킬 박스 바닥에서 숨김 */
     left: 0;
     right: 0;
-    background: rgba(0, 0, 0, 0.8);
+    background: black;
     color: #fff;
     padding: 0.5rem;
     font-size: 0.75rem;
     text-align: center;
+    border-radius: 10px;
     transition:
       bottom 0.6s ease,
       opacity 0.6s ease; /* 부드럽게 애니메이션 */
+
     opacity: 0; /* 초기 상태에서 숨김 */
     z-index: 1;
   }
 
   &:hover .skill-detail {
     bottom: 0; /* hover 시 박스 바닥에서 올라옴 */
-    opacity: 1; /* 표시 */
+    opacity: 0.8; /* 표시 */
   }
 
   img {
@@ -179,8 +182,8 @@ onMounted(async () => {
     height: auto;
     margin-bottom: 0.5rem;
     transition:
-      transform 0.6s ease,
-      scale 0.6 ease; /* 이미지 이동 애니메이션 */
+      transform 0.8s ease,
+      scale 0.8s ease; /* 이미지 이동 애니메이션 */
   }
 
   &:hover img {

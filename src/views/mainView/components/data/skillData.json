@@ -8,17 +8,17 @@
     {
       "skillNm": "Vuetify",
       "img": "src/assets/icon/vuetify.png",
-      "detail": "Material Design UI 프레임워크를 활용하여 반응형 UI를 설계한 경험이 있습니다."
+      "detail": "Material Design UI 프레임워크를 활용하여 반응형 UI를 설계할 수 있습니다."
     },
     {
       "skillNm": "Vue Router",
       "img": "src/assets/icon/vue.png",
-      "detail": "동적 라우팅 구현 및 SPA 라우팅을 효율적으로 처리한 경험이 있습니다."
+      "detail": "동적 라우팅 구현 및 SPA 라우팅을 효율적으로 처리할 수 있습니다."
     },
     {
       "skillNm": "Pinia",
       "img": "src/assets/icon/pinia.png",
-      "detail": "간단하고 효율적인 데이터 관리를 위해 활용한 경험이 있습니다."
+      "detail": "간단하고 효율적인 데이터 관리를 위해 프로젝트에서 활용한 경험이 있습니다."
     },
     {
       "skillNm": "Vuex",
@@ -28,12 +28,12 @@
     {
       "skillNm": "Lodash",
       "img": "src/assets/icon/lodash.png",
-      "detail": "배열, 객체 데이터의 효율적인 조작과 복잡한 데이터 변환 작업을 처리한 경험이 있습니다."
+      "detail": "배열, 객체 데이터의 효율적인 조작과 복잡한 데이터 변환 작업을 처리할 수 있습니다."
     },
     {
       "skillNm": "Tailwind CSS",
       "img": "src/assets/icon/tailwind.png",
-      "detail": "유틸리티 클래스 기반으로 반응형 웹페이지와 다크모드 UI를 빠르게 설계한 경험이 있습니다."
+      "detail": "유틸리티 클래스 기반으로 반응형 웹페이지와 다크모드 UI를 빠르게 구현한 경험이 있습니다."
     },
     {
       "skillNm": "ECharts",
@@ -55,17 +55,17 @@
     {
       "skillNm": "HTML5",
       "img": "src/assets/icon/html5.png",
-      "detail": "HTML, 시맨틱 태그로 웹페이지 구조를 설계할 수 있으며, 접근성을 고려한 마크업을 작성한 경험이 있습니다."
+      "detail": "HTML, 시맨틱 태그로 웹페이지 구조를 설계할 수 있으며, 접근성을 고려한 마크업을 작성할 수 있습니다."
     },
     {
       "skillNm": "CSS3",
       "img": "src/assets/icon/css3.png",
-      "detail": "Flexbox와 Grid를 활용한 레이아웃 설계가 가능하며, 반응형 웹 디자인을 구현한 경험이 있습니다."
+      "detail": "Flexbox와 Grid를 활용한 레이아웃 설계가 가능하며, 반응형 웹 디자인을 구현할 수 있습니다."
     },
     {
       "skillNm": "JavaScript",
       "img": "src/assets/icon/javascript.png",
-      "detail": "비동기 처리, DOM 조작, 이벤트 핸들링 등 기본 작업 및 모듈화와 객체 지향 코드를 작성한 경험이 있습니다."
+      "detail": "비동기 처리, DOM 조작, 이벤트 핸들링 등 기본 작업 및 모듈화와 객체 지향 코드를 작성할 수 있습니다."
     },
     {
       "skillNm": "TypeScript",
@@ -83,7 +83,7 @@
       "detail": "서버와 데이터를 비동기적으로 교환하며, 이를 기반으로 UI 업데이트를 구현한 경험이 있습니다."
     },
     {
-      "skillNm": "Local/Session Storage",
+      "skillNm": "Web Storage",
       "img": "src/assets/icon/storage.png",
       "detail": "사용자 데이터를 캐싱하거나, 로그인 상태와 같은 세션 데이터를 유지한 경험이 있습니다."
     }
