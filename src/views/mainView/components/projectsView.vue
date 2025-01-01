@@ -72,7 +72,7 @@ onMounted(() => {})
 
   .projects-title {
     color: white;
-    padding-top: 4%;
+    padding-top: 4.5%;
     font-family: 'Black Han Sans', sans-serif;
     font-weight: 400;
     font-style: normal;
