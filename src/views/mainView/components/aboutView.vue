@@ -42,7 +42,7 @@
   />
   <!-- 중앙 하단 더보기 -->
   <div class="scroll-down">
-    <div>더보기</div>
+    <div>SCROLL</div>
     <v-icon icon="mdi-chevron-down" color="secondary" size="x-large" />
   </div>
 </template>

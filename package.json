@@ -14,6 +14,7 @@
   "dependencies": {
     "@mdi/font": "^7.4.47",
     "@studio-freight/lenis": "^1.0.42",
+    "gsap": "^3.12.5",
     "pinia": "^2.2.4",
     "sass": "^1.80.6",
     "sass-embedded": "^1.80.4",

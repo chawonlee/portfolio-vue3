@@ -5,24 +5,27 @@
       <about />
     </section>
     <!-- Skills -->
-    <section class="SkillsView">
+    <section class="skillsView">
       <skills />
+    </section>
+    <!-- Project -->
+    <section class="ProjectsView">
+      <projects />
     </section>
   </div>
 </template>
 <script setup>
 import about from './components/aboutView.vue'
 import skills from './components/skillsView.vue'
+import projects from './components/projectsView.vue'
 </script>
 <style lang="scss">
 .mainView {
   display: block;
 }
-.aboutView {
-  width: 100%;
-}
-
-.SkillsView {
+.aboutView,
+.skillsView,
+.ProjectsView {
   width: 100%;
 }
 </style>
