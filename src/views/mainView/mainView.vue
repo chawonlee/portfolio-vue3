@@ -16,6 +16,12 @@
     <section class="careerView">
       <career />
     </section>
+    <!-- Contact -->
+    <section class="contactView">
+      <contact />
+    </section>
+    <!--footer-->
+    <footerView />
   </div>
   <v-btn
     v-show="showScrollTopButton"
@@ -31,6 +37,8 @@ import about from './components/aboutView.vue'
 import skills from './components/skillsView.vue'
 import projects from './components/projectsView.vue'
 import career from './components/careerView.vue'
+import contact from './components/contactView.vue'
+import footerView from '@/components/footer.vue'
 
 // 버튼 보이기 여부 상태
 const showScrollTopButton = ref(false)

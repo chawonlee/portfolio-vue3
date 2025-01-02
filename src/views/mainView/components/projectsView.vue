@@ -27,6 +27,7 @@ onMounted(() => {})
   align-items: center;
   background-color: #006bff;
   z-index: 2;
+  overflow: hidden;
 
   .ocean {
     position: relative;
