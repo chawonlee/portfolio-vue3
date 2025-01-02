@@ -23,11 +23,14 @@ onMounted(() => {})
   height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   background-color: #006bff;
   z-index: 2;
 
   .ocean {
+    position: relative;
+    top: 0;
     height: 15px;
     width: 100%;
     position: absolute;
