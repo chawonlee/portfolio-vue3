@@ -4,13 +4,14 @@
       <div>CONTACT</div>
     </section>
     <v-card color="#fff" class="contact-container">
-      <!-- Title -->
+      <!-- title -->
       <div class="editor-wrap">
         <label class="editor-label">Title *</label>
         <div class="editor" :class="{ error: formError.title.error }">
           <input
             id="title"
             type="text"
+            name="title"
             v-model="formMng.title"
             required
             @blur="titleVaild()"
@@ -21,12 +22,13 @@
           }}</span>
         </div>
       </div>
-      <!-- Title -->
+      <!-- Email -->
       <div class="editor-wrap">
         <label class="editor-label">Your Email *</label>
         <div class="editor" :class="{ error: formError.email.error }">
           <input
             id="email"
+            name="email"
             type="text"
             v-model="formMng.email"
             required
@@ -43,16 +45,17 @@
         <label class="editor-label">Message *</label>
         <div
           class="editor"
-          style="height: 260px !important"
+          style="height: 300px !important"
           :class="{ error: formError.message.error }"
         >
           <textarea
+            name="message"
             id="message"
             type="text"
             v-model="formMng.message"
             required
             @blur="messageVaild()"
-            style="width: 100%; height: 240px"
+            style="width: 100%; height: 280px"
           ></textarea>
           <statusIcon :isError="formError.message.error"></statusIcon>
           <span v-if="formError.message.error">{{
@@ -60,31 +63,50 @@
           }}</span>
         </div>
       </div>
+      <!-- send btn-->
+      <div class="contact-button-wrap">
+        <v-btn
+          size="large"
+          class="contact-button"
+          v-if="isFormValid"
+          color="#000"
+        >
+          SEND
+        </v-btn>
+      </div>
     </v-card>
   </section>
 </template>
 <script setup>
 import statusIcon from '@/components/statusIcon.vue'
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 
 const formError = ref({
   title: {
-    error: false,
-    errorMsg: '제목을 입력해주세요',
+    error: true,
+    errorMsg: '',
   },
   email: {
-    error: false,
-    errorMsg: '이메일을 입력해주세요',
+    error: true,
+    errorMsg: '',
   },
   message: {
-    error: false,
-    errorMsg: '메시지를 입력해주세요',
+    error: true,
+    errorMsg: '',
   },
 })
 const formMng = ref({
   title: null,
   email: null,
   message: null,
+})
+// 모든 에러 상태를 확인하는 computed 속성
+const isFormValid = computed(() => {
+  return (
+    !formError.value.title.error &&
+    !formError.value.email.error &&
+    !formError.value.message.error
+  )
 })
 // `title` 변경 감지
 watch(
@@ -142,12 +164,15 @@ const emailVaild = () => {
     formError.value.email.errorMsg = ''
   }
 }
+
+//이메일 전송
+const sendEmail = () => {}
 </script>
 <style lang="scss">
 .contact-wrap {
   position: relative;
   width: 100%;
-  height: 70vh;
+  height: 850px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -188,6 +213,16 @@ const emailVaild = () => {
         0 6px 8px rgba(0, 0, 0, 0.2),
         0 2px 4px rgba(0, 0, 0, 0.15);
       transform: translateY(-1px);
+    }
+    .contact-button-wrap {
+      width: 100%;
+      height: 80px;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      .contact-button {
+        border-radius: 10% !important;
+      }
     }
     .editor-wrap {
       width: 100%;
