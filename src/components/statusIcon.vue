@@ -35,7 +35,7 @@ const props = defineProps({
   transition: all ease 0.4s;
 
   &.pass {
-    color: #0374ff;
+    color: #94d82d;
   }
 
   &.error {

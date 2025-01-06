@@ -21,6 +21,23 @@
           }}</span>
         </div>
       </div>
+      <!-- Title -->
+      <div class="editor-wrap">
+        <label class="editor-label">Your Email *</label>
+        <div class="editor" :class="{ error: formError.email.error }">
+          <input
+            id="email"
+            type="text"
+            v-model="formMng.email"
+            required
+            @blur="emailVaild()"
+          />
+          <statusIcon :isError="formError.email.error"></statusIcon>
+          <span v-if="formError.email.error">{{
+            formError.email.errorMsg
+          }}</span>
+        </div>
+      </div>
     </v-card>
   </section>
 </template>
@@ -30,18 +47,30 @@ import { ref, watch } from 'vue'
 
 const formError = ref({
   title: {
-    error: true,
+    error: false,
     errorMsg: '제목을 입력해주세요',
+  },
+  email: {
+    error: false,
+    errorMsg: '이메일을 입력해주세요',
   },
 })
 const formMng = ref({
   title: null,
+  email: null,
 })
 // `title` 변경 감지
 watch(
   () => formMng.value.title,
   (newVal, oldVal) => {
     titleVaild()
+  },
+)
+// `email` 변경 감지
+watch(
+  () => formMng.value.email,
+  (newVal, oldVal) => {
+    emailVaild()
   },
 )
 
@@ -51,6 +80,24 @@ const titleVaild = () => {
     formError.value.title.errorMsg = '제목을 입력해주세요'
   } else {
     formError.value.title.error = false
+  }
+}
+const emailVaild = () => {
+  const email = formMng.value.email
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+  if (!email || email.length < 1) {
+    // 이메일이 입력되지 않았을 경우
+    formError.value.email.error = true
+    formError.value.email.errorMsg = '이메일을 입력해주세요'
+  } else if (!emailRegex.test(email)) {
+    // 이메일 형식이 유효하지 않을 경우
+    formError.value.email.error = true
+    formError.value.email.errorMsg = '이메일 형식이 아닙니다'
+  } else {
+    // 유효한 이메일 형식일 경우
+    formError.value.email.error = false
+    formError.value.email.errorMsg = ''
   }
 }
 </script>
@@ -102,6 +149,7 @@ const titleVaild = () => {
     }
     .editor-wrap {
       width: 100%;
+      padding-bottom: 15px;
       .editor-label {
         width: 100%;
       }
@@ -112,7 +160,7 @@ const titleVaild = () => {
         height: 42px;
         border-radius: 4px;
         padding: 0.5rem;
-        background: #edf5fd;
+        background: #f4fce3;
         transition: all 0.4s ease-in-out;
         font-size: 8px;
         outline: transparent;
