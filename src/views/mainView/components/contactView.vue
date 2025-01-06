@@ -38,6 +38,28 @@
           }}</span>
         </div>
       </div>
+      <!-- Message -->
+      <div class="editor-wrap">
+        <label class="editor-label">Message *</label>
+        <div
+          class="editor"
+          style="height: 260px !important"
+          :class="{ error: formError.message.error }"
+        >
+          <textarea
+            id="message"
+            type="text"
+            v-model="formMng.message"
+            required
+            @blur="messageVaild()"
+            style="width: 100%; height: 240px"
+          ></textarea>
+          <statusIcon :isError="formError.message.error"></statusIcon>
+          <span v-if="formError.message.error">{{
+            formError.message.errorMsg
+          }}</span>
+        </div>
+      </div>
     </v-card>
   </section>
 </template>
@@ -54,10 +76,15 @@ const formError = ref({
     error: false,
     errorMsg: '이메일을 입력해주세요',
   },
+  message: {
+    error: false,
+    errorMsg: '메시지를 입력해주세요',
+  },
 })
 const formMng = ref({
   title: null,
   email: null,
+  message: null,
 })
 // `title` 변경 감지
 watch(
@@ -73,6 +100,13 @@ watch(
     emailVaild()
   },
 )
+// `message` 변경 감지
+watch(
+  () => formMng.value.message,
+  (newVal, oldVal) => {
+    messageVaild()
+  },
+)
 
 const titleVaild = () => {
   if (!formMng.value.title || formMng.value.title.length < 1) {
@@ -80,6 +114,14 @@ const titleVaild = () => {
     formError.value.title.errorMsg = '제목을 입력해주세요'
   } else {
     formError.value.title.error = false
+  }
+}
+const messageVaild = () => {
+  if (!formMng.value.message || formMng.value.message.length < 1) {
+    formError.value.message.error = true
+    formError.value.message.errorMsg = '메시지를 입력해주세요'
+  } else {
+    formError.value.message.error = false
   }
 }
 const emailVaild = () => {
@@ -149,7 +191,7 @@ const emailVaild = () => {
     }
     .editor-wrap {
       width: 100%;
-      padding-bottom: 15px;
+      padding-bottom: 10px;
       .editor-label {
         width: 100%;
       }
@@ -195,6 +237,21 @@ const emailVaild = () => {
           background: transparent;
           font-size: 1rem;
           font-weight: 400;
+
+          &:focus-visible {
+            outline: none;
+          }
+        }
+        textarea {
+          width: 100%;
+          padding: 0;
+          border-radius: 0;
+          border: none;
+          background: transparent;
+          font-size: 1rem;
+          resize: none;
+          font-weight: 400;
+          overflow-y: scroll;
 
           &:focus-visible {
             outline: none;

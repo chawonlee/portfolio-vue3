@@ -23,7 +23,8 @@ const props = defineProps({
 .status-icon {
   position: absolute;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
+  padding-top: 15px;
   justify-content: flex-end;
   width: 25px !important;
   height: 100%;
