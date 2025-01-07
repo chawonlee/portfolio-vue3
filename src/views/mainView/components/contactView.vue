@@ -88,15 +88,15 @@ import { notify } from '@/components/notify'
 const formError = ref({
   title: {
     error: true,
-    errorMsg: '',
+    errorMsg: '제목을 입력해주세요',
   },
   email: {
     error: true,
-    errorMsg: '',
+    errorMsg: '이메일을 입력해주세요',
   },
   message: {
     error: true,
-    errorMsg: '',
+    errorMsg: '메시지를 입력해주세요',
   },
 })
 const formMng = ref({
@@ -179,7 +179,7 @@ const sendEmail = () => {
         },
       }
     },
-    error => {
+    () => {
       notify(
         'error',
         '전송 실패',
