@@ -28,6 +28,7 @@
     class="scroll-top-button"
     @click="scrollToTop"
     icon="mdi-arrow-up-bold-circle"
+    color="#000"
   ></v-btn>
 </template>
 <script setup>
