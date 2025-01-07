@@ -70,6 +70,7 @@
           class="contact-button"
           v-if="isFormValid"
           color="#000"
+          @click="sendEmail"
         >
           SEND
         </v-btn>
@@ -77,9 +78,12 @@
     </v-card>
   </section>
 </template>
+
 <script setup>
 import statusIcon from '@/components/statusIcon.vue'
 import { ref, watch, computed } from 'vue'
+import emailjs from 'emailjs-com'
+import { notify } from '@/components/notify'
 
 const formError = ref({
   title: {
@@ -100,6 +104,7 @@ const formMng = ref({
   email: null,
   message: null,
 })
+
 // 모든 에러 상태를 확인하는 computed 속성
 const isFormValid = computed(() => {
   return (
@@ -108,27 +113,6 @@ const isFormValid = computed(() => {
     !formError.value.message.error
   )
 })
-// `title` 변경 감지
-watch(
-  () => formMng.value.title,
-  (newVal, oldVal) => {
-    titleVaild()
-  },
-)
-// `email` 변경 감지
-watch(
-  () => formMng.value.email,
-  (newVal, oldVal) => {
-    emailVaild()
-  },
-)
-// `message` 변경 감지
-watch(
-  () => formMng.value.message,
-  (newVal, oldVal) => {
-    messageVaild()
-  },
-)
 
 const titleVaild = () => {
   if (!formMng.value.title || formMng.value.title.length < 1) {
@@ -138,6 +122,23 @@ const titleVaild = () => {
     formError.value.title.error = false
   }
 }
+
+const emailVaild = () => {
+  const email = formMng.value.email
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+  if (!email || email.length < 1) {
+    formError.value.email.error = true
+    formError.value.email.errorMsg = '이메일을 입력해주세요'
+  } else if (!emailRegex.test(email)) {
+    formError.value.email.error = true
+    formError.value.email.errorMsg = '이메일 형식이 아닙니다'
+  } else {
+    formError.value.email.error = false
+    formError.value.email.errorMsg = ''
+  }
+}
+
 const messageVaild = () => {
   if (!formMng.value.message || formMng.value.message.length < 1) {
     formError.value.message.error = true
@@ -146,27 +147,47 @@ const messageVaild = () => {
     formError.value.message.error = false
   }
 }
-const emailVaild = () => {
-  const email = formMng.value.email
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-  if (!email || email.length < 1) {
-    // 이메일이 입력되지 않았을 경우
-    formError.value.email.error = true
-    formError.value.email.errorMsg = '이메일을 입력해주세요'
-  } else if (!emailRegex.test(email)) {
-    // 이메일 형식이 유효하지 않을 경우
-    formError.value.email.error = true
-    formError.value.email.errorMsg = '이메일 형식이 아닙니다'
-  } else {
-    // 유효한 이메일 형식일 경우
-    formError.value.email.error = false
-    formError.value.email.errorMsg = ''
-  }
+// `title` 변경 감지
+watch(() => formMng.value.title, titleVaild)
+// `email` 변경 감지
+watch(() => formMng.value.email, emailVaild)
+// `message` 변경 감지
+watch(() => formMng.value.message, messageVaild)
+
+// EmailJS로 이메일 보내기
+const sendEmail = () => {
+  const serviceID = import.meta.env.VITE_SERVICE_ID
+  const templateID = import.meta.env.VITE_TEMPLATE_ID
+  const publicID = import.meta.env.VITE_PUBLIC_ID
+  emailjs.send(serviceID, templateID, formMng.value, publicID).then(
+    () => {
+      notify('success', '전송 성공', '이메일이 성공적으로 전송되었습니다.')
+      formMng.value = { title: '', email: '', message: '' }
+      formError.value = {
+        title: {
+          error: true,
+          errorMsg: '',
+        },
+        email: {
+          error: true,
+          errorMsg: '',
+        },
+        message: {
+          error: true,
+          errorMsg: '',
+        },
+      }
+    },
+    error => {
+      notify(
+        'error',
+        '전송 실패',
+        '이메일 전송에 실패했습니다. 다시 시도해주세요.',
+      )
+    },
+  )
 }
-
-//이메일 전송
-const sendEmail = () => {}
 </script>
 <style lang="scss">
 .contact-wrap {
