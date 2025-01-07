@@ -147,7 +147,7 @@ onMounted(async () => {
     box-shadow 0.3s ease;
 
   &:hover {
-    transform: scale(1.1); /* hover 시 박스 확대 */
+    transform: scale(1.05); /* hover 시 박스 확대 */
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* 강조된 그림자 */
   }
 
