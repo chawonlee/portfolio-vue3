@@ -58,6 +58,7 @@
 }
 
 body {
+  overflow-x: hidden;
   cursor: none; /* 기본 커서 숨김 */
   background: white;
   margin: 0;
@@ -99,7 +100,7 @@ body {
 }
 
 ::-webkit-scrollbar {
-  display: none;
+  /* display: none; */
 }
 
 .draggable {

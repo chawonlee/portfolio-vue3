@@ -9,14 +9,42 @@
     <section class="projects-title">
       <div>PROJECTS</div>
     </section>
-    <section class="projects-container"></section>
+
+    <!-- 가로 스크롤 섹션 -->
+    <section class="projects-container">
+      <div class="projects-box" v-for="n in 8" :key="n">{{ n }}</div>
+    </section>
   </section>
 </template>
+
 <script setup>
 import { onMounted } from 'vue'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-onMounted(() => {})
+// GSAP 플러그인 등록
+gsap.registerPlugin(ScrollTrigger)
+
+onMounted(() => {
+  const container = document.querySelector('.projects-container')
+
+  // 가로 스크롤 설정
+  gsap.to(container, {
+    x: () =>
+      -(container.scrollWidth - document.documentElement.clientWidth) + 'px', // 전체 가로 이동
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '.projects-wrap',
+      start: 'top top',
+      end: () => '+=' + container.scrollWidth * 2, // 스크롤 길이를 2배로 늘림
+      scrub: 2,
+      pin: '.projects-wrap',
+      anticipatePin: 1,
+    },
+  })
+})
 </script>
+
 <style lang="scss">
 .projects-wrap {
   position: relative;
@@ -92,6 +120,24 @@ onMounted(() => {})
       1px 22px 10px rgba(0, 0, 0, 0.3),
       1px 25px 35px rgba(0, 0, 0, 0.2),
       1px 30px 60px rgba(0, 0, 0, 0.15);
+  }
+
+  .projects-container {
+    display: flex;
+    width: max-content;
+    padding-left: 100%;
+    padding-top: 10%;
+    margin: 0;
+    .projects-box {
+      width: 300px;
+      height: 300px;
+      margin: 0 30px; /* 양옆 간격 */
+      background-color: white;
+      color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 }
 </style>
