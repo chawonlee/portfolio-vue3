@@ -9,6 +9,7 @@
     <section class="projects-title">
       <div>PROJECTS</div>
     </section>
+    <section class="projects-container"></section>
   </section>
 </template>
 <script setup>
