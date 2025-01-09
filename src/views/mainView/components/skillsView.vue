@@ -9,11 +9,9 @@
         :slides-per-view="2"
         :space-between="0"
         :loop="true"
-        :mousewheel="true"
-        :pagination="{
-          clickable: true,
-        }"
         :centered-slides="true"
+        :free-mode="false"
+        mousewheel="true"
         :allow-touch-move="true"
         @swiper="onSwiper"
       >

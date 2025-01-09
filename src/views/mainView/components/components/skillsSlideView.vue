@@ -117,6 +117,7 @@ onMounted(async () => {
 }
 
 .skill-grid {
+  overflow: hidden;
   display: grid;
   grid-template-columns: repeat(
     auto-fit,
@@ -126,7 +127,6 @@ onMounted(async () => {
   width: 100%; /* 부모 너비 채우기 */
   height: 100%; /* 타이틀 제외한 높이 */
   box-sizing: border-box; /* 여백 포함 크기 계산 */
-  overflow-y: auto; /* 스크롤 활성화 */
   padding: 1rem; /* 내부 여백 */
 }
 
@@ -142,13 +142,12 @@ onMounted(async () => {
   position: relative; /* detail을 박스 내부에 위치하도록 설정 */
   overflow: hidden;
   width: 100%;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: box-shadow 0.3s ease;
 
   &:hover {
-    transform: scale(1.05); /* hover 시 박스 확대 */
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* 강조된 그림자 */
+    box-shadow:
+      0 12px 24px rgba(0, 0, 0, 0.3),
+      0 6px 8px rgba(0, 0, 0, 0.15);
   }
 
   .skill-detail {
@@ -165,7 +164,7 @@ onMounted(async () => {
     border-radius: 10px;
     transition:
       bottom 0.6s ease,
-      opacity 0.6s ease; /* 부드럽게 애니메이션 */
+      opacity 1.6s ease; /* 부드럽게 애니메이션 */
 
     opacity: 0; /* 초기 상태에서 숨김 */
     z-index: 1;
@@ -173,7 +172,7 @@ onMounted(async () => {
 
   &:hover .skill-detail {
     bottom: 0; /* hover 시 박스 바닥에서 올라옴 */
-    opacity: 0.8; /* 표시 */
+    opacity: 0.85; /* 표시 */
   }
 
   img {

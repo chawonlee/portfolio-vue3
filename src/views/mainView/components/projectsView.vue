@@ -10,9 +10,15 @@
       <div>PROJECTS</div>
     </section>
 
+    <section class="projects-section"></section>
     <!-- 가로 스크롤 섹션 -->
     <section class="projects-container">
-      <div class="projects-box" v-for="n in 8" :key="n">{{ n }}</div>
+      <div class="projects-box" v-for="n in 8" :key="n">
+        <div class="project-repre-img">
+          <div class="hover-overlay">자세히 보기</div>
+        </div>
+        <div class="project-repre-detail">{{ n }}</div>
+      </div>
     </section>
   </section>
 </template>
@@ -28,32 +34,38 @@ gsap.registerPlugin(ScrollTrigger)
 onMounted(() => {
   const container = document.querySelector('.projects-container')
 
-  // 가로 스크롤 설정
-  gsap.to(container, {
-    x: () =>
-      -(container.scrollWidth - document.documentElement.clientWidth) + 'px', // 전체 가로 이동
-    ease: 'none',
-    scrollTrigger: {
-      trigger: '.projects-wrap',
-      start: 'top top',
-      end: () => '+=' + container.scrollWidth * 2, // 스크롤 길이를 2배로 늘림
-      scrub: 2,
-      pin: '.projects-wrap',
-      anticipatePin: 1,
+  // 전체 스크롤 길이 계산
+  const totalScrollWidth = container.scrollWidth - window.innerWidth
+
+  // GSAP 가로 스크롤 설정
+  gsap.fromTo(
+    container,
+    { x: 0 }, // 초기 위치를 가장 왼쪽으로 설정
+    {
+      x: -totalScrollWidth, // 전체 너비만큼 이동
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.projects-wrap', // projects-wrap을 트리거로 설정
+        start: 'top top', // 타이틀이 화면 상단에 위치하면 시작
+        end: () => `+=${container.scrollWidth}`, // 전체 스크롤 길이
+        scrub: true, // 스크롤 동기화
+        pin: '.projects-wrap', // wrap 전체를 고정
+        anticipatePin: 1, // 고정 전후 부드러운 전환
+      },
     },
-  })
+  )
 })
 </script>
 
 <style lang="scss">
 .projects-wrap {
   position: relative;
-  width: 100%;
-  height: 100vh;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column; // 자식 요소를 세로로 배치
+  align-items: center; // 가로 정렬
+  justify-content: flex-start; // 위에서부터 정렬
+  width: 100%;
+  height: 100vh; // 전체 높이를 자식 요소에 맞춤
   background-color: #006bff;
   z-index: 2;
   overflow: hidden;
@@ -105,7 +117,7 @@ onMounted(() => {
 
   .projects-title {
     color: white;
-    padding-top: 4.5%;
+    padding-top: 5%;
     font-family: 'Black Han Sans', sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -120,23 +132,80 @@ onMounted(() => {
       1px 22px 10px rgba(0, 0, 0, 0.3),
       1px 25px 35px rgba(0, 0, 0, 0.2),
       1px 30px 60px rgba(0, 0, 0, 0.15);
+    margin-bottom: 20px; // 타이틀 아래 간격 조정
+  }
+
+  .projects-section {
+    display: flex;
   }
 
   .projects-container {
     display: flex;
-    width: max-content;
-    padding-left: 100%;
-    padding-top: 10%;
-    margin: 0;
-    .projects-box {
-      width: 300px;
-      height: 300px;
-      margin: 0 30px; /* 양옆 간격 */
+    gap: 30px; // 박스 간격
+    width: auto; // 고정 너비 대신 유동적인 너비 설정
+    min-width: 100vw; // 최소 너비를 화면 크기로 설정
+    margin: 100px 80px 0 80px;
+    padding: 0 100px;
+    height: 500px; // 박스 높이
+    overflow: visible; // 스크롤 내 요소 잘림 방지
+  }
+
+  .projects-box {
+    flex: 0 0 600px; // 각 박스의 너비를 명시적으로 설정
+    height: 500px;
+    margin: 0; // 간격은 `gap`으로 관리
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    background-color: white;
+    .project-repre-img {
+      width: 100%;
+      height: 60%; // 이미지가 차지하는 영역
+      background-color: lightgray; // 기본 배경 색
+      position: relative; // "자세히 보기" 글자를 위한 부모 위치 설정
+      transition: opacity 0.3s ease; // 부드럽게 변경
+
+      .hover-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.7); // 반투명 검정 배경
+        color: white;
+        font-size: 1.2rem;
+        font-weight: bold;
+        opacity: 0; // 초기 상태에서는 숨김
+        transition: opacity 0.3s ease; // 부드럽게 나타나도록 설정
+      }
+
+      // Hover 상태에서 이미지 어둡게 및 "자세히 보기" 표시
+      &:hover {
+        opacity: 0.5; // 이미지 어둡게
+      }
+
+      &:hover .hover-overlay {
+        opacity: 1; // "자세히 보기" 표시
+      }
+    }
+
+    .project-repre-detail {
+      text-align: center;
+      padding: 10px;
       background-color: white;
-      color: black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      transition: opacity 0.3s ease;
+
+      // 기본 상태에서는 텍스트 숨김
+      opacity: 1;
+
+      // projects-box 전체에 hover 시 텍스트 숨김
+      .projects-box:hover & {
+        opacity: 0;
+      }
     }
   }
 }
