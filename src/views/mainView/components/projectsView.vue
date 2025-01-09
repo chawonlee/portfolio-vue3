@@ -15,7 +15,10 @@
     <section class="projects-container">
       <div class="projects-box" v-for="n in 8" :key="n">
         <div class="project-repre-img">
-          <div class="hover-overlay">자세히 보기</div>
+          <div class="hover-overlay">
+            <div class="hover-overlay-title">CLICK ~!</div>
+            <div class="hover-overlay-detail">자세히 보기</div>
+          </div>
         </div>
         <div class="project-repre-detail">{{ n }}</div>
       </div>
@@ -56,7 +59,6 @@ onMounted(() => {
   )
 })
 </script>
-
 <style lang="scss">
 .projects-wrap {
   position: relative;
@@ -117,7 +119,7 @@ onMounted(() => {
 
   .projects-title {
     color: white;
-    padding-top: 5%;
+    padding-top: 6%;
     font-family: 'Black Han Sans', sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -144,21 +146,22 @@ onMounted(() => {
     gap: 30px; // 박스 간격
     width: auto; // 고정 너비 대신 유동적인 너비 설정
     min-width: 100vw; // 최소 너비를 화면 크기로 설정
-    margin: 100px 80px 0 80px;
+    margin: 8% 10% 0 80px;
     padding: 0 100px;
     height: 500px; // 박스 높이
     overflow: visible; // 스크롤 내 요소 잘림 방지
   }
 
   .projects-box {
-    flex: 0 0 600px; // 각 박스의 너비를 명시적으로 설정
-    height: 500px;
+    flex: 0 0 550px; // 각 박스의 너비를 명시적으로 설정
+    height: 480px;
     margin: 0; // 간격은 `gap`으로 관리
     border: 1px solid #ccc;
-    border-radius: 10px;
+    border-radius: 34px;
     overflow: hidden;
     position: relative;
     background-color: white;
+
     .project-repre-img {
       width: 100%;
       height: 60%; // 이미지가 차지하는 영역
@@ -181,13 +184,28 @@ onMounted(() => {
         font-weight: bold;
         opacity: 0; // 초기 상태에서는 숨김
         transition: opacity 0.3s ease; // 부드럽게 나타나도록 설정
+        .hover-overlay-title {
+          position: absolute;
+          padding: 4px 8px;
+          border-radius: 30px;
+          background-color: #006bff; // 반투명 검정 배경
+          top: 36%;
+          left: 35%;
+          font-size: 0.7rem;
+          font-weight: 900;
+        }
+        .hover-overlay-detail {
+          border: 2px solid #ffc107;
+          border-radius: 32px;
+          padding: 10px;
+          width: 200px;
+          align-items: center;
+          display: flex;
+          justify-content: center;
+        }
       }
 
       // Hover 상태에서 이미지 어둡게 및 "자세히 보기" 표시
-      &:hover {
-        opacity: 0.5; // 이미지 어둡게
-      }
-
       &:hover .hover-overlay {
         opacity: 1; // "자세히 보기" 표시
       }
@@ -198,14 +216,13 @@ onMounted(() => {
       padding: 10px;
       background-color: white;
       transition: opacity 0.3s ease;
+      opacity: 1; // 기본 상태에서는 텍스트 표시
+    }
 
-      // 기본 상태에서는 텍스트 숨김
+    // project-repre-detail이나 project-repre-img에 hover했을 때 overlay 표시
+    &:hover .hover-overlay,
+    &:hover .project-repre-detail:hover ~ .hover-overlay {
       opacity: 1;
-
-      // projects-box 전체에 hover 시 텍스트 숨김
-      .projects-box:hover & {
-        opacity: 0;
-      }
     }
   }
 }
