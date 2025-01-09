@@ -307,7 +307,6 @@ const sendEmail = () => {
           font-size: 1rem;
           resize: none;
           font-weight: 400;
-          overflow-y: scroll;
 
           &:focus-visible {
             outline: none;
