@@ -40,6 +40,12 @@
     class="hover-instruction"
     alt="Move the cursor over the dots!"
   />
+  <!--이벤트-->
+  <img src="@/assets/image/background/Frame 1.png" class="sub1" alt="sub1" />
+  <img src="@/assets/image/background/Frame 2.png" class="sub2" alt="sub2" />
+  <img src="@/assets/image/background/Frame 3.png" class="sub3" alt="sub3" />
+  <img src="@/assets/image/background/Frame 4.png" class="sub4" alt="sub4" />
+  <img src="@/assets/image/background/Frame 5.png" class="sub5" alt="sub5" />
   <!-- 중앙 하단 더보기 -->
   <div class="scroll-down">
     <div>SCROLL</div>
@@ -47,6 +53,10 @@
   </div>
 </template>
 <script setup>
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+gsap.registerPlugin(ScrollTrigger)
+
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 const phrases = ref([
   '열정이 넘치는 개발자',
@@ -94,6 +104,42 @@ onMounted(() => {
   window.addEventListener('resize', resizeCanvas)
   canvasElement.addEventListener('mousemove', handleMouseMove)
   canvasElement.addEventListener('mouseleave', handleMouseLeave)
+
+  const animations = [
+    { selector: '.sub1', rotation: -360, x: -300, y: 0 }, // 왼쪽으로 회전, 왼쪽 이동
+    { selector: '.sub2', rotation: -360, x: 0, y: 300 }, // 왼쪽으로 회전, 아래 이동
+    { selector: '.sub3', rotation: -360, x: -300, y: 0 }, // 왼쪽으로 회전, 왼쪽 이동
+    { selector: '.sub4', rotation: 360, x: 300, y: 0 }, // 오른쪽으로 회전, 오른쪽 이동
+    { selector: '.sub5', rotation: 360, x: 300, y: 0 }, // 오른쪽으로 회전, 오른쪽 이동
+  ]
+
+  animations.forEach(({ selector, rotation, x, y }) => {
+    const element = document.querySelector(selector)
+    if (!element) return
+
+    // 초기 상태 설정
+    gsap.set(element, {
+      scale: 1,
+      rotation: 0,
+      opacity: 0.8,
+    })
+
+    // 애니메이션 설정
+    gsap.to(element, {
+      scale: 2, // 확대
+      rotation, // 각 이미지에 맞는 회전 방향
+      x, // 이동 x
+      y, // 이동 y
+      opacity: 0, // 화면 밖으로 사라짐
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.about-wrap', // 전체 섹션을 트리거로 설정
+        start: 'top top', // 페이지 최상단에서 애니메이션 시작
+        end: '+=800', // 스크롤이 800px 내려갈 때 애니메이션 종료
+        scrub: true, // 스크롤과 동기화
+      },
+    })
+  })
 })
 
 onBeforeUnmount(() => {
@@ -286,6 +332,36 @@ canvas {
   left: 10%;
   top: 20%;
   animation: float 2s ease-in-out infinite;
+}
+.sub1 {
+  position: absolute;
+  left: calc(55% - 37vw);
+  bottom: calc(55% + 0vh);
+  z-index: 2;
+}
+.sub2 {
+  position: absolute;
+  left: calc(50%);
+  bottom: calc(8% + 0vh);
+  z-index: 2;
+}
+.sub3 {
+  position: absolute;
+  left: calc(50% - 32vw);
+  bottom: calc(20% + 0vh);
+  z-index: 2;
+}
+.sub4 {
+  position: absolute;
+  right: calc(64% - 37vw);
+  bottom: calc(66% + 0vh);
+  z-index: 2;
+}
+.sub5 {
+  position: absolute;
+  right: calc(13%);
+  bottom: calc(28% + 0vh);
+  z-index: 2;
 }
 
 /* 둥둥 떠다니는 애니메이션 */
