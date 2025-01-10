@@ -326,63 +326,54 @@ canvas {
   left: calc(50% - 25vw);
   bottom: calc(50% + 20vh);
   filter: blur(2px);
-  z-index: 2;
 }
 .sub2 {
   position: absolute;
   left: calc(50% - 30vw);
   bottom: calc(50% + 0vh);
   filter: blur(0px);
-  z-index: 2;
 }
 .sub3 {
   position: absolute;
   left: calc(50% - 30vw);
   bottom: calc(50% - 20vh);
   filter: blur(0px);
-  z-index: 2;
 }
 .sub4 {
   position: absolute;
   left: calc(50% - 15vw);
   bottom: calc(50% - 32vh);
   filter: blur(2px);
-  z-index: 2;
 }
 .sub5 {
   position: absolute;
   left: calc(50%);
   bottom: calc(22vh);
   filter: blur(0px);
-  z-index: 2;
 }
 .sub6 {
   position: absolute;
   left: calc(50% + 15vw);
   bottom: calc(50% - 20vh);
   filter: blur(0px);
-  z-index: 2;
 }
 .sub7 {
   position: absolute;
   left: calc(50% + 30vw);
   bottom: calc(50% - 30vh);
   filter: blur(2px);
-  z-index: 2;
 }
 .sub8 {
   position: absolute;
   left: calc(50% + 30vw);
   bottom: calc(50% + 0vh);
   filter: blur(0px);
-  z-index: 2;
 }
 .sub9 {
   position: absolute;
   left: calc(50% + 20vw);
   bottom: calc(50% + 20vh);
   filter: blur(2px);
-  z-index: 2;
 }
 
 /* 둥둥 떠다니는 애니메이션 */
