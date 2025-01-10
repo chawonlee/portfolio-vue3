@@ -1,5 +1,9 @@
 <template>
   <div class="mainView">
+    <!-- Home -->
+    <section class="homeView">
+      <home />
+    </section>
     <!-- About -->
     <section class="aboutView">
       <about />
@@ -34,6 +38,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 //components
+import home from './components/homeView.vue'
 import about from './components/aboutView.vue'
 import skills from './components/skillsView.vue'
 import projects from './components/projectsView.vue'
