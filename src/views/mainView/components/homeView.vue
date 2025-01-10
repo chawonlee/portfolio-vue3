@@ -89,7 +89,7 @@ onMounted(() => {
     { selector: '.sub2', rotation: -360, x: -300, y: 0 },
     { selector: '.sub3', rotation: -360, x: -300, y: 0 },
     { selector: '.sub4', rotation: -360, x: -300, y: 0 },
-    { selector: '.sub1', rotation: 360, x: 300, y: 0 }, // 오른쪽으로 회전, 오른쪽 이동
+    { selector: '.sub1', rotation: -360, x: -300, y: 0 }, // 오른쪽으로 회전, 오른쪽 이동
     { selector: '.sub6', rotation: 360, x: 300, y: 0 },
     { selector: '.sub7', rotation: 360, x: 300, y: 0 },
     { selector: '.sub8', rotation: 360, x: 300, y: 0 },
