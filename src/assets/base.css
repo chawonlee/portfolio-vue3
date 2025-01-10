@@ -94,6 +94,10 @@ body {
   font-weight: 700; /* Bold 폰트 */
 }
 
+.color-purple {
+  color: #433878;
+}
+
 ::selection {
   color: white;
   background-color: #a594f9;
