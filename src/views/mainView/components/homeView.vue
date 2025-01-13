@@ -36,15 +36,15 @@
   </div>
 
   <!--이벤트-->
-  <img src="@/assets/image/background/back1.png" class="sub5" alt="sub1" />
-  <img src="@/assets/image/background/back2.png" class="sub2" alt="sub2" />
-  <img src="@/assets/image/background/back3.png" class="sub3" alt="sub3" />
-  <img src="@/assets/image/background/back4.png" class="sub4" alt="sub4" />
-  <img src="@/assets/image/background/back5.png" class="sub1" alt="sub5" />
-  <img src="@/assets/image/background/back6.png" class="sub6" alt="sub6" />
-  <img src="@/assets/image/background/back7.png" class="sub7" alt="sub7" />
-  <img src="@/assets/image/background/back8.png" class="sub8" alt="sub8" />
-  <img src="@/assets/image/background/back9.png" class="sub9" alt="sub9" />
+  <img src="@/assets/image/background/back1.svg" class="sub1" alt="sub1" />
+  <img src="@/assets/image/background/back2.svg" class="sub2" alt="sub2" />
+  <img src="@/assets/image/background/back3.svg" class="sub3" alt="sub3" />
+  <img src="@/assets/image/background/back4.svg" class="sub4" alt="sub4" />
+  <img src="@/assets/image/background/back5.svg" class="sub5" alt="sub5" />
+  <img src="@/assets/image/background/back6.svg" class="sub6" alt="sub6" />
+  <img src="@/assets/image/background/back7.svg" class="sub7" alt="sub7" />
+  <img src="@/assets/image/background/back8.svg" class="sub8" alt="sub8" />
+  <img src="@/assets/image/background/back9.svg" class="sub9" alt="sub9" />
 
   <!-- 중앙 하단 더보기 -->
   <div class="scroll-down">
@@ -322,58 +322,67 @@ canvas {
 }
 
 .sub1 {
+  width: 9vw;
   position: absolute;
   left: calc(50% - 25vw);
   bottom: calc(50% + 20vh);
-  filter: blur(2px);
+  filter: blur(0px);
 }
 .sub2 {
+  width: 9vw;
   position: absolute;
-  left: calc(50% - 30vw);
-  bottom: calc(50% + 0vh);
+  left: calc(50% - 33vw);
+  bottom: calc(50% + 4vh);
   filter: blur(0px);
 }
 .sub3 {
+  width: 9vw;
   position: absolute;
   left: calc(50% - 30vw);
-  bottom: calc(50% - 20vh);
-  filter: blur(0px);
-}
-.sub4 {
-  position: absolute;
-  left: calc(50% - 15vw);
-  bottom: calc(50% - 32vh);
+  bottom: calc(50% - 25vh);
   filter: blur(2px);
 }
+.sub4 {
+  width: 8vw;
+  position: absolute;
+  left: calc(50% - 15vw);
+  bottom: calc(50% - 36vh);
+  filter: blur(0px);
+}
 .sub5 {
+  width: 8vw;
   position: absolute;
   left: calc(50%);
-  bottom: calc(22vh);
+  bottom: calc(12vh);
   filter: blur(0px);
 }
 .sub6 {
+  width: 8vw;
   position: absolute;
   left: calc(50% + 15vw);
   bottom: calc(50% - 20vh);
-  filter: blur(0px);
+  filter: blur(2px);
 }
 .sub7 {
+  width: 8vw;
   position: absolute;
   left: calc(50% + 30vw);
   bottom: calc(50% - 30vh);
-  filter: blur(2px);
+  filter: blur(0px);
 }
 .sub8 {
+  width: 9vw;
   position: absolute;
-  left: calc(50% + 30vw);
+  left: calc(50% + 28vw);
   bottom: calc(50% + 0vh);
   filter: blur(0px);
 }
 .sub9 {
+  width: 7vw;
   position: absolute;
   left: calc(50% + 20vw);
   bottom: calc(50% + 20vh);
-  filter: blur(2px);
+  filter: blur(0px);
 }
 
 /* 둥둥 떠다니는 애니메이션 */
