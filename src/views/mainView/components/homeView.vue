@@ -85,15 +85,15 @@ onMounted(() => {
   canvasElement.addEventListener('mouseleave', handleMouseLeave)
 
   const animations = [
-    { selector: '.sub5', rotation: -360, x: -300, y: 0 }, // 왼쪽으로 회전, 왼쪽 이동
-    { selector: '.sub2', rotation: -360, x: -300, y: 0 },
-    { selector: '.sub3', rotation: -360, x: -300, y: 0 },
-    { selector: '.sub4', rotation: -360, x: -300, y: 0 },
-    { selector: '.sub1', rotation: -360, x: -300, y: 0 }, // 오른쪽으로 회전, 오른쪽 이동
-    { selector: '.sub6', rotation: 360, x: 300, y: 0 },
-    { selector: '.sub7', rotation: 360, x: 300, y: 0 },
-    { selector: '.sub8', rotation: 360, x: 300, y: 0 },
-    { selector: '.sub9', rotation: 360, x: 300, y: 0 },
+    { selector: '.sub1', rotation: 90, x: -300, y: 0 }, // sub1: 시계방향 적은 회전
+    { selector: '.sub2', rotation: 100, x: -300, y: 0 }, // sub2: 시계방향 적은 회전
+    { selector: '.sub3', rotation: 100, x: -300, y: 0 }, // sub3: 시계방향 적은 회전
+    { selector: '.sub4', rotation: 100, x: -300, y: 0 }, // sub4: 시계방향 적은 회전
+    { selector: '.sub5', rotation: 90, x: 0, y: 100 }, // sub5: 시계방향 회전, 아래로 이동
+    { selector: '.sub6', rotation: -100, x: 300, y: 0 }, // sub6: 반시계방향 적은 회전
+    { selector: '.sub7', rotation: -100, x: 300, y: 0 }, // sub7: 반시계방향 적은 회전
+    { selector: '.sub8', rotation: -100, x: 300, y: 0 }, // sub8: 반시계방향 적은 회전
+    { selector: '.sub9', rotation: -100, x: 300, y: 0 }, // sub9: 반시계방향 적은 회전
   ]
 
   animations.forEach(({ selector, rotation, x, y }) => {
@@ -102,23 +102,24 @@ onMounted(() => {
 
     // 초기 상태 설정
     gsap.set(element, {
-      scale: 1.2,
+      scale: 1,
       rotation: 0,
-      opacity: 0.7,
+      opacity: 1,
     })
 
     // 애니메이션 설정
     gsap.to(element, {
-      scale: 2, // 확대
+      scale: 1.6, // 확대
       rotation, // 각 이미지에 맞는 회전 방향
       x, // 이동 x
       y, // 이동 y
       opacity: 0, // 화면 밖으로 사라짐
+      duration: 2,
       ease: 'power3.out',
       scrollTrigger: {
         trigger: '.home-wrap', // 전체 섹션을 트리거로 설정
         start: 'top top', // 페이지 최상단에서 애니메이션 시작
-        end: '+=800', // 스크롤이 800px 내려갈 때 애니메이션 종료
+        end: '+=500', // 스크롤이 800px 내려갈 때 애니메이션 종료
         scrub: true, // 스크롤과 동기화
       },
     })
@@ -135,7 +136,7 @@ onMounted(() => {
       scrollTrigger: {
         trigger: '.home-wrap', // 애니메이션 트리거 요소
         start: 'top top', // 스크롤 시작 지점
-        end: '+=500', // 스크롤 300px 동안 애니메이션 진행
+        end: '+=300', // 스크롤 300px 동안 애니메이션 진행
         scrub: true, // 스크롤 동기화
       },
     },
@@ -153,7 +154,7 @@ onMounted(() => {
       scrollTrigger: {
         trigger: '.home-wrap', // 트리거 요소
         start: 'top top', // 스크롤 시작 지점
-        end: '+=500', // 스크롤 300px 동안 애니메이션 진행
+        end: '+=300', // 스크롤 300px 동안 애니메이션 진행
         scrub: true, // 스크롤 동기화
       },
     },
@@ -318,7 +319,7 @@ canvas {
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 1; /* 이미지와 intro 뒤에 위치 */
+  z-index: 1;
 }
 
 .sub1 {
@@ -402,7 +403,7 @@ canvas {
   align-items: center;
   justify-items: center;
   position: absolute;
-  bottom: 5%; /* about-wrap 아래쪽에 위치 */
+  bottom: 3%; /* about-wrap 아래쪽에 위치 */
   left: 50%;
   transform: translateX(-50%);
   font-size: 1.2rem;
