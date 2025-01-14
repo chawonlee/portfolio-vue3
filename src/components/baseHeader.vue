@@ -129,7 +129,9 @@ const Marquee = (selector, speed, reverse) => {
       font-size: 0.7rem;
       font-weight: 400;
       color: #433878; // 텍스트 기본 색상
-      animation: marquee 50s linear infinite; // 텍스트 애니메이션
+      animation:
+        marquee 50s linear infinite,
+        glow 3s ease-in-out infinite alternate; // 텍스트 애니메이션
     }
   }
 
@@ -139,6 +141,23 @@ const Marquee = (selector, speed, reverse) => {
     }
     to {
       transform: translateX(-100%); // 왼쪽으로 이동
+    }
+  }
+  // 텍스트 글로우 애니메이션
+  @keyframes glow {
+    from {
+      text-shadow:
+        0px 0px 2px #614ad380,
+        0px 0px 1px #614ad39d,
+        0px 0px 6px #9b27b070,
+        0px 0px 5px #e1bee7;
+    }
+    to {
+      text-shadow:
+        0px 0px 4px #614ad398,
+        0px 0px 3px #ffffff,
+        0px 0px 5px #d1c4e9,
+        0px 0px 8px #ffffff;
     }
   }
 }
