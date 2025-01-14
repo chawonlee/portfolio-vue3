@@ -41,6 +41,10 @@
 </template>
 <script setup>
 import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 const phrases = ref([
   '열정이 넘치는 개발자',
   '꾸준히 성장하는 개발자',
@@ -59,13 +63,64 @@ const intervalId = ref(null)
 const isRunning = ref(false)
 
 onMounted(() => {
-  //3초 후 셔플 함수 실행
-  setTimeout(() => {
-    shuffleText()
-  }, 3000)
+  // 이미지가 왼쪽에서 서서히 등장
+  gsap.fromTo(
+    '.myPhoto',
+    {
+      opacity: 0, // 처음에는 투명
+      x: -150, // 왼쪽에서 시작
+    },
+    {
+      opacity: 1, // 점점 불투명
+      x: 0, // 원래 위치로 이동
+      duration: 5, // 애니메이션 지속 시간
+      ease: 'power1.inOut', // 부드럽게 감속/가속
+      scrollTrigger: {
+        trigger: '.about-container', // 애니메이션 트리거
+        start: 'top 80%', // 뷰포트의 90% 지점에서 시작
+        end: 'top 40%', // 뷰포트의 50% 지점에서 끝
+        scrub: true, // 스크롤 동기화
+      },
+      onComplete: checkAnimationsComplete, // 애니메이션 완료 시 호출
+    },
+  )
+
+  // intro 클래스가 오른쪽에서 서서히 등장
+  gsap.fromTo(
+    '.intro',
+    {
+      opacity: 0, // 처음에는 투명
+      x: 150, // 오른쪽에서 시작
+    },
+    {
+      opacity: 1, // 점점 불투명
+      x: 0, // 원래 위치로 이동
+      duration: 5, // 애니메이션 지속 시간
+      ease: 'power1.inOut', // 부드럽게 감속/가속
+      scrollTrigger: {
+        trigger: '.about-container', // 애니메이션 트리거
+        start: 'top 80%', // 뷰포트의 90% 지점에서 시작
+        end: 'top 40%', // 뷰포트의 50% 지점에서 끝
+        scrub: true, // 스크롤 동기화
+      },
+      onComplete: checkAnimationsComplete, // 애니메이션 완료 시 호출
+    },
+  )
 })
 
 onBeforeUnmount(() => {})
+// 애니메이션 완료 확인을 위한 플래그
+
+const animationsCompleted = ref(0)
+const checkAnimationsComplete = () => {
+  animationsCompleted.value += 1
+
+  // 이미지와 intro 애니메이션이 모두 완료된 경우
+  if (animationsCompleted.value === 2) {
+    shuffleText() // 셔플 함수 실행
+    animationsCompleted.value = 0
+  }
+}
 
 //👉셔플 버튼 클릭 시
 const shuffleText = () => {
@@ -97,13 +152,16 @@ const stopShuffle = () => {
 </script>
 <style lang="scss">
 .about-wrap {
+  z-index: 2;
   position: relative;
   height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: white;
   width: 100vw; /* 원하는 너비 조정 */
+
   .about-title {
     font-family: 'Black Han Sans', sans-serif;
     font-weight: 400;
@@ -128,6 +186,8 @@ const stopShuffle = () => {
     grid-template-rows: auto; /* 세로는 1칸 */
     gap: 3rem; /* 칸 간의 간격 설정 (선택 사항) */
     display: grid;
+    transform-origin: center bottom; /* 애니메이션 기준점 아래로 설정 */
+    will-change: transform, opacity, clip-path; /* 애니메이션 최적화 */
 
     .myPhoto {
       width: 100%;
