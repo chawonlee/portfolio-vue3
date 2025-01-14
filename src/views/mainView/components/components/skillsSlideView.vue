@@ -56,7 +56,7 @@ onMounted(async () => {
   position: relative;
   padding: 1rem;
   background-color: white;
-  border-radius: 10px;
+  border-radius: 30px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden; /* 넘치는 요소 숨기기 */
   height: 100%; /* 부모 컨테이너의 높이 */
