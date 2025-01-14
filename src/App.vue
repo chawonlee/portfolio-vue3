@@ -25,8 +25,8 @@ import CursorCustom from './components/cursorCustom.vue'
 const isIntroVisible = ref(true)
 
 const lenis = new Lenis({
-  duration: 1.2, // 부드러운 스크롤 속도
-  easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // easing 함수
+  duration: 1.5, // 부드러운 스크롤 속도
+  easing: t => Math.min(1, 1.001 - Math.pow(2, -8 * t)), // easing 함수
   smooth: true, // 기본 부드러운 스크롤 활성화
   direction: 'vertical', // 스크롤 방향
 })
