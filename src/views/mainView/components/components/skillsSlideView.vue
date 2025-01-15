@@ -156,10 +156,12 @@ onMounted(async () => {
     bottom: -100%; /* 초기 상태: 스킬 박스 바닥에서 숨김 */
     left: 0;
     right: 0;
-    background: black;
-    color: #fff;
-    padding: 0.5rem;
-    font-size: 0.75rem;
+    background: rgba(0, 0, 0, 0.55); /* 반투명한 검정색 */
+    backdrop-filter: blur(50px); /* 블러 효과 추가 */
+    color: white;
+    padding: 1rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.2px;
     text-align: center;
     border-radius: 10px;
     transition:
@@ -171,7 +173,7 @@ onMounted(async () => {
   }
 
   &:hover .skill-detail {
-    bottom: 0; /* hover 시 박스 바닥에서 올라옴 */
+    bottom: -2px; /* hover 시 박스 바닥에서 올라옴 */
     opacity: 0.85; /* 표시 */
   }
 

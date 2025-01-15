@@ -54,7 +54,35 @@
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { ref, onBeforeUnmount, onMounted } from 'vue'
 import skillSlideView from './components/skillsSlideView.vue'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+gsap.registerPlugin(ScrollTrigger)
+
 const serviceSwiper = ref(null)
+
+onMounted(() => {
+  // GSAP 애니메이션 추가
+  gsap.fromTo(
+    '.swiper-container',
+    {
+      opacity: 0,
+      y: 300, // 아래에서 시작
+    },
+    {
+      opacity: 1,
+      y: 0, // 제자리로 이동
+      duration: 5, // 애니메이션 지속 시간
+      ease: 'power3.out', // 부드러운 애니메이션
+      scrollTrigger: {
+        trigger: '.skills-wrap', // 트리거 요소
+        start: 'top 60%', // 트리거 시작 위치 (뷰포트에서 요소가 80% 아래에 있을 때 시작)
+        end: 'top 10%', // 트리거 종료 위치
+        toggleActions: 'play none none reverse', // 스크롤 방향에 따른 애니메이션 동작
+        scrub: true,
+      },
+    },
+  )
+})
 
 // 이벤트 및 타이머 해제
 onBeforeUnmount(() => {
