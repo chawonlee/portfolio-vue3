@@ -55,9 +55,9 @@ onMounted(async () => {
 .skills-section {
   position: relative;
   padding: 1rem;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   border-radius: 30px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(249, 249, 249, 0.925);
   overflow: hidden; /* 넘치는 요소 숨기기 */
   height: 100%; /* 부모 컨테이너의 높이 */
   display: flex;
@@ -68,7 +68,7 @@ onMounted(async () => {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: #ffc107;
+  background-color: #000;
   position: absolute;
   top: 15px;
   left: 15px;

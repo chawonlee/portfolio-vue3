@@ -155,7 +155,7 @@ const slideEnd = event => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #ffc107;
+  pointer-events: none; /* 마우스 이벤트를 차단 */
   z-index: 2;
 
   .skills-title {
@@ -164,15 +164,10 @@ const slideEnd = event => {
     font-style: normal;
     height: 15%;
     font-size: 4rem;
+    color: white; /* 텍스트를 흰색으로 설정 */
     text-shadow:
-      1px 1px 1px #fff,
-      1px 2px 1px #fff,
-      1px 3px 1px #fff,
-      1px 4px 1px #fff,
-      1px 18px 6px rgba(16, 16, 16, 0.4),
-      1px 22px 10px rgba(16, 16, 16, 0.2),
-      1px 25px 35px rgba(16, 16, 16, 0.2),
-      1px 30px 60px rgba(16, 16, 16, 0.4);
+      0px 1px 3px rgba(80, 80, 80, 0.6),
+      /* 살짝 밝은 그림자 */ 0px 3px 6px rgba(120, 120, 120, 0.4); /* 부드럽고 퍼짐 */
   }
 
   .swiper-container {
@@ -191,6 +186,7 @@ const slideEnd = event => {
       justify-content: center;
 
       .swiper-slide {
+        pointer-events: auto;
         transform: scale(0.8);
         transition: all 0.3s ease;
         height: 100%;
@@ -227,6 +223,8 @@ const slideEnd = event => {
 
 // 이미지 스타일 추가
 .drag-instruction {
+  filter: invert(1);
+  pointer-events: none; /* 마우스 이벤트를 차단 */
   position: absolute;
   top: 15%;
   left: 15%;
