@@ -11,8 +11,8 @@
     </nav>
     <div class="marquee">
       <p class="marquee-text">
-        THIS PORTFOLIO MADE BY Vue | Vuetify | SCSS | GSAP | Swiper |
-        Vue-Toastify. I HOPE YOU FIND SOME GOOD LUCK ON THIS PAGE ❤
+        THIS PORTFOLIO MADE BY Vue | Vuetify | Vue-Toastify | SCSS | GSAP |
+        Swiper | Lenis. I HOPE YOU FIND SOME GOOD LUCK ON THIS PAGE ❤
         <span style="padding-right: 10px"> </span>
       </p>
     </div>
@@ -80,7 +80,7 @@ const Marquee = (selector, speed, reverse) => {
 
       a {
         text-decoration: none;
-        color: #433878;
+        color: #fff;
         font-weight: 500;
         transition: color 0.3s;
 
@@ -126,12 +126,12 @@ const Marquee = (selector, speed, reverse) => {
       padding-top: 5px;
       display: inline-block;
       white-space: nowrap; // 텍스트가 줄바꿈되지 않도록 설정
-      font-size: 0.7rem;
+      font-size: 0.8rem;
       font-weight: 400;
-      color: #433878; // 텍스트 기본 색상
+      color: #fff; // 텍스트 기본 색상
       animation:
         marquee 50s linear infinite,
-        glow 3s ease-in-out infinite alternate; // 텍스트 애니메이션
+        glow 1s ease-in-out infinite alternate; // 텍스트 애니메이션
     }
   }
 
@@ -147,17 +147,13 @@ const Marquee = (selector, speed, reverse) => {
   @keyframes glow {
     from {
       text-shadow:
-        0px 0px 2px #614ad380,
-        0px 0px 1px #614ad39d,
-        0px 0px 6px #9b27b070,
-        0px 0px 5px #e1bee7;
+        0px 0px 4px #fff,
+        0px 0px 4px #614ad3;
     }
     to {
       text-shadow:
-        0px 0px 4px #614ad398,
-        0px 0px 3px #ffffff,
-        0px 0px 5px #d1c4e9,
-        0px 0px 8px #ffffff;
+        0px 0px 8px #fff,
+        0px 0px 8px #614ad3;
     }
   }
 }
