@@ -113,7 +113,7 @@ onMounted(() => {
       transform: translate3d(0, -25px, 0);
     }
     50% {
-      transform: translate3d(0, 5px, 0);
+      transform: translate3d(0, -10px, 0);
     }
   }
 
