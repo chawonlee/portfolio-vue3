@@ -198,7 +198,7 @@ const sendEmail = () => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
+  pointer-events: none; /* 마우스 이벤트를 차단 */
   z-index: 2;
 
   .contact-title {
@@ -208,18 +208,14 @@ const sendEmail = () => {
     height: 15%;
     padding-bottom: 50px;
     font-size: 4rem;
+    color: white; /* 텍스트를 흰색으로 설정 */
     text-shadow:
-      1px 1px 1px #fff,
-      1px 2px 1px #fff,
-      1px 3px 1px #fff,
-      1px 4px 1px #fff,
-      1px 18px 6px rgba(16, 16, 16, 0.4),
-      1px 22px 10px rgba(16, 16, 16, 0.2),
-      1px 25px 35px rgba(16, 16, 16, 0.2),
-      1px 30px 60px rgba(16, 16, 16, 0.4);
+      0px 1px 3px rgba(80, 80, 80, 0.6),
+      /* 살짝 밝은 그림자 */ 0px 3px 6px rgba(120, 120, 120, 0.4); /* 부드럽고 퍼짐 */
   }
 
   .contact-container {
+    pointer-events: auto;
     width: 660px;
     height: 600px;
     border-radius: 10px; /* 모서리를 둥글게 */

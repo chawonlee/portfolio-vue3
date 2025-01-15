@@ -209,7 +209,7 @@ class Particle {
 }
 const initParticles = () => {
   particles = []
-  const particleCount = 140 // 점 개수
+  const particleCount = 120 // 점 개수
   for (let i = 0; i < particleCount; i++) {
     const size = Math.random() * 3 + 3
     const x = Math.random() * connectDot.value.width
@@ -250,7 +250,7 @@ const animate = () => {
 
   // 어두운 배경 덧칠
   ctx.save()
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.8)' // 반투명한 검정색 (0.7으로 어둡게 조절)
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.9)' // 반투명한 검정색 (0.7으로 어둡게 조절)
   ctx.fillRect(0, 0, connectDot.value.width, connectDot.value.height)
   ctx.restore()
 
@@ -310,6 +310,7 @@ const handleMouseLeave = () => {
 </script>
 <style lang="scss">
 .home-wrap {
+  pointer-events: none; /* 마우스 이벤트를 차단 */
   height: 100vh;
   flex-direction: column;
   // transform: translate(-50%, -50%);
@@ -362,15 +363,15 @@ canvas {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   z-index: 1;
   background-image: url('src/assets/image/background.jpg');
   background-size: cover; /* 이미지를 화면에 꽉 채우기 */
   background-position: center; /* 이미지를 중앙에 맞춤 */
-  background-repeat: no-repeat; /* 이미지를 반복하지 않음 */
 }
 
 .sub1 {
+  pointer-events: none; /* 마우스 이벤트를 차단 */
   z-index: 1;
   width: 9vw;
   position: absolute;
@@ -379,6 +380,7 @@ canvas {
   filter: blur(0px);
 }
 .sub2 {
+  pointer-events: none; /* 마우스 이벤트를 차단 */
   z-index: 1;
   width: 9vw;
   position: absolute;
@@ -387,6 +389,7 @@ canvas {
   filter: blur(0px);
 }
 .sub3 {
+  pointer-events: none; /* 마우스 이벤트를 차단 */
   z-index: 1;
   width: 9vw;
   position: absolute;
@@ -395,6 +398,7 @@ canvas {
   filter: blur(2px);
 }
 .sub4 {
+  pointer-events: none; /* 마우스 이벤트를 차단 */
   z-index: 1;
   width: 8vw;
   position: absolute;
@@ -403,6 +407,7 @@ canvas {
   filter: blur(0px);
 }
 .sub5 {
+  pointer-events: none; /* 마우스 이벤트를 차단 */
   z-index: 1;
   width: 8vw;
   position: absolute;
@@ -411,6 +416,7 @@ canvas {
   filter: blur(0px);
 }
 .sub6 {
+  pointer-events: none; /* 마우스 이벤트를 차단 */
   z-index: 1;
   width: 8vw;
   position: absolute;
@@ -419,6 +425,7 @@ canvas {
   filter: blur(2px);
 }
 .sub7 {
+  pointer-events: none; /* 마우스 이벤트를 차단 */
   z-index: 1;
   width: 8vw;
   position: absolute;
@@ -427,6 +434,7 @@ canvas {
   filter: blur(0px);
 }
 .sub8 {
+  pointer-events: none; /* 마우스 이벤트를 차단 */
   z-index: 1;
   width: 9vw;
   position: absolute;
@@ -435,6 +443,7 @@ canvas {
   filter: blur(0px);
 }
 .sub9 {
+  pointer-events: none; /* 마우스 이벤트를 차단 */
   z-index: 1;
   width: 7vw;
   position: absolute;

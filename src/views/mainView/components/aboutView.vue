@@ -1,7 +1,13 @@
 <template>
   <section class="about-wrap">
     <section class="about-title">
-      <div>ABOUT</div>
+      <div class="about-text">ABOUT</div>
+      <img
+        ref="checkSvg"
+        src="@/assets/svg/check.svg"
+        alt="check-svg"
+        class="check-svg"
+      />
     </section>
     <div class="about-container">
       <img src="@/assets/image/myPhoto1.jpg" width="30%" class="myPhoto" />
@@ -13,8 +19,8 @@
             @click="shuffleText"
             variant="text"
             :disabled="isRunning"
-            color="#626463"
-            ><v-icon icon="mdi-shuffle-variant" color="secondary"
+            color="#fff"
+            ><v-icon icon="mdi-shuffle-variant" color="#f0c40d"
           /></v-btn>
         </div>
         <div class="detail-text draggable">
@@ -106,6 +112,24 @@ onMounted(() => {
       onComplete: checkAnimationsComplete, // 애니메이션 완료 시 호출
     },
   )
+
+  const path = document.querySelector('.check-svg path')
+
+  if (path) {
+    const pathLength = path.getTotalLength()
+    path.style.strokeDasharray = pathLength
+    path.style.strokeDashoffset = pathLength
+
+    gsap.to(path, {
+      strokeDashoffset: 0, // path를 점점 그려나감
+      scrollTrigger: {
+        trigger: '.about-wrap', // 트리거 설정
+        start: 'top center', // 화면 중앙에 도달할 때 시작
+        end: 'bottom center', // 화면 하단에 도달할 때 종료
+        scrub: true, // 스크롤과 동기화
+      },
+    })
+  }
 })
 
 onBeforeUnmount(() => {})
@@ -152,31 +176,47 @@ const stopShuffle = () => {
 </script>
 <style lang="scss">
 .about-wrap {
-  z-index: 2;
+  z-index: 1;
   position: relative;
   height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: white;
   width: 100vw; /* 원하는 너비 조정 */
+  pointer-events: none; /* 마우스 이벤트를 차단 */
 
   .about-title {
+    position: relative; /* 자식 요소들의 기준점 설정 */
     font-family: 'Black Han Sans', sans-serif;
     font-weight: 400;
     font-style: normal;
-    height: 15%;
+    height: 20%;
     font-size: 4rem;
+    color: white; /* 텍스트를 흰색으로 설정 */
     text-shadow:
-      1px 1px 1px #fff,
-      1px 2px 1px #fff,
-      1px 3px 1px #fff,
-      1px 4px 1px #fff,
-      1px 18px 6px rgba(16, 16, 16, 0.4),
-      1px 22px 10px rgba(16, 16, 16, 0.2),
-      1px 25px 35px rgba(16, 16, 16, 0.2),
-      1px 30px 60px rgba(16, 16, 16, 0.4);
+      0px 1px 3px rgba(80, 80, 80, 0.6),
+      /* 살짝 밝은 그림자 */ 0px 3px 6px rgba(120, 120, 120, 0.4); /* 부드럽고 퍼짐 */
+    .about-text {
+      position: absolute;
+      top: 50%; /* 수직 가운데 정렬 */
+      left: 50%; /* 수평 가운데 정렬 */
+      transform: translate(-50%, -50%); /* 가운데 정렬을 위한 보정 */
+      z-index: 2; /* 텍스트가 이미지 위에 표시되도록 설정 */
+      text-shadow:
+        0px 1px 3px rgba(80, 80, 80, 0.6),
+        0px 3px 6px rgba(120, 120, 120, 0.4); /* 부드럽고 퍼짐 */
+    }
+
+    .check-svg {
+      position: absolute;
+      top: 50%; /* SVG를 텍스트보다 약간 아래로 이동 */
+      left: 50%; /* 수평 가운데 정렬 */
+      transform: translate(-50%, -50%); /* 가운데 정렬 */
+      z-index: 1; /* 텍스트 뒤로 배치 */
+      width: 350px; /* SVG의 크기 */
+      height: auto;
+    }
   }
   .about-container {
     width: auto;
@@ -196,18 +236,20 @@ const stopShuffle = () => {
     }
 
     .intro {
-      background-color: #fff;
+      backdrop-filter: blur(100px);
       font-size: 1.2rem;
-      opacity: 0.9;
+      opacity: 1;
       z-index: 2;
+      pointer-events: auto; /* 내부 요소는 클릭 가능 */
 
       .title {
         font-weight: 600;
-        color: #433878;
+        color: #f0c40d;
       }
 
       .main-text {
         display: flex;
+        color: white;
         justify-content: space-between;
         border-bottom: 1.5px solid;
         padding: 8px 0 2px 0;
@@ -216,6 +258,7 @@ const stopShuffle = () => {
 
       .detail-text {
         line-height: 2.2;
+        color: white;
       }
     }
   }
