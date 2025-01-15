@@ -12,7 +12,7 @@
     <div class="marquee">
       <p class="marquee-text">
         THIS PORTFOLIO MADE BY Vue | Vuetify | SCSS | GSAP | Swiper |
-        Vue-Toastify. I HOPE YOU FIND FOME GOOD LUCK ON THIS PAGE ❤
+        Vue-Toastify. I HOPE YOU FIND SOME GOOD LUCK ON THIS PAGE ❤
         <span style="padding-right: 10px"> </span>
       </p>
     </div>
