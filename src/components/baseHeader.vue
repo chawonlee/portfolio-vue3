@@ -11,7 +11,7 @@
     </nav>
     <div class="marquee">
       <p class="marquee-text">
-        THIS PORTFOLIO MADE BY Vue | Vuetify | Vue-Toastify | SCSS | GSAP |
+        THIS PORTFOLIO MADE BY Vue | Vuetify | Vue-Toastify | GSAP | Three.js |
         Swiper | Lenis. I HOPE YOU FIND SOME GOOD LUCK ON THIS PAGE ❤
         <span style="padding-right: 10px"> </span>
       </p>
