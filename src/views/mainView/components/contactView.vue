@@ -77,10 +77,10 @@
           </v-btn>
         </div>
       </v-card>
-      <div ref="threeContainer" class="three-container">
+      <div ref="threeContainer" class="three-container" @click="handleEvents">
         <svg
           version="1.1"
-          id="canvas"
+          id="threeCanvas"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 2560 1440"
         >
@@ -96,7 +96,7 @@
               <feGaussianBlur id="gBlur" in="SourceGraphic" stdDeviation="0" />
             </filter>
           </defs>
-          <text id="text" x="1250" y="770" style="">Click Me!</text>
+          <text id="text" x="1250" y="770">Click Me!</text>
 
           <g id="heart" filter="url(#blur)">
             <polygon
@@ -529,6 +529,11 @@
         </svg>
       </div>
     </section>
+    <img
+      src="@/assets/image/clickMe.png"
+      class="hover-instruction"
+      alt="clickMe"
+    />
   </section>
 </template>
 
@@ -656,10 +661,7 @@ onMounted(() => {
       transformOrigin: 'center',
     })
 
-    disperse() // Start with hearts dispersed
-
-    // Add global click listener
-    document.addEventListener('click', handleEvents, false)
+    // disperse() // Start with hearts dispersed
   } else {
     console.error('Heart container is not available.')
   }
@@ -735,7 +737,26 @@ function handleEvents() {
   justify-content: center;
   pointer-events: none; /* 마우스 이벤트를 차단 */
   z-index: 2;
-
+  .hover-instruction {
+    z-index: 1;
+    position: absolute;
+    right: 15%;
+    top: 20%;
+    animation: float 2s ease-in-out infinite;
+    padding-bottom: 3%;
+  }
+  /* 둥둥 떠다니는 애니메이션 */
+  @keyframes float {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px); /* 위로 20px 이동 */
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
   .contact-title {
     font-family: 'Black Han Sans', sans-serif;
     font-weight: 400;
@@ -757,6 +778,11 @@ function handleEvents() {
       width: 600px;
       height: 600px;
       overflow: hidden;
+      #threeCanvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
     }
     .contact-container {
       pointer-events: auto;

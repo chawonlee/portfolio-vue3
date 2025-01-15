@@ -79,7 +79,7 @@ onMounted(() => {
     width: 100%;
     position: absolute;
     left: 0;
-    background: #ffc107;
+    background: rgba(0, 0, 0, 0.99);
     .wave {
       background: url(src/assets/svg/wave.svg) repeat-x;
       position: absolute;

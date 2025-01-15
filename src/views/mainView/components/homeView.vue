@@ -167,13 +167,14 @@ onBeforeUnmount(() => {
 })
 
 // Create particles
+// Particle 클래스
 class Particle {
   constructor(x, y, size, color) {
-    this.x = x //점의 x 위치
-    this.y = y //점의 y 위치
-    this.size = size //점 반지름
-    this.color = color //점 색상
-    this.dx = (Math.random() - 0.5) * 1.3 //점 속도(매 프레임마다 이동하는 방향 및 거리)
+    this.x = x
+    this.y = y
+    this.size = size
+    this.color = color
+    this.dx = (Math.random() - 0.5) * 1.3
     this.dy = (Math.random() - 0.5) * 1.3
   }
 
@@ -181,17 +182,13 @@ class Particle {
     ctx.beginPath()
     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
     ctx.fillStyle = this.color
-
-    // 야광 효과 추가
-    ctx.shadowBlur = 15 // 빛 번짐 정도
-    ctx.shadowColor = this.color // 점과 동일한 색상의 그림자
-
+    ctx.shadowBlur = 15
+    ctx.shadowColor = this.color
     ctx.fill()
     ctx.closePath()
   }
 
   update() {
-    //점이 화면을 벗어나지 않도록 충돌 감지
     if (this.x + this.size > connectDot.value.width || this.x - this.size < 0) {
       this.dx *= -1
     }
@@ -207,14 +204,21 @@ class Particle {
     this.draw()
   }
 }
+
 const initParticles = () => {
   particles = []
-  const particleCount = 120 // 점 개수
+  const particleCount = 80
   for (let i = 0; i < particleCount; i++) {
     const size = Math.random() * 3 + 3
     const x = Math.random() * connectDot.value.width
     const y = Math.random() * connectDot.value.height
-    const color = `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 1)`
+
+    // 파스텔 톤 색상 생성
+    const red = Math.floor(Math.random() * 156 + 100)
+    const green = Math.floor(Math.random() * 156 + 100)
+    const blue = Math.floor(Math.random() * 156 + 100)
+    const color = `rgba(${red}, ${green}, ${blue}, 1)`
+
     particles.push(new Particle(x, y, size, color))
   }
 }
@@ -225,20 +229,18 @@ const connectHoveredParticles = () => {
   const nearbyParticles = particles.filter(particle => {
     const dx = particle.x - mouse.x
     const dy = particle.y - mouse.y
-    return Math.sqrt(dx * dx + dy * dy) < 100 // 100px 내의 점만 선택
+    return Math.sqrt(dx * dx + dy * dy) < 100
   })
 
-  // 모든 가까운 점들을 선으로 연결
   for (let i = 0; i < nearbyParticles.length; i++) {
     for (let j = i + 1; j < nearbyParticles.length; j++) {
       const p1 = nearbyParticles[i]
       const p2 = nearbyParticles[j]
 
-      //커서 근처 점들만 필터링하여 선으로 연결
       ctx.beginPath()
       ctx.moveTo(p1.x, p1.y)
       ctx.lineTo(p2.x, p2.y)
-      ctx.strokeStyle = p1.color // 선 색상을 점의 색상으로
+      ctx.strokeStyle = p1.color
       ctx.lineWidth = 0.8
       ctx.stroke()
     }
@@ -248,21 +250,20 @@ const connectHoveredParticles = () => {
 const animate = () => {
   ctx.clearRect(0, 0, connectDot.value.width, connectDot.value.height)
 
-  // 어두운 배경 덧칠
+  // 고정된 배경 색상 설정
   ctx.save()
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.9)' // 반투명한 검정색 (0.7으로 어둡게 조절)
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.99)'
   ctx.fillRect(0, 0, connectDot.value.width, connectDot.value.height)
   ctx.restore()
 
   particles.forEach(particle => particle.update())
   connectHoveredParticles()
 
-  // 커서 주변 밝기 효과
   if (mouse.x !== null && mouse.y !== null) {
     drawHighlight(mouse.x, mouse.y)
   }
 
-  animationFrameId = requestAnimationFrame(animate) //화면 지속적 업데이트 (이전 점 상태 삭제, 점의 새로운 위치 계산, 새로운 상태 그림)
+  animationFrameId = requestAnimationFrame(animate)
 }
 
 const resizeCanvas = () => {
@@ -276,33 +277,20 @@ const handleMouseMove = event => {
   mouse.x = event.clientX - canvasBounds.left
   mouse.y = event.clientY - canvasBounds.top
 
-  // 커서 근처 밝기 효과 적용
   drawHighlight(mouse.x, mouse.y)
 }
 
 const drawHighlight = (x, y) => {
   ctx.save()
-
-  // 어두운 배경을 부드럽게 밝게 만듦
   ctx.globalCompositeOperation = 'destination-out'
-  const gradient = ctx.createRadialGradient(x, y, 0, x, y, 160) // 반경을 200으로 줄임
-  gradient.addColorStop(0, 'rgba(0, 0, 0, 0.4)') // 중심: 밝기 감소
-  gradient.addColorStop(0.7, 'rgba(0, 0, 0, 0.1)') // 중간: 더 투명
-  gradient.addColorStop(1, 'rgba(0, 0, 0, 0)') // 가장자리: 완전히 투명
+  const gradient = ctx.createRadialGradient(x, y, 0, x, y, 160)
+  gradient.addColorStop(0, 'rgba(0, 0, 0, 0.4)')
+  gradient.addColorStop(1, 'rgba(0, 0, 0, 0)')
   ctx.fillStyle = gradient
   ctx.fillRect(0, 0, connectDot.value.width, connectDot.value.height)
-
-  // 추가 밝기 효과
-  ctx.globalCompositeOperation = 'lighter'
-  const highlightGradient = ctx.createRadialGradient(x, y, 0, x, y, 140) // 반경을 150으로 줄임
-  highlightGradient.addColorStop(0, 'rgba(255, 255, 255, 0.1)') // 중심: 더 낮은 밝기
-  highlightGradient.addColorStop(0.5, 'rgba(255, 255, 255, 0.03)') // 중간: 더 부드러운 감소
-  highlightGradient.addColorStop(1, 'rgba(255, 255, 255, 0)') // 가장자리: 완전히 투명
-  ctx.fillStyle = highlightGradient
-  ctx.fillRect(0, 0, connectDot.value.width, connectDot.value.height)
-
   ctx.restore()
 }
+
 const handleMouseLeave = () => {
   mouse.x = null
   mouse.y = null

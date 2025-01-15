@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="100">
   <defs>
     <linearGradient id="a" x1="50%" x2="50%" y1="-10.959%" y2="100%">
-      <stop stop-color="#120716" stop-opacity=".25" offset="0%"/>
-      <stop stop-color="#120716" offset="100%"/>
+      <stop stop-color="rgba(0, 0, 0, 0.99)" stop-opacity=".25" offset="0%"/>
+      <stop stop-color="rgba(0, 0, 0, 0.99)" offset="100%"/>
     </linearGradient>
   </defs>
   <path fill="url(#a)" fill-rule="evenodd" d="M.005 60C311 60 409.898-1 811 0c400 0 500 60 789 60v40H0s.005-25 .005-40z" 

@@ -10,7 +10,7 @@
       />
     </section>
     <div class="about-container">
-      <img src="@/assets/image/myPhoto1.jpg" width="30%" class="myPhoto" />
+      <div class="myPhoto" ref="threeContainer"></div>
       <div class="intro">
         <div class="title">The journey is the reward</div>
         <div class="main-text">
@@ -49,6 +49,8 @@
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import * as THREE from 'three'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
 gsap.registerPlugin(ScrollTrigger)
 const phrases = ref([
@@ -68,6 +70,14 @@ const displayText = ref('꾸준히 성장하는 개발자')
 const intervalId = ref(null)
 const isRunning = ref(false)
 
+const threeContainer = ref(null)
+// Three.js 초기화
+const container = ref(threeContainer)
+
+const mouse = ref({ x: 0, y: 0 })
+const targetRotation = ref({ x: 0, y: 0 })
+let scene, camera, renderer, model, animationFrameId
+// Three.js 관련 설정
 onMounted(() => {
   // 이미지가 왼쪽에서 서서히 등장
   gsap.fromTo(
@@ -130,11 +140,105 @@ onMounted(() => {
       },
     })
   }
+  const width = container.value.clientWidth
+  const height = container.value.clientWidth
+  // Renderer
+  renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
+  renderer.setSize(width, height)
+  container.value.appendChild(renderer.domElement)
+
+  // Scene
+  scene = new THREE.Scene()
+
+  // Camera
+  camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 1000)
+  camera.position.set(0, 1.6, 3)
+
+  // Light
+  const ambientLight = new THREE.AmbientLight(0xffffff, 1)
+  scene.add(ambientLight)
+
+  // GLTFLoader
+  const loader = new GLTFLoader()
+  loader.load(
+    'models/bookworm_girl/scene.gltf', // 경로
+    gltf => {
+      console.log('GLTF Loaded:', gltf) // 로드된 GLTF 데이터 출력
+      model = gltf.scene
+
+      // 모델 크기 강제로 크게 조정
+      model.scale.set(22, 22, 22) // 50배로 키움
+
+      // 모델 위치 조정
+      model.position.set(0, 0, 0) // 바닥 중앙 정렬
+
+      // 모델 회전 조정 (정면으로 설정)
+      model.rotation.y = 180 // 90도 회전
+
+      // 씬에 모델 추가
+      scene.add(model)
+
+      // 모델의 경계 박스 계산
+      const box = new THREE.Box3().setFromObject(model)
+      const center = box.getCenter(new THREE.Vector3())
+      const size = box.getSize(new THREE.Vector3())
+      // 카메라 위치 조정
+      camera.position.set(0, 1.5, 3) // 모델과 가까워지게 설정 (x, y, z)
+      camera.lookAt(0, 1, 0) // 모델 중심 (x: 0, y: 1, z: 0)을 바라보도록 설정
+
+      // 디버깅 정보 출력
+      console.log('Model Center:', center)
+      console.log('Model Size:', size)
+      console.log('Camera Position:', camera.position)
+    },
+    xhr => {
+      // 로딩 진행 상황 출력 (optional)
+      console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+    },
+    error => {
+      // 오류 발생 시 출력
+      console.error('An error occurred while loading the GLTF model:', error)
+    },
+  )
+
+  window.addEventListener('resize', handleResize)
+
+  // 애니메이션 루프
+  const animate = () => {
+    if (model) {
+      model.rotation.x += (targetRotation.value.x - model.rotation.x) * 0.1
+      model.rotation.y += (targetRotation.value.y - model.rotation.y) * 0.1
+    }
+    renderer.render(scene, camera)
+    animationFrameId = requestAnimationFrame(animate)
+  }
+  animate()
+  window.addEventListener('mousemove', handleMouseMove)
 })
 
-onBeforeUnmount(() => {})
+onBeforeUnmount(() => {
+  cancelAnimationFrame(animationFrameId)
+  renderer.dispose()
+  window.removeEventListener('resize', handleResize)
+  window.removeEventListener('mousemove', handleMouseMove)
+})
 // 애니메이션 완료 확인을 위한 플래그
-
+// Resize 이벤트
+const handleResize = () => {
+  const width = container.value.clientWidth
+  const height = container.value.clientHeight
+  camera.aspect = width / height
+  camera.updateProjectionMatrix()
+  renderer.setSize(width, height)
+}
+// Mouse Move Event
+const handleMouseMove = event => {
+  const rect = container.value.getBoundingClientRect()
+  mouse.value.x = ((event.clientX - rect.left) / rect.width) * 2 - 1
+  mouse.value.y = -((event.clientY - rect.top) / rect.height) * 2 + 1
+  targetRotation.value.y = mouse.value.x * 0.5
+  targetRotation.value.x = mouse.value.y * 0.5
+}
 const animationsCompleted = ref(0)
 const checkAnimationsComplete = () => {
   animationsCompleted.value += 1
@@ -144,6 +248,14 @@ const checkAnimationsComplete = () => {
     shuffleText() // 셔플 함수 실행
     animationsCompleted.value = 0
   }
+
+  // 메모리 정리
+  cancelAnimationFrame(animationFrameId)
+  renderer.dispose()
+  scene = null
+  camera = null
+  model = null
+  window.removeEventListener('resize', () => {})
 }
 
 //👉셔플 버튼 클릭 시
@@ -178,7 +290,7 @@ const stopShuffle = () => {
 .about-wrap {
   z-index: 1;
   position: relative;
-  height: 80vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -219,20 +331,17 @@ const stopShuffle = () => {
     }
   }
   .about-container {
+    padding-top: 3%;
     width: auto;
     justify-content: center;
     align-items: center;
     grid-template-columns: 400px 700px; /* 첫 번째 칸은 1fr, 두 번째 칸은 2fr */
     grid-template-rows: auto; /* 세로는 1칸 */
-    gap: 3rem; /* 칸 간의 간격 설정 (선택 사항) */
     display: grid;
     transform-origin: center bottom; /* 애니메이션 기준점 아래로 설정 */
     will-change: transform, opacity, clip-path; /* 애니메이션 최적화 */
 
     .myPhoto {
-      width: 100%;
-      border-radius: 10px;
-      z-index: 2;
     }
 
     .intro {
