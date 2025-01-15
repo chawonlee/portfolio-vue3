@@ -9,15 +9,13 @@
     />
     <section class="home-title">
       <div class="home-title-main">
-        <div>
-          <span>웹</span>
-          <span class="color-purple">-</span>
-          <span class="color-purple">프</span>
-          <span class="color-purple">론</span>
-          <span class="color-purple">트</span>
-          <span class="color-purple">엔</span>
-          <span class="color-purple">드</span>
-        </div>
+        <span>웹</span>
+        <span class="color-purple">-</span>
+        <span class="color-purple">프</span>
+        <span class="color-purple">론</span>
+        <span class="color-purple">트</span>
+        <span class="color-purple">엔</span>
+        <span class="color-purple">드</span>
       </div>
       <div class="home-title-sub">
         <span>포</span>
@@ -49,7 +47,7 @@
   <!-- 중앙 하단 더보기 -->
   <div class="scroll-down">
     <div>SCROLL</div>
-    <v-icon icon="mdi-chevron-down" color="secondary" size="x-large" />
+    <v-icon icon="mdi-chevron-down" color="white" size="x-large" />
   </div>
 </template>
 <script setup>
@@ -102,7 +100,7 @@ onMounted(() => {
 
     // 초기 상태 설정
     gsap.set(element, {
-      scale: 1,
+      scale: 0.9,
       rotation: 0,
       opacity: 1,
     })
@@ -124,8 +122,18 @@ onMounted(() => {
       },
     })
   })
+  // 애니메이션 타임라인 생성
+  const timeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: '.home-wrap', // 트리거 요소
+      start: 'top top', // 애니메이션 시작 시점
+      end: '+=300', // 애니메이션이 진행될 스크롤 거리
+      scrub: true, // 스크롤 동기화
+    },
+  })
+
   // "웹-프론트엔드" 애니메이션
-  gsap.fromTo(
+  timeline.fromTo(
     '.home-title-main span',
     { y: 20, opacity: 1 }, // 초기 상태
     {
@@ -133,31 +141,21 @@ onMounted(() => {
       opacity: 0.3, // 흐려짐
       ease: 'power2.out', // 부드러운 애니메이션
       stagger: 0.1, // 각 글자에 순차적으로 적용
-      scrollTrigger: {
-        trigger: '.home-wrap', // 애니메이션 트리거 요소
-        start: 'top top', // 스크롤 시작 지점
-        end: '+=300', // 스크롤 300px 동안 애니메이션 진행
-        scrub: true, // 스크롤 동기화
-      },
     },
+    0,
   )
 
   // "포트폴리오" 애니메이션
-  gsap.fromTo(
+  timeline.fromTo(
     '.home-title-sub span',
     { y: 0, opacity: 1 }, // 초기 상태
     {
-      y: -50, // 위로 이동
+      y: -60, // 위로 이동
       opacity: 0.2, // 흐려짐
       ease: 'power2.out', // 부드러운 애니메이션
       stagger: 0.1, // 각 글자에 순차적으로 적용
-      scrollTrigger: {
-        trigger: '.home-wrap', // 트리거 요소
-        start: 'top top', // 스크롤 시작 지점
-        end: '+=300', // 스크롤 300px 동안 애니메이션 진행
-        scrub: true, // 스크롤 동기화
-      },
     },
+    1,
   )
 })
 
@@ -183,7 +181,13 @@ class Particle {
     ctx.beginPath()
     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
     ctx.fillStyle = this.color
+
+    // 야광 효과 추가
+    ctx.shadowBlur = 15 // 빛 번짐 정도
+    ctx.shadowColor = this.color // 점과 동일한 색상의 그림자
+
     ctx.fill()
+    ctx.closePath()
   }
 
   update() {
@@ -205,12 +209,12 @@ class Particle {
 }
 const initParticles = () => {
   particles = []
-  const particleCount = 200 // 점 개수
+  const particleCount = 140 // 점 개수
   for (let i = 0; i < particleCount; i++) {
     const size = Math.random() * 3 + 3
     const x = Math.random() * connectDot.value.width
     const y = Math.random() * connectDot.value.height
-    const color = `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 0.3)`
+    const color = `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 1)`
     particles.push(new Particle(x, y, size, color))
   }
 }
@@ -243,8 +247,21 @@ const connectHoveredParticles = () => {
 
 const animate = () => {
   ctx.clearRect(0, 0, connectDot.value.width, connectDot.value.height)
+
+  // 어두운 배경 덧칠
+  ctx.save()
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.8)' // 반투명한 검정색 (0.7으로 어둡게 조절)
+  ctx.fillRect(0, 0, connectDot.value.width, connectDot.value.height)
+  ctx.restore()
+
   particles.forEach(particle => particle.update())
   connectHoveredParticles()
+
+  // 커서 주변 밝기 효과
+  if (mouse.x !== null && mouse.y !== null) {
+    drawHighlight(mouse.x, mouse.y)
+  }
+
   animationFrameId = requestAnimationFrame(animate) //화면 지속적 업데이트 (이전 점 상태 삭제, 점의 새로운 위치 계산, 새로운 상태 그림)
 }
 
@@ -258,8 +275,34 @@ const handleMouseMove = event => {
   const canvasBounds = connectDot.value.getBoundingClientRect()
   mouse.x = event.clientX - canvasBounds.left
   mouse.y = event.clientY - canvasBounds.top
+
+  // 커서 근처 밝기 효과 적용
+  drawHighlight(mouse.x, mouse.y)
 }
 
+const drawHighlight = (x, y) => {
+  ctx.save()
+
+  // 어두운 배경을 부드럽게 밝게 만듦
+  ctx.globalCompositeOperation = 'destination-out'
+  const gradient = ctx.createRadialGradient(x, y, 0, x, y, 160) // 반경을 200으로 줄임
+  gradient.addColorStop(0, 'rgba(0, 0, 0, 0.4)') // 중심: 밝기 감소
+  gradient.addColorStop(0.7, 'rgba(0, 0, 0, 0.1)') // 중간: 더 투명
+  gradient.addColorStop(1, 'rgba(0, 0, 0, 0)') // 가장자리: 완전히 투명
+  ctx.fillStyle = gradient
+  ctx.fillRect(0, 0, connectDot.value.width, connectDot.value.height)
+
+  // 추가 밝기 효과
+  ctx.globalCompositeOperation = 'lighter'
+  const highlightGradient = ctx.createRadialGradient(x, y, 0, x, y, 140) // 반경을 150으로 줄임
+  highlightGradient.addColorStop(0, 'rgba(255, 255, 255, 0.1)') // 중심: 더 낮은 밝기
+  highlightGradient.addColorStop(0.5, 'rgba(255, 255, 255, 0.03)') // 중간: 더 부드러운 감소
+  highlightGradient.addColorStop(1, 'rgba(255, 255, 255, 0)') // 가장자리: 완전히 투명
+  ctx.fillStyle = highlightGradient
+  ctx.fillRect(0, 0, connectDot.value.width, connectDot.value.height)
+
+  ctx.restore()
+}
 const handleMouseLeave = () => {
   mouse.x = null
   mouse.y = null
@@ -267,7 +310,6 @@ const handleMouseLeave = () => {
 </script>
 <style lang="scss">
 .home-wrap {
-  position: relative;
   height: 100vh;
   flex-direction: column;
   // transform: translate(-50%, -50%);
@@ -277,12 +319,14 @@ const handleMouseLeave = () => {
   width: 100vw; /* 원하는 너비 조정 */
 
   .hover-instruction {
+    z-index: 1;
     animation: float 2s ease-in-out infinite;
     padding-bottom: 3%;
   }
   .home-title {
     padding-bottom: 8%;
     font-style: normal;
+    color: white;
     font-size: 4rem;
     z-index: 3;
     text-shadow:
@@ -320,9 +364,14 @@ canvas {
   width: 100vw;
   height: 100vh;
   z-index: 1;
+  background-image: url('src/assets/image/background.jpg');
+  background-size: cover; /* 이미지를 화면에 꽉 채우기 */
+  background-position: center; /* 이미지를 중앙에 맞춤 */
+  background-repeat: no-repeat; /* 이미지를 반복하지 않음 */
 }
 
 .sub1 {
+  z-index: 1;
   width: 9vw;
   position: absolute;
   left: calc(50% - 25vw);
@@ -330,6 +379,7 @@ canvas {
   filter: blur(0px);
 }
 .sub2 {
+  z-index: 1;
   width: 9vw;
   position: absolute;
   left: calc(50% - 33vw);
@@ -337,6 +387,7 @@ canvas {
   filter: blur(0px);
 }
 .sub3 {
+  z-index: 1;
   width: 9vw;
   position: absolute;
   left: calc(50% - 30vw);
@@ -344,6 +395,7 @@ canvas {
   filter: blur(2px);
 }
 .sub4 {
+  z-index: 1;
   width: 8vw;
   position: absolute;
   left: calc(50% - 15vw);
@@ -351,6 +403,7 @@ canvas {
   filter: blur(0px);
 }
 .sub5 {
+  z-index: 1;
   width: 8vw;
   position: absolute;
   left: calc(50%);
@@ -358,6 +411,7 @@ canvas {
   filter: blur(0px);
 }
 .sub6 {
+  z-index: 1;
   width: 8vw;
   position: absolute;
   left: calc(50% + 15vw);
@@ -365,6 +419,7 @@ canvas {
   filter: blur(2px);
 }
 .sub7 {
+  z-index: 1;
   width: 8vw;
   position: absolute;
   left: calc(50% + 30vw);
@@ -372,6 +427,7 @@ canvas {
   filter: blur(0px);
 }
 .sub8 {
+  z-index: 1;
   width: 9vw;
   position: absolute;
   left: calc(50% + 28vw);
@@ -379,6 +435,7 @@ canvas {
   filter: blur(0px);
 }
 .sub9 {
+  z-index: 1;
   width: 7vw;
   position: absolute;
   left: calc(50% + 20vw);
@@ -408,16 +465,16 @@ canvas {
   transform: translateX(-50%);
   font-size: 1.2rem;
   font-weight: 600;
-  color: #433878;
+  color: #fff;
   opacity: 0.8;
-  animation: fadeBlink 3s ease-in-out infinite; /* 깜빡이는 애니메이션 */
+  animation: fadeBlink 1.5s ease-in-out infinite; /* 깜빡이는 애니메이션 */
   z-index: 2; /* about-wrap 위에 표시 */
 }
 /* 깜빡이는 애니메이션 */
 @keyframes fadeBlink {
   0%,
   100% {
-    opacity: 0.8;
+    opacity: 1;
   }
   50% {
     opacity: 0.4;
