@@ -1,5 +1,5 @@
 <template>
-  <canvas ref="connectDot"></canvas>
+  <canvas ref="connectDot" class="connectDot"></canvas>
   <section class="home-wrap">
     <!-- 설명 이미지 -->
     <img
@@ -357,7 +357,7 @@ const handleMouseLeave = () => {
     }
   }
 }
-canvas {
+.connectDot {
   display: block;
   position: fixed;
   top: 0;
