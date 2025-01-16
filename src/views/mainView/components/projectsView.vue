@@ -1,5 +1,17 @@
 <template>
   <section class="projects-wrap">
+    <!--팝업-->
+    <base-popup
+      class="project-popup"
+      v-model="popState"
+      :persistent="true"
+      :title="popTitle"
+      height="500px"
+      width="500px"
+      :color="'#0374ff'"
+      @close="closeManagePopup()"
+    >
+    </base-popup>
     <!--wave 상단 효과-->
     <div class="ocean">
       <div class="wave"></div>
@@ -13,7 +25,7 @@
     <section class="projects-section"></section>
     <!-- 가로 스크롤 섹션 -->
     <section class="projects-container">
-      <div class="projects-box" v-for="n in 8" :key="n">
+      <div class="projects-box" v-for="n in 8" :key="n" @click="openPopup()">
         <div class="project-repre-img">
           <div class="hover-overlay">
             <div class="hover-overlay-title">CLICK ~!</div>
@@ -25,11 +37,17 @@
     </section>
   </section>
 </template>
-
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
+
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import basePopup from '@/components/basePopup.vue'
+import { fa } from 'vuetify/lib/iconsets/fa.mjs'
+
+//팝업 변수
+const popState = ref(false)
+const popTitle = ref('')
 
 // GSAP 플러그인 등록
 gsap.registerPlugin(ScrollTrigger)
@@ -53,11 +71,22 @@ onMounted(() => {
         end: () => `+=${container.scrollWidth}`, // 전체 스크롤 길이
         scrub: true, // 스크롤 동기화
         pin: '.projects-wrap', // wrap 전체를 고정
-        anticipatePin: 1, // 고정 전후 부드러운 전환
+        anticipatePin: 2, // 고정 전후 부드러운 전환
       },
     },
   )
 })
+
+//팝업 열기
+const openPopup = () => {
+  popState.value = true
+  popTitle.value = '테스트 팝업'
+}
+
+//팝업 닫기
+const closeManagePopup = () => {
+  popState.value = false
+}
 </script>
 <style lang="scss">
 .projects-wrap {
@@ -71,7 +100,8 @@ onMounted(() => {
   background-color: #006bff;
   z-index: 2;
   overflow: hidden;
-
+  .project-popup {
+  }
   .ocean {
     position: relative;
     top: 0;

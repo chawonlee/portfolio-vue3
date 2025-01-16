@@ -1,5 +1,6 @@
 <template>
   <v-dialog
+    class="basePopup"
     v-model="dialog"
     :width="!props.fullscreen ? props.width : ''"
     :fullscreen="props.fullscreen"
@@ -124,5 +125,8 @@ watch(dialog, () => {
 <style scoped lang="scss">
 .dialog-toolbar-title {
   font-size: 1.7rem;
+}
+
+.basePopup {
 }
 </style>
