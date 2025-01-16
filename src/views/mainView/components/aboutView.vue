@@ -51,7 +51,6 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 gsap.registerPlugin(ScrollTrigger)
 const phrases = ref([
@@ -77,6 +76,9 @@ let controls
 const container = ref(threeContainer)
 
 let scene, camera, renderer, model, animationFrameId
+const isDragging = ref(false)
+const previousMousePosition = { x: 0, y: 0 }
+const zoomSpeed = 0.1
 // Three.js 관련 설정
 onMounted(() => {
   // 이미지가 왼쪽에서 서서히 등장
@@ -142,16 +144,16 @@ onMounted(() => {
   }
   const width = threeContainer.value.clientWidth || window.innerWidth
   const height = threeContainer.value.clientHeight || window.innerHeight
+  console.log(
+    threeContainer.value.clientWidth,
+    threeContainer.value.clientHeight,
+  )
   // Renderer
-  renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
+  renderer = new THREE.WebGLRenderer()
   renderer.domElement.id = 'myPhotoCanvas'
-  renderer.domElement.style.touchAction = 'auto' // 터치 이벤트 허용
   renderer.setSize(width, height)
 
-  // threeContainer DOM이 존재하는 경우에만 렌더러를 추가
-  if (container.value) {
-    container.value.appendChild(renderer.domElement)
-  }
+  container.value.appendChild(renderer.domElement)
 
   // Scene
   scene = new THREE.Scene()
@@ -164,16 +166,15 @@ onMounted(() => {
   const ambientLight = new THREE.AmbientLight(0xffffff, 1)
   scene.add(ambientLight)
 
-  // OrbitControls 초기화
-  console.log(renderer.domElement)
-  controls = new OrbitControls(camera, renderer.domElement)
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 1)
+  directionalLight.position.set(5, 5, 5)
+  scene.add(directionalLight)
 
-  // OrbitControls 설정
-  controls.enableRotate = true // 회전 허용
-  controls.enableZoom = true // 줌 허용
-  controls.enablePan = true // 팬(이동) 허용
-  controls.dampingFactor = 0.25
-
+  // 이벤트 리스너 추가
+  renderer.domElement.addEventListener('mousedown', onMouseDown)
+  renderer.domElement.addEventListener('mousemove', onMouseMove)
+  // 전역 mouseup 이벤트 추가 (캔버스 외부에서 버튼을 떼도 감지)
+  window.addEventListener('mouseup', onMouseUp)
   // GLTFLoader
   const loader = new GLTFLoader()
   loader.load(
@@ -194,8 +195,8 @@ onMounted(() => {
       scene.add(model)
 
       // 카메라 위치 조정
-      camera.position.set(0, 1.5, 3) // 모델과 가까워지게 설정 (x, y, z)
-      camera.lookAt(0, 1, 0) // 모델 중심 (x: 0, y: 1, z: 0)을 바라보도록 설정
+      camera.position.set(0, 1.5, 3)
+      camera.lookAt(0, 1, 0)
     },
     xhr => {
       console.log(`Model loading progress: ${(xhr.loaded / xhr.total) * 100}%`)
@@ -212,14 +213,46 @@ onBeforeUnmount(() => {
   cancelAnimationFrame(animationFrameId)
   controls.dispose() // OrbitControls 메모리 해제
   renderer.dispose()
+
+  renderer.domElement.removeEventListener('mousedown', onMouseDown)
+  renderer.domElement.removeEventListener('mousemove', onMouseMove)
+  window.removeEventListener('mouseup', onMouseUp) // 전역 이벤트 제거
+
   scene = null
   camera = null
+  renderer = null
   model = null
 })
 
+// 마우스 이벤트 핸들러
+const onMouseDown = () => {
+  isDragging.value = true
+
+  // 드래그 시작 시 마우스 위치 저장
+  previousMousePosition.x = event.clientX
+}
+
+const onMouseMove = event => {
+  if (!isDragging.value || !model) return
+
+  // 드래그한 X축 거리 계산
+  const deltaX = event.clientX - previousMousePosition.x
+
+  const rotationSpeed = 0.03
+
+  // Y축 회전 업데이트 (누적 방식)
+  model.rotation.y -= deltaX * rotationSpeed
+
+  // 이전 마우스 위치 업데이트
+  previousMousePosition.x = event.clientX
+}
+
+const onMouseUp = () => {
+  isDragging.value = false
+}
+
 const animate = () => {
   animationFrameId = requestAnimationFrame(animate)
-  controls.update() // OrbitControls 업데이트
   renderer.render(scene, camera)
 }
 
@@ -228,19 +261,10 @@ const animationsCompleted = ref(0)
 const checkAnimationsComplete = () => {
   animationsCompleted.value += 1
 
-  // 이미지와 intro 애니메이션이 모두 완료된 경우
   if (animationsCompleted.value === 2) {
-    shuffleText() // 셔플 함수 실행
+    shuffleText()
     animationsCompleted.value = 0
   }
-
-  // 메모리 정리
-  cancelAnimationFrame(animationFrameId)
-  renderer.dispose()
-  scene = null
-  camera = null
-  model = null
-  window.removeEventListener('resize', () => {})
 }
 
 //👉셔플 버튼 클릭 시
@@ -249,10 +273,10 @@ const shuffleText = () => {
     isRunning.value = true
     runShuffle()
 
-    // 2초 후 자동 멈춤
+    // 5초 후 자동 멈춤
     setTimeout(() => {
       stopShuffle()
-    }, 2000)
+    }, 5000)
   }
 }
 //👉 텍스트 랜덤 제공
@@ -262,7 +286,7 @@ const runShuffle = () => {
       phrases.value[Math.floor(Math.random() * phrases.value.length)]
     intervalId.value = setTimeout(() => {
       runShuffle()
-    }, 100)
+    }, 200)
   }
 }
 //👉2초 후 텍스트 랜덤 제공 중지
@@ -327,11 +351,21 @@ const stopShuffle = () => {
     will-change: transform, opacity, clip-path; /* 애니메이션 최적화 */
 
     .myPhoto {
+      display: block;
+      height: 100%;
       pointer-events: auto !important;
       z-index: 2;
       #myPhotoCanvas {
+        -webkit-user-select: auto;
+        -moz-user-select: auto;
+        -ms-user-select: auto;
+        user-select: auto;
         touch-action: auto !important; /* 터치 이벤트를 허용 */
         pointer-events: auto !important; /* 마우스 이벤트도 허용 */
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
       }
     }
 
