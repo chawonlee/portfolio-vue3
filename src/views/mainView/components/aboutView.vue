@@ -305,7 +305,7 @@ const stopShuffle = () => {
   justify-content: center;
   align-items: center;
   width: 100vw; /* 원하는 너비 조정 */
-  //pointer-events: none; /* 마우스 이벤트를 차단 */
+  pointer-events: none; /* 마우스 이벤트를 차단 */
 
   .about-title {
     position: relative; /* 자식 요소들의 기준점 설정 */
