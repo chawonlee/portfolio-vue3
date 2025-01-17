@@ -191,3 +191,8 @@ onMounted(async () => {
   }
 }
 </style>
+<style>
+.pin-spacer {
+  pointer-events: none;
+}
+</style>
