@@ -1,7 +1,6 @@
 <template>
   <section class="skills-section">
     <!-- Circle and Title -->
-    <div class="skills-title-circle"></div>
     <div class="skills-sub-title" v-html="animatedText"></div>
 
     <!-- Skill Grid -->
@@ -63,17 +62,6 @@ onMounted(async () => {
   max-width: 1200px;
   display: flex;
   flex-direction: column; /* 세로 정렬 */
-}
-
-.skills-title-circle {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.874);
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  z-index: 2; /* 타이틀이 위로 보이도록 설정 */
 }
 
 .skills-sub-title {
@@ -158,17 +146,17 @@ onMounted(async () => {
     bottom: -100%; /* 초기 상태: 스킬 박스 바닥에서 숨김 */
     left: 0;
     right: 0;
-    background: rgba(0, 0, 0, 0.55); /* 반투명한 검정색 */
+    background: rgba(0, 0, 0, 0.8); /* 반투명한 검정색 */
     backdrop-filter: blur(50px); /* 블러 효과 추가 */
     color: white;
     padding: 1rem;
-    font-size: 0.85rem;
+    font-size: 0.86rem;
     letter-spacing: 0.2px;
     text-align: center;
     border-radius: 10px;
     transition:
       bottom 0.6s ease,
-      opacity 1.6s ease; /* 부드럽게 애니메이션 */
+      opacity 1.2s ease; /* 부드럽게 애니메이션 */
 
     opacity: 0; /* 초기 상태에서 숨김 */
     z-index: 1;
