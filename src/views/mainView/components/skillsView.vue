@@ -9,160 +9,68 @@
         class="check-svg"
       />
     </section>
-    <section class="swiper-container">
-      <Swiper
-        ref="serviceSwiper"
-        :slides-per-view="2"
-        :space-between="0"
-        :loop="true"
-        :centered-slides="true"
-        :free-mode="false"
-        mousewheel="true"
-        :allow-touch-move="true"
-        @swiper="onSwiper"
-      >
-        <SwiperSlide @click="clickSlide('FrLi', $event)">
-          <skillSlideView subject="Framework & Library" />
-        </SwiperSlide>
-        <SwiperSlide @click="clickSlide('FrontEnd', $event)">
-          <skillSlideView subject="FrontEnd" />
-        </SwiperSlide>
-        <SwiperSlide @click="clickSlide('BackEnd', $event)">
-          <skillSlideView subject="BackEnd" />
-        </SwiperSlide>
-        <SwiperSlide @click="clickSlide('ETC', $event)">
-          <skillSlideView subject="ETC" />
-        </SwiperSlide>
-        <SwiperSlide @click="clickSlide('FrLi', $event)">
-          <skillSlideView subject="Framework & Library" />
-        </SwiperSlide>
-        <SwiperSlide @click="clickSlide('FrontEnd', $event)">
-          <skillSlideView subject="FrontEnd" />
-        </SwiperSlide>
-        <SwiperSlide @click="clickSlide('BackEnd', $event)">
-          <skillSlideView subject="BackEnd" />
-        </SwiperSlide>
-        <SwiperSlide @click="clickSlide('ETC', $event)">
-          <skillSlideView subject="ETC" />
-        </SwiperSlide>
-      </Swiper>
+    <section class="skills-container">
+      <div class="skills-slide-content">
+        <skillSlideView
+          class="skills-slide-view"
+          v-for="(skills, category) in skillData"
+          :key="category"
+          :subject="category"
+          :content="skills"
+        />
+      </div>
     </section>
-    <!-- drag 설명 이미지 -->
-    <img
-      class="drag-instruction"
-      src="@/assets/image/dragBox.png"
-      alt="Drag Box!"
-    />
   </section>
 </template>
 
 <script setup>
-import { Swiper, SwiperSlide } from 'swiper/vue'
 import { ref, onBeforeUnmount, onMounted } from 'vue'
 import skillSlideView from './components/skillsSlideView.vue'
 import { gsap } from 'gsap'
+import skillData from './data/skillData.json'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
-const serviceSwiper = ref(null)
-
 onMounted(() => {
-  // GSAP 애니메이션 추가
+  const container = document.querySelector('.skills-slide-content')
+
+  // 전체 스크롤 길이 계산
+  const totalScrollWidth = container.scrollWidth
+  // ScrollTrigger 생성
   gsap.fromTo(
-    '.swiper-container',
+    container,
+    { x: 0 }, // 초기 위치
     {
-      opacity: 0,
-      y: 300, // 아래에서 시작
-    },
-    {
-      opacity: 1,
-      y: 0, // 제자리로 이동
-      duration: 5, // 애니메이션 지속 시간
-      ease: 'power3.out', // 부드러운 애니메이션
+      x: -Math.max(totalScrollWidth) * 0.9, // 전체 너비만큼 이동
+      ease: 'none',
       scrollTrigger: {
-        trigger: '.skills-wrap', // 트리거 요소
-        start: 'top 60%', // 트리거 시작 위치 (뷰포트에서 요소가 80% 아래에 있을 때 시작)
-        end: 'top 10%', // 트리거 종료 위치
-        toggleActions: 'play none none reverse', // 스크롤 방향에 따른 애니메이션 동작
-        scrub: true,
+        trigger: '.skills-wrap', // 트리거 대상
+        start: 'top top', // 시작 지점
+        end: () => `+=${Math.max(totalScrollWidth) * 0.9}`, // 전체 스크롤 길이
+        scrub: true, // 스크롤 동기화
+        pin: '.skills-wrap', // wrap 고정
+        invalidateOnRefresh: true, // 화면 크기 변화 시 갱신
       },
     },
   )
 })
 
 // 이벤트 및 타이머 해제
-onBeforeUnmount(() => {
-  if (serviceSwiper.value && serviceSwiper.value.wrapperEl) {
-    serviceSwiper.value.wrapperEl.removeEventListener('touchstart', slideStart)
-    serviceSwiper.value.wrapperEl.removeEventListener('touchend', slideEnd)
-  }
-})
-
-// 슬라이드 클릭
-const clickSlide = (path, event) => {
-  const currentTarget = event.currentTarget.classList
-  const next = currentTarget.contains('swiper-slide-next')
-  const prev = currentTarget.contains('swiper-slide-prev')
-  const active = currentTarget.contains('swiper-slide-active')
-
-  if (next) {
-    serviceSwiper.value.slideNext() // 클릭한 슬라이드가 prev면 이전 슬라이드로 슬라이딩
-  } else if (prev) {
-    serviceSwiper.value.slidePrev() // 클릭한 슬라이드가 next면 다음 슬라이드로 슬라이딩
-  } else if (active) {
-  }
-}
-
-// 자동 슬라이드
-
-const onSwiper = swiperInstance => {
-  serviceSwiper.value = swiperInstance
-  // DOM 요소에 직접 터치 이벤트 추가
-  serviceSwiper.value.wrapperEl.addEventListener('dragstart', slideStart)
-  serviceSwiper.value.wrapperEl.addEventListener('dragend', slideEnd)
-}
-
-// 드래그 이벤트 (터치 이벤트)
-const startX = ref(0)
-const endX = ref(0)
-
-const slideStart = event => {
-  console.log(event.touches)
-  event.preventDefault() // 기본 동작 방지
-  if (event.touches && event.touches.length > 0) {
-    startX.value = event.touches[0].clientX
-  }
-}
-const slideEnd = event => {
-  event.preventDefault() // 기본 동작 방지
-
-  if (event.changedTouches && event.changedTouches.length > 0) {
-    endX.value = event.changedTouches[0].clientX
-    if (Math.abs(startX.value - endX.value) > 130) {
-      if (startX.value - endX.value > 0) {
-        // 오른쪽에서 왼쪽으로 드래그 시 next슬라이딩
-        serviceSwiper.value.slideNext()
-      }
-      if (startX.value - endX.value < 0) {
-        // 왼쪽에서 오른쪽으로 드래그 시 prev슬라이딩
-        serviceSwiper.value.slidePrev()
-      }
-    }
-  }
-}
+onBeforeUnmount(() => {})
 </script>
 
 <style lang="scss">
 .skills-wrap {
   position: relative;
-  width: 100%;
-  height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column; // 자식 요소를 세로로 배치
+  align-items: center; // 가로 정렬
+  justify-content: flex-start; // 위에서부터 정렬
+  width: 100%;
+  height: 100vh; // 전체 높이를 자식 요소에 맞춤
+  z-index: 1;
+  overflow: hidden;
   pointer-events: none; /* 마우스 이벤트를 차단 */
-  z-index: 2;
 
   .skills-title {
     position: relative; /* 자식 요소들의 기준점 설정 */
@@ -197,80 +105,33 @@ const slideEnd = event => {
     }
   }
 
-  .swiper-container {
+  .skills-container {
+    margin: 2% 0% 0 5%;
+    padding: 0 0 0 100px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100vw;
-    height: calc(80vh / 1.2);
-    overflow: visible;
+    width: 100%;
+    height: 68vh;
+    overflow: visible; /* 텍스트 및 요소 잘림 방지 */
 
-    .swiper {
-      width: 100%;
-      height: 100%;
+    .skills-slide-title {
+      position: relative;
+      z-index: 15;
+      width: 100vw;
+      max-height: 68vh; /* 최대 높이 제한 */
+    }
+    .skills-slide-content {
       display: flex;
-      align-items: center;
-      justify-content: center;
-
-      .swiper-slide {
-        pointer-events: auto;
-        transform: scale(0.8);
-        transition: all 0.3s ease;
-        height: 100%;
-        width: calc((100% - 60px) / 2.4);
-        display: flex;
-        flex-direction: column;
-        line-height: 1.5;
-        border-radius: 30px;
-        box-shadow: -3px 3px 8px rgba(0, 0, 0, 0.15);
-        background-color: white;
-        opacity: 0.8;
-
-        em {
-          font-family: 'Gmarket Sans';
-          // font-size: 20px;/
-          font-weight: 600;
-        }
-
-        span {
-          // font-size: 16px;
-          font-weight: 600;
-        }
-
-        &.swiper-slide-active {
-          transform: scale(0.96);
-          opacity: 1;
-          transition: all 0.7s ease;
-          z-index: 2; /* 활성 슬라이드가 앞에 보이도록 설정 */
-        }
+      gap: 40px; // 박스 간격
+      width: auto; // 고정 너비 대신 유동적인 너비 설정
+      overflow: visible; // 스크롤 내 요소 잘림 방지
+      .skill-slide-view {
+        flex: 0 0 1000px; // 각 박스의 너비를 명시적으로 설정
+        height: 800px;
+        margin: 0; // 간격은 `gap`으로 관리
+        overflow: hidden;
+        position: relative;
       }
     }
-  }
-}
-
-// 이미지 스타일 추가
-.drag-instruction {
-  filter: invert(1);
-  pointer-events: none; /* 마우스 이벤트를 차단 */
-  position: absolute;
-  top: 15%;
-  left: 15%;
-  width: 4.2rem;
-  height: auto;
-  z-index: 3; /* 글자 위로 올라오도록 설정 */
-  animation: moveSideToSide 3s ease-in-out infinite;
-}
-
-/* 좌우 이동 애니메이션 */
-@keyframes moveSideToSide {
-  0% {
-    transform: translateX(0); /* 초기 위치 */
-  }
-  50% {
-    transform: translateX(20px); /* 오른쪽으로 이동 */
-  }
-  100% {
-    transform: translateX(0); /* 다시 초기 위치 */
   }
 }
 </style>

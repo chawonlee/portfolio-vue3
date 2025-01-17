@@ -7,7 +7,7 @@
     <!-- Skill Grid -->
     <div class="skill-grid">
       <div
-        v-for="(item, index) in skillData[props.subject]"
+        v-for="(item, index) in props.content"
         :key="index"
         class="skill-item"
       >
@@ -21,10 +21,10 @@
 
 <script setup>
 import { ref, onMounted, nextTick } from 'vue'
-import skillData from '../data/skillData.json'
 
 const props = defineProps({
   subject: { type: String, default: '' },
+  content: { type: Array, default: [] },
 })
 
 const animatedText = ref('')
@@ -53,13 +53,15 @@ onMounted(async () => {
 
 <style lang="scss">
 .skills-section {
-  position: relative;
+  pointer-events: auto;
   padding: 1rem;
-  background-color: rgb(255, 255, 255);
+  background-color: rgba(255, 255, 255, 0.1);
   border-radius: 30px;
   box-shadow: 0 4px 10px rgba(249, 249, 249, 0.925);
   overflow: hidden; /* 넘치는 요소 숨기기 */
-  height: 100%; /* 부모 컨테이너의 높이 */
+  height: 60vh;
+  width: 90vw;
+  max-width: 1200px;
   display: flex;
   flex-direction: column; /* 세로 정렬 */
 }
@@ -81,7 +83,7 @@ onMounted(async () => {
   margin-top: 0.1vw; /* 상단 여백 */
   font-size: 1.4vw;
   font-weight: bold;
-  color: #212121;
+  color: #fff;
   text-transform: uppercase;
   text-shadow: 1px 1px 2px #fff;
   z-index: 2; /* 타이틀이 위로 보이게 */
