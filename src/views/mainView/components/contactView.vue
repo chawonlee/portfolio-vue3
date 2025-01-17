@@ -773,6 +773,7 @@ function handleEvents() {
     display: flex;
     gap: 3%;
     .three-container {
+      background-color: rgba(0, 0, 0, 0.8);
       pointer-events: auto;
       border-radius: 30px;
       width: 600px;
