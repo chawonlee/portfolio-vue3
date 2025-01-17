@@ -34,7 +34,7 @@ onMounted(async () => {
     .split('')
     .map((char, index) => {
       if (index >= 10 && index < 10 + props.subject.length) {
-        return `<span class="animated-char" style="animation-delay: ${index * 0.1}s; color: #ffc107; -webkit-text-stroke: 1px black;">${char}</span>`
+        return `<span class="animated-char" style="animation-delay: ${index * 0.1}s; color: #f0c40d; font-weight:600; -webkit-text-stroke: 1px black;">${char}</span>`
       }
       if (char === ' ') {
         return `<span class="animated-space" style="display: inline-block; width: 0.5rem;"></span>`
@@ -53,7 +53,6 @@ onMounted(async () => {
 
 <style lang="scss">
 .skills-section {
-  pointer-events: auto;
   padding: 1rem;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 30px;
@@ -70,7 +69,7 @@ onMounted(async () => {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: #000;
+  background-color: rgba(255, 255, 255, 0.874);
   position: absolute;
   top: 15px;
   left: 15px;
@@ -133,6 +132,7 @@ onMounted(async () => {
 }
 
 .skill-item {
+  pointer-events: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
