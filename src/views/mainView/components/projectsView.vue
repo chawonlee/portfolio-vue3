@@ -47,9 +47,8 @@ onMounted(() => {
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: '.projects-wrap',
-      markers: true,
       pin: true,
-      start: 'top 10%',
+      start: 'top 0%',
       end: '+=200%',
       scrub: true,
       onUpdate: self => {
@@ -62,8 +61,8 @@ onMounted(() => {
     },
   })
   panels.forEach((element, i) => {
-    const height = element.clientHeight + 80
-    const gap = 15
+    const height = element.clientHeight + 120
+    const gap = 10
     gsap.set(element, { position: 'absolute', top: `${height * i}` })
     tl.to(element, {
       y: `-${(height - gap) * i}`,
@@ -166,7 +165,7 @@ const scrollToLabel = (duration, timeline, label) => {
     margin-bottom: 20px; // 타이틀 아래 간격 조정
   }
   .projects-container {
-    padding: 4% 0 0 0;
+    padding: 5% 0 0 0;
     position: relative;
     align-items: center;
     justify-content: center;
@@ -187,7 +186,7 @@ const scrollToLabel = (duration, timeline, label) => {
 
       .projects-item {
         position: absolute;
-        width: 80vw;
+        width: 50vw;
         height: 60vh;
         display: flex;
         left: 50%;
