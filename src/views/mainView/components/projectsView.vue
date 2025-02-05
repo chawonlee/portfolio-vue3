@@ -18,7 +18,13 @@
             v-for="(item, index) in projects"
             :key="index"
           >
-            <div class="gsap-container">{{ item }}</div>
+            <div class="projects-item-container">
+              <div class="projects-item-left">
+                <div>왼-위</div>
+                <div>왼-아래</div>
+              </div>
+              <div class="projects-item-right">오</div>
+            </div>
           </li>
         </ul>
       </div>
@@ -61,7 +67,7 @@ onMounted(() => {
     },
   })
   panels.forEach((element, i) => {
-    const height = element.clientHeight + 120
+    const height = element.clientHeight + 200
     const gap = 10
     gsap.set(element, { position: 'absolute', top: `${height * i}` })
     tl.to(element, {
@@ -186,25 +192,32 @@ const scrollToLabel = (duration, timeline, label) => {
 
       .projects-item {
         position: absolute;
-        width: 50vw;
-        height: 60vh;
+        width: 90vw;
+        height: 80vh;
+        max-width: 1200px;
+        max-height: 760px;
         display: flex;
         left: 50%;
         transform: translateX(-50%);
 
-        .gsap-container {
+        .projects-item-container {
+          padding: 1.4rem;
           width: 100%;
           height: 100%;
           background: white;
-          border-radius: 40px;
-          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 2rem;
-          font-weight: bold;
-          color: #333;
+          border-radius: 30px;
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+          display: grid;
+          grid-template-columns: 48% 52%;
+          grid-auto-flow: dense; /* 빈 공간 최소화 */
           position: relative;
+
+          .projects-item-left {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-rows: 60% 40%;
+          }
         }
       }
     }
