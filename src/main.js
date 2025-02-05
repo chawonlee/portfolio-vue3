@@ -10,7 +10,9 @@ import router from './router'
 import 'swiper/css' // swiper style
 import 'swiper/css/autoplay' // swiper style
 import 'swiper/swiper-bundle.css' // swiper style
-
+import 'swiper/css/free-mode'
+import 'swiper/css/navigation'
+import 'swiper/css/thumbs'
 /** ✏️ Vuetify Plugins (i18n, vuetify) */
 import vuetifyPlugins from '@/plugin/vuetify'
 /** ✏️ Push Alarm */

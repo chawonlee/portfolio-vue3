@@ -1,1 +1,31 @@
-{}
+{
+  "list": [
+    {
+      "id": "teamsAI",
+      "projectNm": "AI저작도구 플랫폼 구축(TEAMS-AI)",
+      "period": "2023.05 ~ 2023.12",
+      "skills": [
+        "Vue.js",
+        "Vuetify",
+        "Tailwind",
+        "Konva",
+        "PostgreSQL",
+        "STS4",
+        "Git"
+      ],
+      "videos": "main.mp4",
+      "images": [
+        "로그인.png",
+        "라벨링.png",
+        "프로젝트.png",
+        "클래스.png",
+        "이미지.png",
+        "게시판.png",
+        "근태.png",
+        "다양성요건.png",
+        "의미정확성.png",
+        "품질.png"
+      ]
+    }
+  ]
+}

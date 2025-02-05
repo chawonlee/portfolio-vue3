@@ -15,12 +15,69 @@
         <ul class="projects-list">
           <li
             class="projects-item"
-            v-for="(item, index) in projects"
+            v-for="(project, index) in projectsData.list"
             :key="index"
           >
             <div class="projects-item-container">
               <div class="projects-item-left">
-                <div>왼-위</div>
+                <div>
+                  <swiper
+                    :style="{
+                      '--swiper-navigation-color': '#fff',
+                      '--swiper-pagination-color': '#fff',
+                    }"
+                    :spaceBetween="10"
+                    :navigation="true"
+                    :thumbs="{ swiper: thumbsSwiper }"
+                    :modules="modules"
+                    class="mySwiper2"
+                  >
+                    <swiper-slide v-if="project.videos">
+                      <video controls width="100%">
+                        <source
+                          :src="`/assets/image/projects/${project.id}/${project.videos}`"
+                          type="video/mp4"
+                        />
+                        동영상을 지원하지 않는 브라우저입니다.
+                      </video>
+                    </swiper-slide>
+                    <swiper-slide
+                      v-for="(img, idx) in project.images"
+                      :key="idx"
+                    >
+                      <img
+                        :src="`/assets/image/projects/${project.id}/${img}`"
+                      />
+                    </swiper-slide>
+                  </swiper>
+                  <swiper
+                    @swiper="setThumbsSwiper"
+                    :spaceBetween="10"
+                    :slidesPerView="4"
+                    :freeMode="true"
+                    :watchSlidesProgress="true"
+                    :modules="modules"
+                    class="mySwiper"
+                  >
+                    <swiper-slide v-if="project.videos">
+                      <video controls>
+                        <source
+                          :src="`/assets/image/projects/${project.id}/${project.videos}`"
+                          type="video/mp4"
+                        />
+                        동영상을 지원하지 않는 브라우저입니다.
+                      </video>
+                    </swiper-slide>
+                    <swiper-slide
+                      v-for="(img, idx) in project.images"
+                      :key="idx"
+                    >
+                      <img
+                        :src="`/assets/image/projects/${project.id}/${img}`"
+                      />
+                    </swiper-slide>
+                  </swiper>
+                </div>
                 <div>왼-아래</div>
               </div>
               <div class="projects-item-right">오</div>
@@ -37,12 +94,24 @@ import { onMounted, ref, onUnmounted } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
+import projectsData from './data/projectsData.json'
 
-// Dummy data for projects
-const projects = ['1', '2', '3', '4', '5'] // Dummy data for cards
+import { Swiper, SwiperSlide } from 'swiper/vue'
 
+// import required modules
+import { FreeMode, Navigation, Thumbs } from 'swiper/modules'
+
+// import '@/assets/slider.css'
 // GSAP 플러그인 등록
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
+
+//slider
+const thumbsSwiper = ref(null)
+const setThumbsSwiper = swiper => {
+  thumbsSwiper.value = swiper
+}
+
+const modules = [FreeMode, Navigation, Thumbs]
 
 onMounted(() => {
   const panels = document.querySelectorAll('.projects-item')
