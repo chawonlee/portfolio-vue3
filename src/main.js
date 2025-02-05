@@ -13,6 +13,7 @@ import 'swiper/swiper-bundle.css' // swiper style
 import 'swiper/css/free-mode'
 import 'swiper/css/navigation'
 import 'swiper/css/thumbs'
+import 'swiper/css/zoom'
 /** ✏️ Vuetify Plugins (i18n, vuetify) */
 import vuetifyPlugins from '@/plugin/vuetify'
 /** ✏️ Push Alarm */

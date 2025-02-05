@@ -26,6 +26,81 @@
         "의미정확성.png",
         "품질.png"
       ]
+    },
+    {
+      "id": "psms",
+      "projectNm": "주차면관리시스템 구축 ~ ODM 개발(PSMS)",
+      "period": "2023.11 ~ 2024.04",
+      "skills": [
+        "Vue.js",
+        "Vuetify",
+        "Tailwind",
+        "MQTT",
+        "InfluxDB",
+        "PostgreSQL",
+        "STS4",
+        "Git"
+      ],
+      "images": [
+        "로그인.png",
+        "모니터링.png",
+        "모니터링상세.png",
+        "모니터링상세2.png",
+        "주차장관리.png",
+        "통신연결.png",
+        "공통코드.png",
+        "이력.png"
+      ]
+    },
+    {
+      "id": "bfKiosk",
+      "projectNm": "현장(마을)중심의 재난대응 지능형 무인정보 단말시스템 개발",
+      "period": "2024.01 ~ 2024.12",
+      "skills": [
+        "Vue.js",
+        "Vuetify",
+        "Pinia",
+        "Electron",
+        "MQTT",
+        "InfluxDB",
+        "SQLite",
+        "PostgreSQL",
+        "STS4",
+        "Git"
+      ],
+      "videos": "main.mp4",
+      "images": [
+        "로그인.png",
+        "모니터링.png",
+        "버전관리.png",
+        "콘텐츠관리.png",
+        "스케줄러관리.png"
+      ]
+    },
+    {
+      "id": "parkdian",
+      "projectNm": "전기차 화재 감시시스템 구축",
+      "period": "2024.04 ~ 진행중",
+      "skills": [
+        "Vue.js",
+        "Vuetify",
+        "Pinia",
+        "Konva",
+        "MQTT",
+        "InfluxDB",
+        "PostgreSQL",
+        "STS4",
+        "Git"
+      ],
+      "images": [
+        "로그인.png",
+        "모니터링.png",
+        "장비관리.png",
+        "roi설정.png",
+        "메뉴관리.png",
+        "화재감시이력.png",
+        "공통코드.png"
+      ]
     }
   ]
 }

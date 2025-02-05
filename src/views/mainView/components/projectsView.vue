@@ -5,7 +5,6 @@
       <div class="wave"></div>
       <div class="wave"></div>
     </div>
-
     <section class="projects-title">
       <div>PROJECTS</div>
     </section>
@@ -20,67 +19,31 @@
           >
             <div class="projects-item-container">
               <div class="projects-item-left">
-                <div>
-                  <swiper
-                    :style="{
-                      '--swiper-navigation-color': '#fff',
-                      '--swiper-pagination-color': '#fff',
-                    }"
-                    :spaceBetween="10"
-                    :navigation="true"
-                    :thumbs="{ swiper: thumbsSwiper }"
-                    :modules="modules"
-                    class="mySwiper2"
-                  >
-                    <swiper-slide v-if="project.videos">
-                      <video controls width="100%">
-                        <source
-                          :src="`/assets/image/projects/${project.id}/${project.videos}`"
-                          type="video/mp4"
-                        />
-                        동영상을 지원하지 않는 브라우저입니다.
-                      </video>
-                    </swiper-slide>
-                    <swiper-slide
-                      v-for="(img, idx) in project.images"
-                      :key="idx"
-                    >
-                      <img
-                        :src="`/assets/image/projects/${project.id}/${img}`"
-                      />
-                    </swiper-slide>
-                  </swiper>
-                  <swiper
-                    @swiper="setThumbsSwiper"
-                    :spaceBetween="10"
-                    :slidesPerView="4"
-                    :freeMode="true"
-                    :watchSlidesProgress="true"
-                    :modules="modules"
-                    class="mySwiper"
-                  >
-                    <swiper-slide v-if="project.videos">
-                      <video controls>
-                        <source
-                          :src="`/assets/image/projects/${project.id}/${project.videos}`"
-                          type="video/mp4"
-                        />
-                        동영상을 지원하지 않는 브라우저입니다.
-                      </video>
-                    </swiper-slide>
-                    <swiper-slide
-                      v-for="(img, idx) in project.images"
-                      :key="idx"
-                    >
-                      <img
-                        :src="`/assets/image/projects/${project.id}/${img}`"
-                      />
-                    </swiper-slide>
-                  </swiper>
+                <!-- swiper들을 감싸는 래퍼 div 추가 -->
+                <div class="swiper-container">
+                  <projectSwiper :project="project" />
                 </div>
-                <div>왼-아래</div>
+                <div class="projects-detail-container">
+                  <div class="projects-item-left-title">
+                    {{ project.projectNm }}
+                  </div>
+                  <div class="projects-item-left-period">
+                    {{ project.period }}
+                  </div>
+                  <div class="projects-item-left-skills">
+                    <span
+                      class="badge"
+                      v-for="(skill, index) in project.skills"
+                      :key="index"
+                    >
+                      {{ skill }}
+                    </span>
+                  </div>
+                </div>
               </div>
-              <div class="projects-item-right">오</div>
+              <div class="projects-item-right">
+                <div class="projects-item-right-wrap">설명설명설명</div>
+              </div>
             </div>
           </li>
         </ul>
@@ -95,23 +58,10 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 import projectsData from './data/projectsData.json'
+import projectSwiper from './components/projectSwiper.vue'
 
-import { Swiper, SwiperSlide } from 'swiper/vue'
-
-// import required modules
-import { FreeMode, Navigation, Thumbs } from 'swiper/modules'
-
-// import '@/assets/slider.css'
 // GSAP 플러그인 등록
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
-
-//slider
-const thumbsSwiper = ref(null)
-const setThumbsSwiper = swiper => {
-  thumbsSwiper.value = swiper
-}
-
-const modules = [FreeMode, Navigation, Thumbs]
 
 onMounted(() => {
   const panels = document.querySelectorAll('.projects-item')
@@ -165,6 +115,7 @@ const scrollToLabel = (duration, timeline, label) => {
 </script>
 <style lang="scss">
 .projects-wrap {
+  pointer-events: auto !important;
   position: relative;
   display: flex;
   flex-direction: column; // 자식 요소를 세로로 배치
@@ -270,26 +221,152 @@ const scrollToLabel = (duration, timeline, label) => {
         transform: translateX(-50%);
 
         .projects-item-container {
-          padding: 1.4rem;
+          overflow: hidden;
+          box-sizing: border-box; /* 패딩 포함 높이 계산 */
+          display: grid;
+          grid-template-columns: 60% 40%;
+          align-items: stretch; /* 자식 아이템들이 컨테이너 높이를 꽉 채움 */
           width: 100%;
           height: 100%;
+          padding: 1.4rem;
           background: white;
           border-radius: 30px;
-          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-          display: grid;
-          grid-template-columns: 48% 52%;
-          grid-auto-flow: dense; /* 빈 공간 최소화 */
+          box-shadow:
+            0 10px 20px rgba(0, 0, 0, 0.2),
+            inset 0 2px 6px rgba(0, 0, 0, 0.2);
           position: relative;
-
+          .projects-item-left,
+          .projects-item-right {
+            align-self: stretch;
+          }
           .projects-item-left {
             width: 100%;
             height: 100%;
             display: grid;
-            grid-template-rows: 60% 40%;
+            grid-template-rows: 60% 30%; // 상단은 swiper 영역, 하단은 기타 콘텐츠
+            // 추가: 내부의 첫 번째 그리드 셀에 해당하는 래퍼에 높이 100% 적용
+            .swiper-container {
+              height: 100%;
+              display: grid;
+              grid-template-rows: 80% 20%; // 메인 swiper와 썸네일 swiper의 비율 조정
+            }
+            .projects-detail-container {
+              .projects-item-left-title {
+                font-weight: 600;
+                font-size: 1.4rem;
+                padding: 10px 0;
+              }
+              .projects-item-left-period {
+                color: #4b5563;
+                font-size: 1rem;
+                padding: 10px 0;
+              }
+              .projects-item-left-skills {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+
+                .badge {
+                  padding: 10px 0;
+                  background-color: #dbeafe;
+                  color: #1e40af;
+                  padding: 0.5rem 0.8rem;
+                  border-radius: 999px; /* 둥근 뱃지 형태 */
+                  font-size: 0.8rem;
+                  font-weight: bold;
+                }
+              }
+            }
+          }
+          .projects-item-right {
+            padding-left: 1rem;
+            display: flex;
+            align-items: stretch;
+            max-height: 714px;
+            .projects-item-right-wrap {
+              flex: 1; // 남은 공간을 꽉 채우게 함
+              min-height: 0; // 자식의 최소 높이를 0으로 설정해 부모 높이 제한 적용
+              width: 100%;
+              height: 100%;
+              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // 그림자 효과
+              border-radius: 10px;
+              overflow: hidden; // 둥근 모서리에 맞게 내부 내용이 잘리지 않도록
+            }
           }
         }
       }
     }
   }
+}
+</style>
+<style>
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swiper {
+  width: 100%;
+  height: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.swiper-slide {
+  background-size: cover;
+  background-position: center;
+}
+
+.mySwiper2 {
+  height: 100%;
+  width: 100%;
+}
+
+.mySwiper {
+  height: 100%;
+  box-sizing: border-box;
+  padding: 10px 0;
+}
+
+.mySwiper .swiper-slide {
+  width: 25%;
+  height: 100%;
+  opacity: 0.4;
+}
+
+.mySwiper .swiper-slide-thumb-active {
+  opacity: 1;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.swiper-slide video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 </style>
