@@ -33,10 +33,10 @@ const lenis = new Lenis({
 
 onMounted(() => {
   lenis.stop()
-  // 3초 후 intro를 숨기고 메인 화면으로 전환
+  // 4초 후 intro를 숨기고 메인 화면으로 전환
   setTimeout(() => {
     isIntroVisible.value = false
-  }, 3000)
+  }, 4000)
   lenis.start()
 
   function raf(time) {
