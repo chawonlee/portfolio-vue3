@@ -14,8 +14,8 @@
         <ul class="projects-list">
           <li
             class="projects-item"
-            v-for="(project, index) in projectsData.list"
-            :key="index"
+            v-for="(project, projectIdx) in projectsData.list"
+            :key="projectIdx"
           >
             <div class="projects-item-container">
               <div class="projects-item-left">
@@ -33,8 +33,8 @@
                   <div class="projects-item-left-skills">
                     <span
                       class="badge"
-                      v-for="(skill, index) in project.skills"
-                      :key="index"
+                      v-for="(skill, skillIdx) in project.skills"
+                      :key="skillIdx"
                     >
                       {{ skill }}
                     </span>
@@ -42,7 +42,29 @@
                 </div>
               </div>
               <div class="projects-item-right">
-                <div class="projects-item-right-wrap">설명설명설명</div>
+                <div class="projects-item-right-wrap">
+                  <div
+                    v-for="(contents, contentIdx) in project.detail"
+                    :key="contentIdx"
+                    class="item-contents"
+                  >
+                    {{ contentIdx + 1 + `. ` + contents.title }}
+                    <div
+                      v-for="(sub, subIdx) in contents.content"
+                      :key="subIdx"
+                      class="item-sub"
+                    >
+                      <div>{{ '■ ' + sub.title }}</div>
+                      <div
+                        v-for="(detail, detailIdx) in sub.content"
+                        :key="detailIdx"
+                        class="item-detail"
+                      >
+                        {{ '-' + detail }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </li>
@@ -191,7 +213,7 @@ const scrollToLabel = (duration, timeline, label) => {
     margin-bottom: 20px; // 타이틀 아래 간격 조정
   }
   .projects-container {
-    padding: 5% 0 0 0;
+    padding: 3.5% 0 0 0;
     position: relative;
     align-items: center;
     justify-content: center;
@@ -213,9 +235,9 @@ const scrollToLabel = (duration, timeline, label) => {
       .projects-item {
         position: absolute;
         width: 90vw;
-        height: 80vh;
-        max-width: 1200px;
-        max-height: 760px;
+        height: 69vh;
+        max-width: 1400px;
+        max-height: 800px;
         display: flex;
         left: 50%;
         transform: translateX(-50%);
@@ -224,11 +246,11 @@ const scrollToLabel = (duration, timeline, label) => {
           overflow: hidden;
           box-sizing: border-box; /* 패딩 포함 높이 계산 */
           display: grid;
-          grid-template-columns: 60% 40%;
+          grid-template-columns: 45% 55%;
           align-items: stretch; /* 자식 아이템들이 컨테이너 높이를 꽉 채움 */
           width: 100%;
           height: 100%;
-          padding: 1.4rem;
+          padding: 1rem;
           background: white;
           border-radius: 30px;
           box-shadow:
@@ -253,8 +275,8 @@ const scrollToLabel = (duration, timeline, label) => {
             .projects-detail-container {
               .projects-item-left-title {
                 font-weight: 600;
-                font-size: 1.4rem;
-                padding: 10px 0;
+                font-size: 1.3rem;
+                // padding: 10px 0;
               }
               .projects-item-left-period {
                 color: #4b5563;
@@ -270,9 +292,9 @@ const scrollToLabel = (duration, timeline, label) => {
                   padding: 10px 0;
                   background-color: #dbeafe;
                   color: #1e40af;
-                  padding: 0.5rem 0.8rem;
+                  padding: 0.5rem 0.5rem;
                   border-radius: 999px; /* 둥근 뱃지 형태 */
-                  font-size: 0.8rem;
+                  font-size: 0.7rem;
                   font-weight: bold;
                 }
               }
@@ -283,14 +305,30 @@ const scrollToLabel = (duration, timeline, label) => {
             display: flex;
             align-items: stretch;
             max-height: 714px;
+            height: calc(65.5vh);
+            max-height: 780px;
+
             .projects-item-right-wrap {
+              padding: 5px;
               flex: 1; // 남은 공간을 꽉 채우게 함
               min-height: 0; // 자식의 최소 높이를 0으로 설정해 부모 높이 제한 적용
               width: 100%;
               height: 100%;
               box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // 그림자 효과
               border-radius: 10px;
-              overflow: hidden; // 둥근 모서리에 맞게 내부 내용이 잘리지 않도록
+              overflow-y: scroll;
+              .item-contents {
+                padding-left: 5px;
+                padding-bottom: 3px;
+                font-weight: 900;
+                .item-sub {
+                  padding-left: 10px;
+                  padding-bottom: 3px;
+                  .item-detail {
+                    padding-left: 15px;
+                  }
+                }
+              }
             }
           }
         }
