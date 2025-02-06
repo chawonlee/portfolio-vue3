@@ -311,6 +311,8 @@ const handleMouseLeave = () => {
     z-index: 1;
     animation: float 2s ease-in-out infinite;
     padding-bottom: 3%;
+    width: 8vw;
+    min-width: 120px;
   }
   .home-title {
     padding-bottom: 8%;
@@ -332,7 +334,7 @@ const handleMouseLeave = () => {
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 12vmin;
+      font-size: clamp(45px, 6vw, 120px);
     }
     .home-title-sub {
       font-family: 'GalmuriMono11';
@@ -341,7 +343,7 @@ const handleMouseLeave = () => {
       justify-content: center;
       align-items: center;
       font-weight: 600;
-      font-size: 15vmin;
+      font-size: clamp(45px, 6vw, 120px);
     }
   }
 }
@@ -362,6 +364,7 @@ const handleMouseLeave = () => {
   pointer-events: none; /* 마우스 이벤트를 차단 */
   z-index: 1;
   width: 9vw;
+  min-width: 80px;
   position: absolute;
   left: calc(50% - 25vw);
   bottom: calc(50% + 20vh);
@@ -369,6 +372,7 @@ const handleMouseLeave = () => {
 }
 .sub2 {
   pointer-events: none; /* 마우스 이벤트를 차단 */
+  min-width: 80px;
   z-index: 1;
   width: 9vw;
   position: absolute;
@@ -379,6 +383,7 @@ const handleMouseLeave = () => {
 .sub3 {
   pointer-events: none; /* 마우스 이벤트를 차단 */
   z-index: 1;
+  min-width: 80px;
   width: 9vw;
   position: absolute;
   left: calc(50% - 30vw);
@@ -387,6 +392,7 @@ const handleMouseLeave = () => {
 }
 .sub4 {
   pointer-events: none; /* 마우스 이벤트를 차단 */
+  min-width: 80px;
   z-index: 1;
   width: 8vw;
   position: absolute;
@@ -396,6 +402,7 @@ const handleMouseLeave = () => {
 }
 .sub5 {
   pointer-events: none; /* 마우스 이벤트를 차단 */
+  min-width: 80px;
   z-index: 1;
   width: 8vw;
   position: absolute;
@@ -405,6 +412,7 @@ const handleMouseLeave = () => {
 }
 .sub6 {
   pointer-events: none; /* 마우스 이벤트를 차단 */
+  min-width: 80px;
   z-index: 1;
   width: 8vw;
   position: absolute;
@@ -414,6 +422,7 @@ const handleMouseLeave = () => {
 }
 .sub7 {
   pointer-events: none; /* 마우스 이벤트를 차단 */
+  min-width: 80px;
   z-index: 1;
   width: 8vw;
   position: absolute;
@@ -423,6 +432,7 @@ const handleMouseLeave = () => {
 }
 .sub8 {
   pointer-events: none; /* 마우스 이벤트를 차단 */
+  min-width: 80px;
   z-index: 1;
   width: 9vw;
   position: absolute;
@@ -432,6 +442,7 @@ const handleMouseLeave = () => {
 }
 .sub9 {
   pointer-events: none; /* 마우스 이벤트를 차단 */
+  min-width: 80px;
   z-index: 1;
   width: 7vw;
   position: absolute;

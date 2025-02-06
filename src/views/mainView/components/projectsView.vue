@@ -268,19 +268,19 @@ const scrollToLabel = (duration, timeline, label) => {
             grid-template-rows: 60% 30%; // 상단은 swiper 영역, 하단은 기타 콘텐츠
             // 추가: 내부의 첫 번째 그리드 셀에 해당하는 래퍼에 높이 100% 적용
             .swiper-container {
-              height: 100%;
+              height: auto;
               display: grid;
               grid-template-rows: 80% 20%; // 메인 swiper와 썸네일 swiper의 비율 조정
             }
             .projects-detail-container {
               .projects-item-left-title {
                 font-weight: 600;
-                font-size: 1.3rem;
+                font-size: 1.2rem;
                 // padding: 10px 0;
               }
               .projects-item-left-period {
                 color: #4b5563;
-                font-size: 1rem;
+                font-size: 0.9rem;
                 padding: 10px 0;
               }
               .projects-item-left-skills {
@@ -321,11 +321,15 @@ const scrollToLabel = (duration, timeline, label) => {
                 padding-left: 5px;
                 padding-bottom: 3px;
                 font-weight: 900;
+                font-size: 1rem;
                 .item-sub {
                   padding-left: 10px;
                   padding-bottom: 3px;
+                  font-weight: 600;
+                  font-size: 0.9rem;
                   .item-detail {
                     padding-left: 15px;
+                    font-size: 0.9rem;
                   }
                 }
               }

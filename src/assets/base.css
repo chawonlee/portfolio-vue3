@@ -103,8 +103,21 @@ body {
   background-color: #a594f9;
 }
 
+/* 스크롤바 전체 (vertical, horizontal) */
 ::-webkit-scrollbar {
-  display: none;
+  width: 5px; /* 세로 스크롤바 폭 */
+  height: 5px; /* 가로 스크롤바 두께 */
+}
+
+/* 스크롤바 thumb (실제 드래그 가능한 부분) */
+::-webkit-scrollbar-thumb {
+  background-color: #000;
+  border-radius: 5px;
+}
+
+/* 스크롤바 track (스크롤바 배경, 선택 사항) */
+::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 .draggable {
