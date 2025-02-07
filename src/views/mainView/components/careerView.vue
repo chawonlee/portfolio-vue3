@@ -85,15 +85,17 @@ import careerData from './data/careerData.json'
     .career-company-box {
       display: flex;
       .career-company-logo {
-        padding-right: 3rem;
+        padding-right: 3vw;
         border-right: 1px solid #ccc;
         .career-logo-wrapper {
           display: flex;
           justify-content: center;
           align-items: center;
           overflow: hidden;
-          width: 15rem;
-          height: 15rem;
+          width: 9vw;
+          height: 9vw;
+          min-width: 120px;
+          min-height: 120px;
           background-color: #fff;
           border: 1px solid #ccc;
           border-radius: 100%;
@@ -105,7 +107,7 @@ import careerData from './data/careerData.json'
       }
       .career-company-detail {
         padding-bottom: 4rem;
-        padding-left: 3rem;
+        padding-left: 4vw;
         .career-company-name {
           padding-bottom: 0.5rem;
           font-weight: 900;
