@@ -200,7 +200,7 @@ const scrollToLabel = (duration, timeline, label) => {
     font-weight: 400;
     font-style: normal;
     height: 15%;
-    font-size: 4rem;
+    font-size: clamp(40px, 10vw, 65px);
     text-shadow:
       1px 1px 1px rgba(0, 0, 0, 0.1),
       1px 2px 1px rgba(0, 0, 0, 0.15),

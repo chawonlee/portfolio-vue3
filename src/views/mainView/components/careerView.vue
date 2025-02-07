@@ -66,7 +66,7 @@ import careerData from './data/careerData.json'
     font-style: normal;
     height: 15%;
     padding-bottom: 50px;
-    font-size: 4rem;
+    font-size: clamp(40px, 10vw, 65px);
     text-shadow:
       1px 1px 1px #fff,
       1px 2px 1px #fff,

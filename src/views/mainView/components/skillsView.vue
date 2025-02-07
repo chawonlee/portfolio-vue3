@@ -79,7 +79,7 @@ onBeforeUnmount(() => {})
     font-weight: 400;
     font-style: normal;
     height: 20%;
-    font-size: 4rem;
+    font-size: clamp(40px, 10vw, 65px);
     color: white; /* 텍스트를 흰색으로 설정 */
     text-shadow:
       0px 1px 3px rgba(80, 80, 80, 0.6),
@@ -101,7 +101,8 @@ onBeforeUnmount(() => {})
       left: 50%; /* 수평 가운데 정렬 */
       transform: translate(-50%, -50%); /* 가운데 정렬 */
       z-index: 1; /* 텍스트 뒤로 배치 */
-      width: 350px; /* SVG의 크기 */
+      width: 15vw;
+      min-width: 260px;
       height: auto;
     }
   }

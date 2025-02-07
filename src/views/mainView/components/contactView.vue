@@ -763,7 +763,7 @@ function handleEvents() {
     font-style: normal;
     height: 15%;
     padding-bottom: 50px;
-    font-size: 4rem;
+    font-size: clamp(40px, 10vw, 65px);
     color: white; /* 텍스트를 흰색으로 설정 */
     text-shadow:
       0px 1px 3px rgba(80, 80, 80, 0.6),
