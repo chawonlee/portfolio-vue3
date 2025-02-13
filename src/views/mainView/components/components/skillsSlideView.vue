@@ -68,7 +68,7 @@ onMounted(async () => {
   position: relative;
   margin-left: 45px; /* 원(circle) 오른쪽으로 이동 */
   margin-top: 0.1vw; /* 상단 여백 */
-  font-size: 1.4vw;
+  font-size: clamp(20px, 1.4vw, 40px);
   font-weight: bold;
   color: #fff;
   text-transform: uppercase;

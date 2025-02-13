@@ -530,9 +530,9 @@
       </div>
     </section>
     <img
-      src="@/assets/image/clickMe.png"
+      src="@/assets/image/clickHeart.png"
       class="hover-instruction"
-      alt="clickMe"
+      alt="clickHeart"
     />
   </section>
 </template>

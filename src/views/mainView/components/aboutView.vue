@@ -43,6 +43,11 @@
         </div>
       </div>
     </div>
+    <img
+      src="@/assets/image/dragMe.png"
+      class="drag-instruction"
+      alt="dragMe"
+    />
   </section>
 </template>
 <script setup>
@@ -306,7 +311,12 @@ const stopShuffle = () => {
   align-items: center;
   width: 100vw; /* 원하는 너비 조정 */
   pointer-events: none; /* 마우스 이벤트를 차단 */
-
+  .drag-instruction {
+    z-index: 1;
+    position: absolute;
+    left: 15%;
+    top: 20%;
+  }
   .about-title {
     position: relative; /* 자식 요소들의 기준점 설정 */
     font-family: 'Black Han Sans', sans-serif;
