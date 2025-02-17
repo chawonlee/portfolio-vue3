@@ -313,9 +313,11 @@ const stopShuffle = () => {
   pointer-events: none; /* 마우스 이벤트를 차단 */
   .drag-instruction {
     z-index: 1;
+    width: 4vw;
+    min-width: 55px;
     position: absolute;
-    left: 15%;
-    top: 20%;
+    left: 25%;
+    top: 30%;
   }
   .about-title {
     position: relative; /* 자식 요소들의 기준점 설정 */
