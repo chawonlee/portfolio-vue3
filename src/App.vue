@@ -1,5 +1,12 @@
 <template>
-  <div>
+  <div v-if="isMobileMode" class="mobile-message">
+    <img src="@/assets/icon/mobile.gif" />
+    <p class="bold-text">
+      보다 나은 서비스 제공을 위하여 모바일 페이지 준비중에 있습니다
+    </p>
+    <p class="medium-text">원활한 이용을 위해 💻데스크탑💻으로 접속해 주세요</p>
+  </div>
+  <div v-else>
     <transition name="fade" mode="out-in">
       <div v-if="isIntroVisible" class="intro-background">
         <p class="intro-text medium-text">The journey is the reward.</p>
@@ -30,8 +37,10 @@ const lenis = new Lenis({
   smooth: true, // 기본 부드러운 스크롤 활성화
   direction: 'vertical', // 스크롤 방향
 })
+const isMobileMode = ref(window.innerWidth <= 1200) //화면 크기 감지지
 
 onMounted(() => {
+  updateScreenSize()
   lenis.stop()
   // 4초 후 intro를 숨기고 메인 화면으로 전환
   setTimeout(() => {
@@ -45,10 +54,20 @@ onMounted(() => {
   }
 
   requestAnimationFrame(raf)
+  window.addEventListener('resize', updateScreenSize)
 })
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', updateScreenSize)
+})
+
+// 화면 크기 변경 감지
+const updateScreenSize = () => {
+  isMobileMode.value = window.innerWidth <= 1200
+}
 </script>
 
 <style lang="scss">
+.mobile-message,
 .intro-background {
   position: fixed;
   top: 0;
