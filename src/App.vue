@@ -1,10 +1,5 @@
 <template>
-  <div v-if="isMobileMode" class="mobile-message">
-    <img src="@/assets/icon/mobile.gif" />
-    <p class="bold-text">모바일 페이지 준비중에 있습니다</p>
-    <p class="medium-text">원활한 이용을 위해 💻데스크탑💻으로 접속해 주세요</p>
-  </div>
-  <div v-else>
+  <div>
     <transition name="fade" mode="out-in">
       <div v-if="isIntroVisible" class="intro-background">
         <p class="intro-text medium-text">The journey is the reward.</p>
@@ -14,7 +9,15 @@
       </div>
     </transition>
 
-    <baseLayout />
+    <div v-if="isMobileMode" class="mobile-message" :key="mobileModeKey">
+      <img src="@/assets/icon/mobile.gif" />
+      <p class="bold-text">모바일 페이지 준비중에 있습니다</p>
+      <p class="medium-text">
+        원활한 이용을 위해 💻데스크탑💻으로 접속해 주세요
+      </p>
+    </div>
+    <baseLayout v-else />
+
     <CursorCustom />
   </div>
 </template>
@@ -22,12 +25,14 @@
 <script setup>
 import Lenis from '@studio-freight/lenis'
 import { RouterLink, RouterView } from 'vue-router'
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref, onMounted, onBeforeUnmount, nextTick, watchEffect } from 'vue'
 import baseLayout from '@/components/baseLayout.vue'
 //componets
 import CursorCustom from './components/cursorCustom.vue'
 
-const isIntroVisible = ref(false)
+const isIntroVisible = ref(true)
+
+const mobileModeKey = ref(0) //render key
 
 const lenis = new Lenis({
   duration: 1.5, // 부드러운 스크롤 속도
@@ -35,16 +40,12 @@ const lenis = new Lenis({
   smooth: true, // 기본 부드러운 스크롤 활성화
   direction: 'vertical', // 스크롤 방향
 })
-const isMobileMode = ref(window.innerWidth <= 1200) //화면 크기 감지
+const isMobileMode = ref(false)
 
 onMounted(() => {
-  window.addEventListener('resize', updateScreenSize)
-  updateScreenSize()
   lenis.stop()
   // 4초 후 intro를 숨기고 메인 화면으로 전환
-  setTimeout(() => {
-    isIntroVisible.value = false
-  }, 4000)
+  introVisible()
   lenis.start()
 
   function raf(time) {
@@ -52,15 +53,30 @@ onMounted(() => {
     requestAnimationFrame(raf)
   }
 
+  window.addEventListener('resize', updateScreenSize)
+  updateScreenSize() // 초기 로드 시에도 실행
   requestAnimationFrame(raf)
 })
 onBeforeUnmount(() => {
   window.removeEventListener('resize', updateScreenSize)
 })
 
+const introVisible = () => {
+  setTimeout(() => {
+    isIntroVisible.value = false
+  }, 4000)
+}
+
 // 화면 크기 변경 감지
 const updateScreenSize = () => {
-  isMobileMode.value = window.innerWidth <= 1200
+  let saveMobileMode = isMobileMode.value
+  isMobileMode.value = document.documentElement.clientWidth < 1200
+
+  if (saveMobileMode !== isMobileMode.value) {
+    isIntroVisible.value = true
+    introVisible()
+    mobileModeKey.value++
+  }
 }
 </script>
 
