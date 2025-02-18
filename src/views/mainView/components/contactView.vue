@@ -787,7 +787,8 @@ function handleEvents() {
     }
     .contact-container {
       pointer-events: auto;
-      width: 660px;
+      width: 45vw;
+      max-width: 660px;
       height: 600px;
       border-radius: 10px; /* 모서리를 둥글게 */
       box-shadow:
