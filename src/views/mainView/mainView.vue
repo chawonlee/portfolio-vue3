@@ -1,27 +1,27 @@
 <template>
   <div class="mainView">
     <!-- Home -->
-    <section class="homeView">
+    <section id="idHomeView" class="homeView">
       <home />
     </section>
     <!-- About -->
-    <section class="aboutView">
+    <section id="idAboutView" class="aboutView">
       <about />
     </section>
     <!-- Skills -->
-    <section class="skillsView">
+    <section id="idSkillsView" class="skillsView">
       <skills />
     </section>
     <!-- Project -->
-    <section class="projectsView">
+    <section id="idProjectsView" class="projectsView">
       <projects />
     </section>
     <!-- Career -->
-    <section class="careerView">
+    <section id="idCareerView" class="careerView">
       <career />
     </section>
     <!-- Contact -->
-    <section class="contactView">
+    <section id="idContactView" class="contactView">
       <contact />
     </section>
     <!--footer-->
