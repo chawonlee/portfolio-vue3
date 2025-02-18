@@ -149,10 +149,6 @@ onMounted(() => {
   }
   const width = threeContainer.value.clientWidth || window.innerWidth
   const height = threeContainer.value.clientHeight || window.innerHeight
-  console.log(
-    threeContainer.value.clientWidth,
-    threeContainer.value.clientHeight,
-  )
   // Renderer
   renderer = new THREE.WebGLRenderer()
   renderer.domElement.id = 'myPhotoCanvas'
@@ -216,7 +212,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   cancelAnimationFrame(animationFrameId)
-  controls.dispose() // OrbitControls 메모리 해제
+  // controls.dispose() // OrbitControls 메모리 해제
   renderer.dispose()
 
   renderer.domElement.removeEventListener('mousedown', onMouseDown)
@@ -313,11 +309,12 @@ const stopShuffle = () => {
   pointer-events: none; /* 마우스 이벤트를 차단 */
   .drag-instruction {
     z-index: 1;
-    width: 4vw;
-    min-width: 55px;
+    width: 5vw;
+    min-width: 120px;
+    max-width: 160px;
     position: absolute;
-    left: 25%;
-    top: 30%;
+    left: 25vw;
+    top: 16vw;
   }
   .about-title {
     position: relative; /* 자식 요소들의 기준점 설정 */
