@@ -2,11 +2,24 @@
   <header class="header">
     <nav class="nav">
       <ul class="nav-list">
-        <li class="nav-item"><a>About</a></li>
-        <li class="nav-item"><a>Skills</a></li>
-        <li class="nav-item"><a>Projects</a></li>
-        <li class="nav-item"><a>Career</a></li>
-        <li class="nav-item"><a>Contact</a></li>
+        <li class="nav-item">
+          <a @click="scrollToSection('idHomeView')">HOME</a>
+        </li>
+        <li class="nav-item">
+          <a @click="scrollToSection('idAboutView')">About</a>
+        </li>
+        <li class="nav-item">
+          <a @click="scrollToSection('idSkillsView')">Skills</a>
+        </li>
+        <li class="nav-item">
+          <a @click="scrollToSection('idProjectsView')">Projects</a>
+        </li>
+        <li class="nav-item">
+          <a @click="scrollToSection('idCareerView')">Career</a>
+        </li>
+        <li class="nav-item">
+          <a @click="scrollToSection('idContactView')">Contact</a>
+        </li>
       </ul>
     </nav>
     <div class="marquee">
@@ -25,6 +38,12 @@ onMounted(() => {
   // 윈도우 로드되면 해당 함수 실행
   Marquee('.marquee', 0.4, false)
 })
+const scrollToSection = id => {
+  const element = document.getElementById(id)
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+}
 
 const Marquee = (selector, speed, reverse) => {
   const parentSelector = document.querySelector(selector) // 클래스명을 인자로 받은 매개변수
@@ -58,7 +77,7 @@ const Marquee = (selector, speed, reverse) => {
   height: 50px;
   backdrop-filter: blur(3px);
   color: black;
-  background: rgba(255, 255, 255, 0.29);
+  background: rgba(255, 255, 255, 0.566);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   border-bottom: 1px solid #f8f0fc;
   z-index: 101;
@@ -79,14 +98,25 @@ const Marquee = (selector, speed, reverse) => {
       text-align: center;
 
       a {
+        display: inline-block; /* background-clip: text 적용을 위해 inline-block 이상이어야 함 */
+        color: rgba(0, 0, 0, 0.627); /* 기본 글자 색상 */
         text-decoration: none;
-        color: #fff;
-        font-weight: 500;
-        transition: color 0.3s;
+        transition: 0.3s ease; /* hover 시 부드럽게 변하도록 */
+        font-size: 15px;
+        font-weight: 600;
+      }
 
-        &:hover {
-          color: #007bff;
-        }
+      /* hover 시 텍스트 그라데이션 */
+      a:hover {
+        background: linear-gradient(
+          to bottom,
+          #745cec,
+          #4c00ff
+        ); /* 위->아래 보라~흰 */
+        background-clip: text; /* 텍스트 영역만 배경 적용 */
+        -webkit-background-clip: text; /* 웹킷 브라우저 호환 */
+        color: transparent; /* 텍스트 자체 색상은 투명 */
+        -webkit-text-fill-color: transparent; /* 웹킷 브라우저에서 텍스트 투명 */
       }
     }
   }
