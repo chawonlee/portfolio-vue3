@@ -1,7 +1,7 @@
 {
   "comp": [
     {
-      "src": "src/assets/image/logo/Thub.png",
+      "src": "/assets/image/logo/Thub.png",
       "name": "(주) 티허브",
       "period": "2023.04.01 - (재직 중)",
       "explain": "IoT 플랫폼 기술과 스마트 플랫폼 기술을 기반으로 한 IoT 전문 기업",
@@ -50,7 +50,7 @@
       ]
     },
     {
-      "src": "src/assets/image/logo/mapsco.png",
+      "src": "/assets/image/logo/mapsco.png",
       "name": "(주) 맵스코",
       "period": "2022.03.01 - 2023.02.28",
       "explain": "대학 차세대 정보시스템 구축 전문기업",
