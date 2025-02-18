@@ -88,9 +88,7 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 onMounted(() => {
   const panels = document.querySelectorAll('.projects-item')
   // const tabs = document.querySelectorAll(".tab-wrap > button");
-  gsap.set('.box', {
-    zIndex: i => panels.length + i,
-  })
+
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: '.projects-wrap',
@@ -98,13 +96,7 @@ onMounted(() => {
       start: 'top 0%',
       end: '+=200%',
       scrub: true,
-      onUpdate: self => {
-        const scrollProgress = self.progress * (panels.length - 1)
-        // const activeIndex = Math.round(scrollProgress);
-        // tabs.forEach((btn, i) => {
-        //   btn.classList.toggle("active", i === activeIndex);
-        // });
-      },
+      onUpdate: self => {},
     },
   })
   panels.forEach((element, i) => {
