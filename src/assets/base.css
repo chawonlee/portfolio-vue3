@@ -105,8 +105,8 @@ body {
 
 /* 스크롤바 전체 (vertical, horizontal) */
 ::-webkit-scrollbar {
-  width: 5px; /* 세로 스크롤바 폭 */
-  height: 5px; /* 가로 스크롤바 두께 */
+  width: 8px; /* 세로 스크롤바 폭 */
+  height: 8px; /* 가로 스크롤바 두께 */
 }
 
 /* 스크롤바 thumb (실제 드래그 가능한 부분) */
