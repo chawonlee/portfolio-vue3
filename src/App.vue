@@ -11,7 +11,9 @@
 
     <div v-if="isMobileMode" class="mobile-message" :key="mobileModeKey">
       <img src="@/assets/icon/mobile.gif" />
-      <p class="bold-text">모바일 페이지 준비중에 있습니다</p>
+      <p class="bold-text" style="padding: 5px; font-size: 20px">
+        모바일 페이지 준비중에 있습니다
+      </p>
       <p class="medium-text">
         원활한 이용을 위해 💻데스크탑💻으로 접속해 주세요
       </p>
