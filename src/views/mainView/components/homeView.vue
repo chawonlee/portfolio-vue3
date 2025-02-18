@@ -355,7 +355,7 @@ const handleMouseLeave = () => {
   width: 100vw;
   height: 100%;
   z-index: 1;
-  background-image: url('src/assets/image/background.jpg');
+  background-image: url('@/assets/image/background.jpg');
   background-size: cover; /* 이미지를 화면에 꽉 채우기 */
   background-position: center; /* 이미지를 중앙에 맞춤 */
 }

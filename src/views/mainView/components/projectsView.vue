@@ -149,7 +149,7 @@ const scrollToLabel = (duration, timeline, label) => {
     left: 0;
     background: rgba(0, 0, 0, 0.99);
     .wave {
-      background: url(src/assets/svg/wave.svg) repeat-x;
+      background: url(@/assets/svg/wave.svg) repeat-x;
       position: absolute;
       top: 0px;
       width: 6400px;
