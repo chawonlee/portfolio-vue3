@@ -1,6 +1,6 @@
 <template>
   <section class="footer-wrap">
-    © 2024. Lee Chae Won. All rights reserved.
+    © 2025. Lee Chae Won. All rights reserved.
   </section>
 </template>
 <script setup></script>
