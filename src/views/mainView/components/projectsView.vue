@@ -100,7 +100,7 @@ onMounted(() => {
     },
   })
   panels.forEach((element, i) => {
-    const height = element.clientHeight + 200
+    const height = element.clientHeight + 400
     const gap = 10
     gsap.set(element, { position: 'absolute', top: `${height * i}` })
     tl.to(element, {
