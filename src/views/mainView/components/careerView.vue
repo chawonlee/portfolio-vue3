@@ -57,7 +57,8 @@ import careerData from './data/careerData.json'
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #fffbe6;
+  // background-color: #fffbe6;
+  background: rgba(255, 255, 255, 0.944);
   z-index: 2;
 
   .career-title {
