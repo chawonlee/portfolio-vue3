@@ -18,7 +18,6 @@
           variant="text"
           :disabled="isRunning"
           color="#fff"
-          size="small"
           ><v-icon icon="mdi-shuffle-variant" color="#f0c40d"
         /></v-btn>
       </div>
@@ -104,7 +103,7 @@ onMounted(() => {})
   justify-content: center;
   align-items: center;
   width: 100vw;
-  background: linear-gradient(to bottom, #000000, #252525);
+  background: linear-gradient(to bottom, #000000, #363636);
   .mobile-about-title {
     position: relative; /* 자식 요소들의 기준점 설정 */
     font-family: 'Black Han Sans', sans-serif;
@@ -141,7 +140,7 @@ onMounted(() => {})
   .mobile-intro {
     width: 60vw;
     min-width: 300px;
-    font-size: clamp(13px, 3vw, 14px);
+    font-size: clamp(14px, 3vw, 14px);
     opacity: 1;
     z-index: 2;
 
