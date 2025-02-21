@@ -11,7 +11,7 @@
 
     <baseLayout :isMobileMode="isMobileMode" />
 
-    <CursorCustom v-if="isMobileMode === false" />
+    <CursorCustom />
   </div>
 </template>
 

@@ -70,6 +70,20 @@ const onMouseMove = event => {
   startIdleTimer()
 }
 
+const onTouchMove = event => {
+  // 터치 위치 계산
+  const touch = event.touches[0]
+  if (touch) {
+    mousePosition.value.x = touch.clientX - width / 2
+    mousePosition.value.y = touch.clientY - width / 2
+  }
+
+  // 마우스 이벤트와 동일하게 처리
+  idle.value = false
+  clearTimeout(timeoutID)
+  startIdleTimer()
+}
+
 // idle 상태로 전환
 const goIdle = () => {
   idle.value = true
@@ -139,11 +153,13 @@ const initCursor = () => {
 
 onMounted(() => {
   initCursor()
+  window.addEventListener('touchmove', onTouchMove)
 })
 
 // 컴포넌트 언마운트 시 이벤트 리스너 제거
 onBeforeUnmount(() => {
   window.removeEventListener('mousemove', onMouseMove)
+  window.removeEventListener('touchmove', onTouchMove)
   clearTimeout(timeoutID)
 })
 </script>
