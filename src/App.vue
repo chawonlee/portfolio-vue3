@@ -9,7 +9,7 @@
       </div>
     </transition>
 
-    <div v-if="isMobileMode" class="mobile-message" :key="mobileModeKey">
+    <!-- <div v-if="isMobileMode" class="mobile-message" :key="mobileModeKey">
       <img src="@/assets/icon/mobile.gif" />
       <p class="bold-text" style="padding: 5px; font-size: 20px">
         모바일 페이지 준비중에 있습니다
@@ -17,8 +17,8 @@
       <p class="medium-text">
         원활한 이용을 위해 💻데스크탑💻으로 접속해 주세요
       </p>
-    </div>
-    <baseLayout v-else />
+    </div> -->
+    <baseLayout :isMobileMode="isMobileMode" />
 
     <CursorCustom />
   </div>
@@ -33,8 +33,6 @@ import baseLayout from '@/components/baseLayout.vue'
 import CursorCustom from './components/cursorCustom.vue'
 
 const isIntroVisible = ref(true)
-
-const mobileModeKey = ref(0) //render key
 
 const lenis = new Lenis({
   duration: 1.5, // 부드러운 스크롤 속도
@@ -77,7 +75,6 @@ const updateScreenSize = () => {
   if (saveMobileMode !== isMobileMode.value) {
     isIntroVisible.value = true
     introVisible()
-    mobileModeKey.value++
   }
 }
 </script>
