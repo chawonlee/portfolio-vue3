@@ -21,6 +21,7 @@
     <section class="mobile-about-container">
       <div class="mobileMyPhoto" ref="threeMobileContainer"></div>
     </section>
+    <div class="mobile-about-detail">캐릭터를 좌우로 회전시켜보세요</div>
   </section>
   <!-- 중앙 하단 더보기 -->
   <div class="mobile-scroll-down">
@@ -261,7 +262,7 @@ const animate = () => {
       font-size: clamp(45px, 6vw, 120px);
     }
   }
-  .about-container {
+  .mobile-about-container {
     justify-content: center;
     align-items: center;
     transform-origin: center bottom; /* 애니메이션 기준점 아래로 설정 */
@@ -285,6 +286,10 @@ const animate = () => {
       }
     }
   }
+  .mobile-about-detail {
+    padding: 15px 0;
+    color: #fff;
+  }
 }
 
 /* 둥둥 떠다니는 애니메이션 */
@@ -304,7 +309,7 @@ const animate = () => {
   align-items: center;
   justify-items: center;
   position: absolute;
-  bottom: 3%; /* about-wrap 아래쪽에 위치 */
+  bottom: 50px; /* about-wrap 아래쪽에 위치 */
   left: 50%;
   transform: translateX(-50%);
   font-size: 1.2rem;
