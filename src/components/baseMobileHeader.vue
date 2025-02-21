@@ -31,7 +31,9 @@
           >
         </li>
         <li class="mobile-nav-item">
-          <a @click="closeMenu">Skills</a>
+          <a @click="closeMenu, scrollToSection('idMobileSkillsView')"
+            >Skills</a
+          >
         </li>
         <li class="mobile-nav-item">
           <a @click="closeMenu">Projects</a>

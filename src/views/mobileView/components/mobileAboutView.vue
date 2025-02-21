@@ -103,7 +103,7 @@ onMounted(() => {})
   justify-content: center;
   align-items: center;
   width: 100vw;
-  background: linear-gradient(to bottom, #000000, #363636);
+  background: linear-gradient(to bottom, #000000, #626262);
   .mobile-about-title {
     position: relative; /* 자식 요소들의 기준점 설정 */
     font-family: 'Black Han Sans', sans-serif;
