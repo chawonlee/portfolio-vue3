@@ -22,7 +22,7 @@
   <!-- 중앙 하단 더보기 -->
   <div class="mobile-scroll-down">
     <div>SCROLL</div>
-    <v-icon icon="mdi-chevron-down" color="white" size="x-large" />
+    <v-icon icon="mdi-chevron-down" color="white" size="arge" />
   </div>
 </template>
 <script setup>
