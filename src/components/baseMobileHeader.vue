@@ -7,8 +7,8 @@
         class="icon-transition"
         :class="{ rotate: isMenuOpen }"
         size="x-large"
-      />
-    </v-btn>
+      /> </v-btn
+    >모바일 버전 개발 중 입니다
   </header>
 
   <!-- 사이드 메뉴 박스 -->
