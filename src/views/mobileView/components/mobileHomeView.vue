@@ -18,10 +18,13 @@
         <span>오</span>
       </div>
     </section>
-    <section class="mobile-about-container">
+    <section class="mobile-home-container">
       <div class="mobileMyPhoto" ref="threeMobileContainer"></div>
     </section>
-    <div class="mobile-about-detail">캐릭터를 좌우로 회전시켜보세요</div>
+    <div class="mobile-home-detail">캐릭터를 좌우로 회전시켜보세요</div>
+
+    <!-- 별들 -->
+    <div class="stars"></div>
   </section>
   <!-- 중앙 하단 더보기 -->
   <div class="mobile-scroll-down">
@@ -84,10 +87,10 @@ onMounted(() => {
   const height =
     (threeMobileContainer.value.clientHeight || window.innerHeight) / 2.8
   // Renderer
-  renderer = new THREE.WebGLRenderer()
+  renderer = new THREE.WebGLRenderer({ alpha: true })
   renderer.domElement.id = 'myMobilePhotoCanvas'
   renderer.setSize(width, height)
-
+  renderer.setClearColor(0x000000, 0) // 색상(0x000000) + 투명도(0)
   container.value.appendChild(renderer.domElement)
 
   // Scene
@@ -127,7 +130,6 @@ onMounted(() => {
 
       // 모델 위치 조정
       model.position.set(0, 0, 0) // 바닥 중앙 정렬
-
       // 모델 회전 조정 (정면으로 설정)
       model.rotation.y = 0 // 90도 회전
 
@@ -137,6 +139,9 @@ onMounted(() => {
       // 카메라 위치 조정
       camera.position.set(0, 1.5, 3)
       camera.lookAt(0, 1, 0)
+
+      // 별들 랜덤 배치
+      createStars()
     },
     xhr => {
       console.log(`Model loading progress: ${(xhr.loaded / xhr.total) * 100}%`)
@@ -219,6 +224,50 @@ const animate = () => {
   animationFrameId = requestAnimationFrame(animate)
   renderer.render(scene, camera)
 }
+
+// 별 랜덤 배치
+const createStars = () => {
+  const starContainer = document.querySelector('.stars')
+
+  // 모델의 z-값을 기준으로 별의 z-값을 설정하기 위해 모델의 위치를 가져옴
+  const modelZ = model.position.z
+
+  // 모델 중심 기준으로 원형 영역을 비우기 위한 반경 설정
+  const radius = 0.3 // 모델 중심에서의 비어야 하는 영역의 반경
+
+  // 기존 별들 삭제
+  starContainer.innerHTML = ''
+
+  for (let i = 0; i < 60; i++) {
+    const star = document.createElement('div')
+    star.classList.add('star')
+
+    // 랜덤한 x, y 위치 설정 (원형 영역을 피하도록 설정)
+    let x, y, distance
+    do {
+      x = Math.random() * 100 // 0~100% 사이의 랜덤 x 위치
+      y = Math.random() * 100 // 0~100% 사이의 랜덤 y 위치
+
+      // x, y의 중심으로부터의 거리 계산 (modelZ를 제외한 중심 기준으로)
+      distance = Math.sqrt(Math.pow(x - 50, 2) + Math.pow(y - 50, 2))
+    } while (distance < radius * 100) // 원형 영역을 피할 때까지 반복
+
+    // 랜덤 위치 설정
+    star.style.left = `${x}%`
+    star.style.top = `${y}%`
+
+    // 별의 z-값을 모델의 z-값보다 더 작은 값으로 설정
+    const starZ = modelZ - Math.random() * 2 - 0.1 // 모델 z값보다 낮은 값으로 설정 (0.1부터 조금씩 낮은 값)
+
+    // 별의 z-값을 설정 (Three.js 씬에서 기준에 맞춰)
+    star.style.transform = `translateZ(${starZ}px)`
+
+    const randomDuration = Math.random() * 3 + 3 // 3초 ~ 6초 사이
+    star.style.animationDuration = `${randomDuration}s`
+    star.style.animationTimingFunction = 'ease-in-out'
+    starContainer.appendChild(star)
+  }
+}
 </script>
 <style lang="scss">
 .mobile-home-wrap {
@@ -230,6 +279,34 @@ const animate = () => {
   align-items: center;
   width: 100vw; /* 원하는 너비 조정 */
   background-color: #000;
+  .stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    .star {
+      z-index: 0;
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background-color: white;
+      border-radius: 50%;
+      opacity: 0;
+      animation: twinkle 1.5s infinite alternate;
+
+      @keyframes twinkle {
+        0% {
+          opacity: 0.2;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+    }
+  }
   .mobile-home-title {
     padding-bottom: 8%;
     font-style: normal;
@@ -262,7 +339,7 @@ const animate = () => {
       font-size: clamp(45px, 6vw, 120px);
     }
   }
-  .mobile-about-container {
+  .mobile-home-container {
     justify-content: center;
     align-items: center;
     transform-origin: center bottom; /* 애니메이션 기준점 아래로 설정 */
@@ -286,7 +363,7 @@ const animate = () => {
       }
     }
   }
-  .mobile-about-detail {
+  .mobile-home-detail {
     padding: 15px 0;
     color: #fff;
   }
