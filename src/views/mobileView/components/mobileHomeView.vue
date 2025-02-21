@@ -262,6 +262,8 @@ const createStars = () => {
 </script>
 <style lang="scss">
 .mobile-home-wrap {
+  padding: 0;
+  margin: 0;
   height: 100vh;
   flex-direction: column;
   // transform: translate(-50%, -50%);

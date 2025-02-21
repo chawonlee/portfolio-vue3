@@ -15,4 +15,11 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import home from './components/mobileHomeView.vue'
 import about from './components/mobileAboutView.vue'
 </script>
-<style lang="scss"></style>
+<style lang="scss">
+.mobileView,
+.mobileHomeView,
+.mobileAboutView {
+  margin: 0;
+  padding: 0;
+}
+</style>
