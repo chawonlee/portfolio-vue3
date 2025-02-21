@@ -229,11 +229,8 @@ const animate = () => {
 const createStars = () => {
   const starContainer = document.querySelector('.stars')
 
-  // 모델의 z-값을 기준으로 별의 z-값을 설정하기 위해 모델의 위치를 가져옴
-  const modelZ = model.position.z
-
   // 모델 중심 기준으로 원형 영역을 비우기 위한 반경 설정
-  const radius = 0.3 // 모델 중심에서의 비어야 하는 영역의 반경
+  const radius = 0.35 // 모델 중심에서의 비어야 하는 영역의 반경
 
   // 기존 별들 삭제
   starContainer.innerHTML = ''
@@ -256,13 +253,7 @@ const createStars = () => {
     star.style.left = `${x}%`
     star.style.top = `${y}%`
 
-    // 별의 z-값을 모델의 z-값보다 더 작은 값으로 설정
-    const starZ = modelZ - Math.random() * 2 - 0.1 // 모델 z값보다 낮은 값으로 설정 (0.1부터 조금씩 낮은 값)
-
-    // 별의 z-값을 설정 (Three.js 씬에서 기준에 맞춰)
-    star.style.transform = `translateZ(${starZ}px)`
-
-    const randomDuration = Math.random() * 3 + 3 // 3초 ~ 6초 사이
+    const randomDuration = Math.random() * 2 + 3
     star.style.animationDuration = `${randomDuration}s`
     star.style.animationTimingFunction = 'ease-in-out'
     starContainer.appendChild(star)
