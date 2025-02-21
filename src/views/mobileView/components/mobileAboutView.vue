@@ -14,6 +14,6 @@
   justify-content: center;
   align-items: center;
   width: 100vw;
-  background: linear-gradient(to bottom, #000000, #555555);
+  background: linear-gradient(to bottom, #000000, #252525);
 }
 </style>

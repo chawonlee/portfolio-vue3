@@ -19,9 +19,9 @@
       </div>
     </section>
     <section class="mobile-home-container">
-      <div class="mobileMyPhoto" ref="threeMobileContainer"></div>
+      <heart />
     </section>
-    <div class="mobile-home-detail">캐릭터를 좌우로 회전시켜보세요</div>
+    <div class="mobile-home-detail">하트를 클릭해보세요</div>
 
     <!-- 별들 -->
     <div class="stars"></div>
@@ -33,20 +33,11 @@
 </template>
 <script setup>
 import { gsap } from 'gsap'
+import heart from '@/components/heart.vue'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import * as THREE from 'three'
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 gsap.registerPlugin(ScrollTrigger)
 
 import { onBeforeUnmount, onMounted, ref } from 'vue'
-
-const threeMobileContainer = ref(null)
-// Three.js 초기화
-const container = ref(threeMobileContainer)
-
-let scene, camera, renderer, model, animationFrameId
-const isDragging = ref(false)
-const previousMousePosition = { x: 0, y: 0 }
 
 onMounted(() => {
   const timeline = gsap.timeline({
@@ -81,156 +72,18 @@ onMounted(() => {
     },
     1,
   )
-
-  const width =
-    (threeMobileContainer.value.clientWidth || window.innerWidth) / 1
-  const height =
-    (threeMobileContainer.value.clientHeight || window.innerHeight) / 2.8
-  // Renderer
-  renderer = new THREE.WebGLRenderer({ alpha: true })
-  renderer.domElement.id = 'myMobilePhotoCanvas'
-  renderer.setSize(width, height)
-  renderer.setClearColor(0x000000, 0) // 색상(0x000000) + 투명도(0)
-  container.value.appendChild(renderer.domElement)
-
-  // Scene
-  scene = new THREE.Scene()
-
-  // Camera
-  camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 1000)
-  camera.position.set(0, 1.6, 3)
-
-  // Light
-  const ambientLight = new THREE.AmbientLight(0xffffff, 1)
-  scene.add(ambientLight)
-
-  const directionalLight = new THREE.DirectionalLight(0xffffff, 1)
-  directionalLight.position.set(5, 5, 5)
-  scene.add(directionalLight)
-
-  // 이벤트 리스너 추가
-  renderer.domElement.addEventListener('mousedown', onMouseDown)
-  renderer.domElement.addEventListener('mousemove', onMouseMove)
-  // 전역 mouseup 이벤트 추가 (캔버스 외부에서 버튼을 떼도 감지)
-  window.addEventListener('mouseup', onMouseUp)
-
-  renderer.domElement.addEventListener('touchstart', onTouchStart)
-  renderer.domElement.addEventListener('touchmove', onTouchMove)
-  window.addEventListener('touchend', onTouchEnd)
-
-  // GLTFLoader
-  const loader = new GLTFLoader()
-  loader.load(
-    'models/bookworm_girl/scene.gltf', // 경로
-    gltf => {
-      model = gltf.scene
-
-      // 모델 크기 강제로 크게 조정
-      model.scale.set(22, 22, 22)
-
-      // 모델 위치 조정
-      model.position.set(0, 0, 0) // 바닥 중앙 정렬
-      // 모델 회전 조정 (정면으로 설정)
-      model.rotation.y = 0 // 90도 회전
-
-      // 씬에 모델 추가
-      scene.add(model)
-
-      // 카메라 위치 조정
-      camera.position.set(0, 1.5, 3)
-      camera.lookAt(0, 1, 0)
-
-      // 별들 랜덤 배치
-      createStars()
-    },
-    xhr => {
-      console.log(`Model loading progress: ${(xhr.loaded / xhr.total) * 100}%`)
-    },
-    error => {
-      // 오류 발생 시 출력
-      console.error('An error occurred while loading the GLTF model:', error)
-    },
-  )
-  animate()
+  // 별들 랜덤 배치
+  createStars()
 })
 
-onBeforeUnmount(() => {
-  cancelAnimationFrame(animationFrameId)
-  // controls.dispose() // OrbitControls 메모리 해제
-  renderer.dispose()
-
-  renderer.domElement.removeEventListener('mousedown', onMouseDown)
-  renderer.domElement.removeEventListener('mousemove', onMouseMove)
-  window.removeEventListener('mouseup', onMouseUp) // 전역 이벤트 제거
-
-  renderer.domElement.addEventListener('touchstart', onTouchStart)
-  renderer.domElement.addEventListener('touchmove', onTouchMove)
-  window.addEventListener('touchend', onTouchEnd)
-
-  scene = null
-  camera = null
-  renderer = null
-  model = null
-})
-
-// 마우스 이벤트 핸들러
-const onMouseDown = () => {
-  isDragging.value = true
-
-  // 드래그 시작 시 마우스 위치 저장
-  previousMousePosition.x = event.clientX
-}
-
-const onMouseMove = event => {
-  if (!isDragging.value || !model) return
-
-  // 드래그한 X축 거리 계산
-  const deltaX = event.clientX - previousMousePosition.x
-
-  const rotationSpeed = 0.03
-
-  // Y축 회전 업데이트 (누적 방식)
-  model.rotation.y -= deltaX * rotationSpeed
-
-  // 이전 마우스 위치 업데이트
-  previousMousePosition.x = event.clientX
-}
-
-const onMouseUp = () => {
-  isDragging.value = false
-}
-
-// 터치 이벤트 핸들러
-const onTouchStart = event => {
-  isDragging.value = true
-  const touch = event.touches[0]
-  previousMousePosition.x = touch.clientX
-}
-
-const onTouchMove = event => {
-  if (!isDragging.value || !model) return
-  const touch = event.touches[0]
-  const deltaX = touch.clientX - previousMousePosition.x
-  const rotationSpeed = 0.03
-  model.rotation.y -= deltaX * rotationSpeed
-  previousMousePosition.x = touch.clientX
-}
-
-const onTouchEnd = () => {
-  isDragging.value = false
-}
-
-const animate = () => {
-  animationFrameId = requestAnimationFrame(animate)
-  renderer.render(scene, camera)
-}
+onBeforeUnmount(() => {})
 
 // 별 랜덤 배치
 const createStars = () => {
   const starContainer = document.querySelector('.stars')
 
   // 모델 중심 기준으로 원형 영역을 비우기 위한 반경 설정
-  const radius = 0.35 // 모델 중심에서의 비어야 하는 영역의 반경
+  const radius = 0.25 // 모델 중심에서의 비어야 하는 영역의 반경
 
   // 기존 별들 삭제
   starContainer.innerHTML = ''
@@ -335,24 +188,17 @@ const createStars = () => {
   .mobile-home-container {
     justify-content: center;
     align-items: center;
-    transform-origin: center bottom; /* 애니메이션 기준점 아래로 설정 */
-    will-change: transform, opacity, clip-path; /* 애니메이션 최적화 */
-
-    .mobileMyPhoto {
-      display: block;
-      height: 100%;
-      pointer-events: auto !important;
-      z-index: 3;
-      #myMobilePhotoCanvas {
-        z-index: 3;
-        -webkit-user-select: auto;
-        -moz-user-select: auto;
-        -ms-user-select: auto;
-        user-select: auto;
+    .three-container {
+      background-color: rgba(0, 0, 0, 0.8);
+      pointer-events: auto;
+      border-radius: 30px;
+      width: 350px;
+      height: 350px;
+      overflow: hidden;
+      #threeCanvas {
         width: 100%;
         height: 100%;
-        margin: 0;
-        padding: 0;
+        display: block;
       }
     }
   }
