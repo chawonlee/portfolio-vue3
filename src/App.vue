@@ -11,7 +11,7 @@
 
     <baseLayout :isMobileMode="isMobileMode" />
 
-    <CursorCustom />
+    <CursorCustom v-if="!isMobileMode" />
   </div>
 </template>
 
@@ -149,28 +149,36 @@ const updateScreenSize = () => {
   text-align: center;
 }
 
-/* 커서 스타일 */
-.Cursor {
-  pointer-events: none;
-  position: fixed;
-  display: block;
-  border-radius: 0;
-  transform-origin: center center;
-  mix-blend-mode: difference;
-  top: 0;
-  left: 0;
-  z-index: 3000;
-  filter: url('#goo');
+/* Mobile mode일 때 커서 스타일 변경 */
+@media (max-width: 1200px) {
+  body {
+    cursor: default; /* 기본 커서 설정 */
+  }
 }
+@media (min-width: 1200px) {
+  /* 커서 스타일 */
+  .Cursor {
+    pointer-events: none;
+    position: fixed;
+    display: block;
+    border-radius: 0;
+    transform-origin: center center;
+    mix-blend-mode: difference;
+    top: 0;
+    left: 0;
+    z-index: 3000;
+    filter: url('#goo');
+  }
 
-.Cursor span {
-  position: absolute;
-  display: block;
-  width: 26px;
-  height: 26px;
-  border-radius: 20px;
-  background-color: white;
-  transform-origin: center center;
-  transform: translate(-50%, -50%);
+  .Cursor span {
+    position: absolute;
+    display: block;
+    width: 26px;
+    height: 26px;
+    border-radius: 20px;
+    background-color: white;
+    transform-origin: center center;
+    transform: translate(-50%, -50%);
+  }
 }
 </style>
