@@ -9,6 +9,13 @@
         size="x-large"
       /> </v-btn
     >모바일 버전 개발 중 입니다
+    <div class="mobile-marquee" v-if="!isMenuOpen">
+      <p class="mobile-marquee-text">
+        THIS PORTFOLIO MADE BY Vue | Vuetify | Vue-Toastify | GSAP | Three.js |
+        Swiper | Lenis. I HOPE YOU FIND SOME GOOD LUCK ON THIS PAGE ❤
+        <span style="padding-right: 10px"> </span>
+      </p>
+    </div>
   </header>
 
   <!-- 사이드 메뉴 박스 -->
@@ -16,10 +23,12 @@
     <nav class="mobile-nav">
       <ul class="mobile-nav-list">
         <li class="mobile-nav-item">
-          <a @click="closeMenu">HOME</a>
+          <a @click="closeMenu(), scrollToSection('idMobileHomeView')">HOME</a>
         </li>
         <li class="mobile-nav-item">
-          <a @click="closeMenu">About</a>
+          <a @click="closeMenu(), scrollToSection('idMobileAboutView')"
+            >About</a
+          >
         </li>
         <li class="mobile-nav-item">
           <a @click="closeMenu">Skills</a>
@@ -56,6 +65,14 @@ const toggleMenu = () => {
 const closeMenu = () => {
   isMenuOpen.value = false // 메뉴 닫기
 }
+
+//메뉴 클릭 시 이동
+const scrollToSection = id => {
+  const element = document.getElementById(id)
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+}
 </script>
 
 <style lang="scss">
@@ -78,6 +95,73 @@ const closeMenu = () => {
 
   .rotate {
     transform: rotate(180deg);
+  }
+
+  .mobile-marquee {
+    position: fixed;
+    top: 50px;
+    display: flex;
+    overflow: hidden; // 텍스트가 영역 밖으로 넘어가지 않도록 설정
+    width: 100%;
+    height: 30px; // marquee 영역 높이
+    background: transparent; // 투명 배경 유지
+    border-radius: 10px; // 부드러운 모서리
+
+    /* 양쪽 끝에 그라데이션 마스크 적용 */
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 40%,
+      black 60%,
+      transparent
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 40%,
+      black 60%,
+      transparent
+    );
+
+    mask-repeat: no-repeat; // 마스크 반복 방지
+    -webkit-mask-repeat: no-repeat;
+
+    mask-size: 100% 100%; // 마스크 크기
+    -webkit-mask-size: 100% 100%;
+
+    .mobile-marquee-text {
+      padding-top: 5px;
+      display: inline-block;
+      white-space: nowrap; // 텍스트가 줄바꿈되지 않도록 설정
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: #fff; // 텍스트 기본 색상
+      animation:
+        marquee 50s linear infinite,
+        glow 1s ease-in-out infinite alternate; // 텍스트 애니메이션
+    }
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0); // 시작 위치
+    }
+    to {
+      transform: translateX(-100%); // 왼쪽으로 이동
+    }
+  }
+  // 텍스트 글로우 애니메이션
+  @keyframes glow {
+    from {
+      text-shadow:
+        0px 0px 4px #fff,
+        0px 0px 4px #614ad3;
+    }
+    to {
+      text-shadow:
+        0px 0px 8px #fff,
+        0px 0px 8px #614ad3;
+    }
   }
 }
 /* 오버레이 (배경 클릭 시 메뉴 닫힘) */
