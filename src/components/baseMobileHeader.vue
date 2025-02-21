@@ -8,7 +8,7 @@
         :class="{ rotate: isMenuOpen }"
         size="x-large"
       /> </v-btn
-    >모바일 버전 개발 중 입니다
+    >👉모바일 버전 구현 중 입니다👈
     <div class="mobile-marquee" v-if="!isMenuOpen">
       <p class="mobile-marquee-text">
         THIS PORTFOLIO MADE BY Vue | Vuetify | Vue-Toastify | GSAP | Three.js |
