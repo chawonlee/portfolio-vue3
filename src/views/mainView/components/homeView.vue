@@ -27,12 +27,6 @@
     </section>
   </section>
 
-  <!-- 중앙 하단 더보기 -->
-  <div class="scroll-down">
-    <div>SCROLL</div>
-    <v-icon icon="mdi-chevron-down" color="secondary" size="x-large" />
-  </div>
-
   <!--이벤트-->
   <img src="@/assets/image/background/back1.svg" class="sub1" alt="sub1" />
   <img src="@/assets/image/background/back2.svg" class="sub2" alt="sub2" />

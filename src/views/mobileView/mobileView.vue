@@ -1,5 +1,18 @@
 <template>
-  <div class="mobileView"></div>
+  <div class="mobileView">
+    <!-- Home -->
+    <section id="idMobileHomeView" class="mobileHomeView">
+      <home />
+    </section>
+    <!-- About -->
+    <section id="idMobileAboutView" class="mobileAboutView">
+      <about />
+    </section>
+  </div>
 </template>
-<script setup></script>
+<script setup>
+import { ref, onMounted, onUnmounted } from 'vue'
+import home from './components/mobileHomeView.vue'
+import about from './components/mobileAboutView.vue'
+</script>
 <style lang="scss"></style>
