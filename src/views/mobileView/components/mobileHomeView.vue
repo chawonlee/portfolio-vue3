@@ -154,7 +154,7 @@ const createStars = () => {
     }
   }
   .mobile-home-title {
-    padding-bottom: 8%;
+    padding-bottom: 4%;
     font-style: normal;
     color: white;
     font-size: 4rem;
@@ -225,7 +225,7 @@ const createStars = () => {
   align-items: center;
   justify-items: center;
   position: absolute;
-  bottom: 50px; /* about-wrap 아래쪽에 위치 */
+  bottom: 30px; /* about-wrap 아래쪽에 위치 */
   left: 50%;
   transform: translateX(-50%);
   font-size: 1.2rem;
