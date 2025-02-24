@@ -9,6 +9,7 @@
         class="mobile-check-svg"
       />
     </section>
+    <section>구현 중 입니다😭</section>
   </section>
 </template>
 <script setup></script>
