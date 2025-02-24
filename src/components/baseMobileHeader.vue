@@ -36,13 +36,19 @@
           >
         </li>
         <li class="mobile-nav-item">
-          <a @click="closeMenu">Projects</a>
+          <a @click="closeMenu(), scrollToSection('idMobileSkillsView')"
+            >Projects</a
+          >
         </li>
         <li class="mobile-nav-item">
-          <a @click="closeMenu">Career</a>
+          <a @click="closeMenu(), scrollToSection('idMobileSkillsView')"
+            >Career</a
+          >
         </li>
         <li class="mobile-nav-item">
-          <a @click="closeMenu">Contact</a>
+          <a @click="closeMenu(), scrollToSection('idMobileSkillsView')"
+            >Contact</a
+          >
         </li>
       </ul>
     </nav>
