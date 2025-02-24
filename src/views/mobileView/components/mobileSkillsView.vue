@@ -9,12 +9,63 @@
         class="mobile-check-svg"
       />
     </section>
+    <section class="mobile-skills-container">
+      <v-card class="mobile-skill-card" width="90vw" height="70vh">
+        <!-- v-tabs에서 각 카테고리를 표시 -->
+        <v-tabs
+          v-model="tab"
+          class="mobile-skill-card-tabs"
+          bg-color="transparent"
+          color="basil"
+          grow
+        >
+          <v-tab
+            v-for="(skills, category) in skillsData"
+            :key="category"
+            :text="category"
+            :value="category"
+          >
+            {{ category }}
+          </v-tab>
+        </v-tabs>
+
+        <!-- 각 탭에 해당하는 내용 -->
+        <v-tabs-window v-model="tab">
+          <v-tabs-window-item
+            v-for="(skills, category) in skillsData"
+            :key="category"
+            :value="category"
+          >
+            <v-card color="transparent" flat style="overflow-y: auto">
+              <!-- 기술 항목들을 skillNm으로 출력 -->
+              <v-card-text class="mobile-skill-card-detail">
+                <div
+                  v-for="(skill, index) in skills"
+                  :key="index"
+                  class="mobile-skill-box"
+                >
+                  <div class="mobile-skill-nm">
+                    <img :src="skill.img" :alt="skill.skillNm" />
+                    <div>{{ skill.skillNm }}</div>
+                  </div>
+                  <div class="mobile-skill-detail">{{ skill.detail }}</div>
+                </div>
+              </v-card-text>
+            </v-card>
+          </v-tabs-window-item>
+        </v-tabs-window>
+      </v-card>
+    </section>
   </section>
 </template>
-<script setup></script>
+<script setup>
+import skillsData from '@/views/mainView/components/data/skillData.json'
+import { ref, onBeforeUnmount, onMounted } from 'vue'
+
+const tab = ref('Framework & Library')
+</script>
 <style lang="scss">
 .mobile-skills-wrap {
-  pointer-events: none;
   position: relative;
   display: flex;
   flex-direction: column; // 자식 요소를 세로로 배치
@@ -57,6 +108,40 @@
       width: 15vw;
       min-width: 200px;
       height: auto;
+    }
+  }
+
+  .mobile-skills-container {
+    .mobile-skill-card {
+      background-color: rgb(255, 255, 255, 0.5);
+      .mobile-skill-card-tabs {
+        height: 50px;
+      }
+      .mobile-skill-card-detail {
+        height: calc(70vh - 50px);
+        overflow-y: scroll;
+        .mobile-skill-box {
+          margin: 0 0 10px 0;
+          display: block;
+          padding: 10px;
+          background-color: rgba(255, 255, 255);
+          height: 100px;
+          border-radius: 10px;
+          box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+          .mobile-skill-nm {
+            display: flex;
+            padding-bottom: 8px;
+            align-items: center;
+            img {
+              width: 25px;
+              padding-right: 6px;
+            }
+          }
+          .mobile-skill-detail {
+            color: #4b5563;
+          }
+        }
+      }
     }
   }
 }

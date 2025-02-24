@@ -24,7 +24,7 @@
     <div class="mobile-home-detail">하트를 클릭해보세요</div>
 
     <!-- 별들 -->
-    <div class="stars"></div>
+    <div ref="starContainer" class="stars"></div>
   </section>
   <!-- 중앙 하단 더보기 -->
   <div class="mobile-scroll-down">
