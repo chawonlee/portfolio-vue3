@@ -16,5 +16,6 @@
   background-color: #000;
   color: white;
   z-index: 2;
+  font-size: clamp(10px, 2.5vw, 15px);
 }
 </style>
