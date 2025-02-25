@@ -131,7 +131,7 @@ import careerData from '@/views/mainView/components/data/careerData.json'
       }
       .mobile-career-company-detail {
         padding-bottom: 4rem;
-        padding-left: 4vw;
+        padding: 0 4vw;
         .mobile-career-company-name {
           padding-bottom: 0.5rem;
           font-weight: 900;
