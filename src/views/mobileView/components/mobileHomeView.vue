@@ -21,7 +21,7 @@
     <section class="mobile-home-container">
       <heart />
     </section>
-    <div class="mobile-home-detail">하트를 클릭해보세요</div>
+    <div class="mobile-home-detail">🩷하트를 터뜨려보세요!🩷</div>
 
     <!-- 별들 -->
     <div ref="starContainer" class="stars"></div>
