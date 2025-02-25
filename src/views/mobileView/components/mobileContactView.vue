@@ -10,7 +10,7 @@
       />
     </section>
     <section>
-      <v-card color="#fff" class="mobile-contact-container">
+      <v-card class="mobile-contact-container">
         <!-- title -->
         <div class="mobile-editor-wrap">
           <label class="mobile-editor-label">Title *</label>
@@ -245,10 +245,11 @@ const sendEmail = () => {
 
   .mobile-contact-container {
     pointer-events: auto;
+    background-color: rgb(255, 255, 255, 0.5);
     width: 90vw;
     max-width: 660px;
     height: 72vh;
-    border-radius: 10px; /* 모서리를 둥글게 */
+    border-radius: 20px !important; /* 모서리를 둥글게 */
     box-shadow:
       0 4px 6px rgba(0, 0, 0, 0.1),
       /* 부드러운 그림자 */ 0 1px 3px rgba(0, 0, 0, 0.06);
