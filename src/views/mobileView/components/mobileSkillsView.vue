@@ -113,6 +113,7 @@ const tab = ref('Framework & Library')
 
   .mobile-skills-container {
     .mobile-skill-card {
+      border-radius: 20px !important;
       background-color: rgb(255, 255, 255, 0.5);
       .mobile-skill-card-tabs {
         height: 50px;
