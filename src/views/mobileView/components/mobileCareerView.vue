@@ -9,17 +9,56 @@
         class="mobile-check-svg"
       />
     </section>
-    <section>구현 중 입니다😭</section>
+    <section class="mobile-career-container">
+      <div
+        class="mobile-career-company-box"
+        v-for="(comp, idx) in careerData.comp"
+        :key="idx"
+      >
+        <!--logo-->
+        <!-- <div class="mobile-career-company-logo">
+          <div class="mobile-career-logo-wrapper">
+            <img :src="comp.src" alt="Company Logo" />
+          </div>
+        </div> -->
+        <!--details-->
+        <div class="mobile-career-company-detail">
+          <h4 class="mobile-career-company-name">{{ comp.name }}</h4>
+          <div class="mobile-career-period">{{ comp.period }}</div>
+          <div class="mobile-career-explain">{{ comp.explain }}</div>
+          <div
+            class="mobile-career-roles"
+            v-for="(role, roleIdx) in comp.roles"
+            :key="roleIdx"
+          >
+            <div class="mobile-career-role">{{ role }}</div>
+          </div>
+          <div class="mobile-career-works">
+            <div
+              class="mobile-career-work"
+              v-for="(work, workIdx) in comp.works"
+              :key="workIdx"
+            >
+              <h5 class="mobile-career-work-title">{{ work.title }}</h5>
+              <div class="mobile-career-work-period">{{ work.period }}</div>
+              <div class="mobile-career-work-desc">{{ work.desc }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </section>
 </template>
-<script setup></script>
+<script setup>
+import careerData from '@/views/mainView/components/data/careerData.json'
+</script>
 <style lang="scss">
 .mobile-career-wrap {
   padding: 0;
   margin: 0;
   z-index: 1;
   position: relative;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -28,6 +67,7 @@
   background: linear-gradient(to bottom, #d1d0e6, #a2a0d6);
 
   .mobile-career-title {
+    top: 120px;
     position: relative; /* 자식 요소들의 기준점 설정 */
     font-family: 'Black Han Sans', sans-serif;
     font-weight: 400;
@@ -58,6 +98,92 @@
       width: 15vw;
       min-width: 200px;
       height: auto;
+    }
+  }
+
+  .mobile-career-container {
+    margin-top: 200px;
+    display: flex;
+    flex-direction: column;
+
+    .mobile-career-company-box {
+      display: flex;
+      .mobile-career-company-logo {
+        padding-right: 3vw;
+        border-right: 1px solid #ccc;
+        .mobile-career-logo-wrapper {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          overflow: hidden;
+          width: 9vw;
+          height: 9vw;
+          min-width: 120px;
+          min-height: 120px;
+          background-color: #fff;
+          border: 1px solid #ccc;
+          border-radius: 100%;
+          img {
+            vertical-align: middle;
+            width: 70%;
+          }
+        }
+      }
+      .mobile-career-company-detail {
+        padding-bottom: 4rem;
+        padding-left: 4vw;
+        .mobile-career-company-name {
+          padding-bottom: 0.5rem;
+          font-weight: 900;
+          font-size: 1.5rem;
+        }
+        .mobile-career-period {
+          padding-bottom: 1rem;
+          color: #6c757d;
+        }
+        .mobile-career-explain {
+          padding-bottom: 1rem;
+          word-break: keep-all;
+        }
+        .mobile-career-roles {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+          padding-bottom: 2rem;
+          .mobile-career-role {
+            padding: 0.25rem 0.75rem;
+            background-color: #222;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            color: #fff;
+          }
+        }
+        .mobile-career-works {
+          display: flex;
+          flex-direction: column;
+          .mobile-career-work {
+            padding-bottom: 18px;
+            margin-bottom: 0;
+            border-bottom: none;
+            .mobile-career-work-title {
+              padding-left: 0.75rem;
+              margin-bottom: 0.5rem;
+              border-left: 4px solid #222;
+              font-weight: 700;
+              color: #222;
+              font-size: 1rem;
+            }
+            .mobile-career-work-period {
+              padding-bottom: 0.5rem;
+              font-size: 0.875rem;
+              color: #6c757d;
+            }
+            .mobile-career-work-desc {
+              font-size: 0.875rem;
+            }
+          }
+        }
+      }
     }
   }
 }
