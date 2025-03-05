@@ -172,5 +172,8 @@ const modules = [EffectCube, Pagination]
 <style lang="scss">
 .swiper-pagination {
   bottom: -36px !important;
+  .swiper-pagination-bullet-active {
+    background-color: #fff !important;
+  }
 }
 </style>
