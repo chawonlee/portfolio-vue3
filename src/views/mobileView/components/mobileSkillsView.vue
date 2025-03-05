@@ -117,14 +117,10 @@ const modules = [EffectCube, Pagination]
       .mobile-skill-swiper-slide {
         background-color: #f0f0f0;
         .mobile-skill-category {
-          background: linear-gradient(
-            to bottom,
-            #ffffff,
-            #e3e3e3
-          ); // 위쪽 밝은 회색 → 아래쪽 어두운 회색
-          -webkit-background-clip: text; // 텍스트에만 그라데이션 적용
-          -webkit-text-fill-color: transparent; // 텍스트 색상을 투명으로 만들어 그라데이션 적용
-          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); // 살짝 입체감 추가
+          background: linear-gradient(to bottom, #ffffff, #e3e3e3);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
           position: absolute;
           top: -32px;
           left: 50%;

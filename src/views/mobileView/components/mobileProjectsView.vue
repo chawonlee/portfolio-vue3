@@ -14,12 +14,43 @@
         v-for="(project, projectIdx) in projectsData.list"
         :key="projectIdx"
         class="mobile-project-box"
-      ></div>
+      >
+        <h3 class="project-title">{{ project.projectNm }}</h3>
+        <div class="project-skills">
+          <div class="skills-row">
+            <span
+              v-for="(skill, index) in project.skills.slice(0, 3)"
+              :key="index"
+              class="skill-tag"
+            >
+              {{ skill }}
+            </span>
+            <span v-if="project.skills.length > 3" class="more-skills">
+              +{{ project.skills.length - 3 }}개
+            </span>
+          </div>
+        </div>
+        <div class="project-period">{{ project.period }}</div>
+        <p class="project-description">
+          {{ getProjectDescription(project) }}
+        </p>
+      </div>
     </section>
   </section>
 </template>
 <script setup>
 import projectsData from '@/views/mainView/components/data/projectsData.json'
+
+const getProjectDescription = project => {
+  const overview = project.detail.find(item => item.title === '프로젝트 개요')
+  if (!overview) return ''
+
+  const purpose = overview.content.find(item => item.title === '목적')
+  if (!purpose) return ''
+
+  const content = purpose.content[0] || ''
+  return content.length > 70 ? content.slice(0, 70) + '...' : content
+}
 </script>
 <style lang="scss">
 .mobile-projects-wrap {
@@ -73,19 +104,76 @@ import projectsData from '@/views/mainView/components/data/projectsData.json'
     margin: 100px 0 50px 0;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-    gap: 6px;
+    gap: 16px;
     width: 96vw;
     max-width: 800px;
-    height: 80vh;
+    padding: 0 16px;
+
     .mobile-project-box {
-      display: block;
-      border: 1px solid rgba(0, 0, 0, 0.1); /* 연한 테두리 */
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
-      transition: box-shadow 0.3s ease-in-out; /* 그림자 부드러운 애니메이션 */
-      width: 100%;
-      height: 100%;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      background: white;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.3s ease-in-out;
       border-radius: 20px;
+
+      .project-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin: 0 0 12px 0;
+      }
+
+      .project-skills {
+        margin-bottom: 12px;
+
+        .skills-row {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+          align-items: center;
+        }
+
+        .skill-tag {
+          font-size: 12px;
+          padding: 4px 8px;
+          background-color: #f3f4f6;
+          border-radius: 4px;
+          white-space: nowrap;
+          height: 20px;
+          line-height: 20px;
+          display: inline-flex;
+          align-items: center;
+        }
+
+        .more-skills {
+          font-size: 12px;
+          color: #666;
+          height: 20px;
+          line-height: 20px;
+          white-space: nowrap;
+        }
+      }
+
+      .project-period {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 12px;
+      }
+
+      .project-description {
+        font-size: 14px;
+        line-height: 1.5;
+        color: #444;
+        margin: 0;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
     }
+
     .mobile-project-box:hover {
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     }
