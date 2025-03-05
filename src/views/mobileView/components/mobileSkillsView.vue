@@ -10,59 +10,57 @@
       />
     </section>
     <section class="mobile-skills-container">
-      <v-card class="mobile-skill-card" width="90vw" height="70vh">
-        <!-- v-tabs에서 각 카테고리를 표시 -->
-        <v-tabs
-          v-model="tab"
-          class="mobile-skill-card-tabs"
-          bg-color="transparent"
-          color="basil"
-          grow
+      <swiper
+        :effect="'cube'"
+        :loop="true"
+        :parallax="true"
+        :grabCursor="true"
+        :cubeEffect="{
+          shadow: true,
+          slideShadows: true,
+          shadowOffset: 20,
+          shadowScale: 0.94,
+        }"
+        :pagination="true"
+        :modules="modules"
+        class="mobile-skill-swiper"
+      >
+        <swiper-slide
+          v-for="(skills, category) in skillsData"
+          :key="category"
+          class="mobile-skill-swiper-slide"
         >
-          <v-tab
-            v-for="(skills, category) in skillsData"
-            :key="category"
-            :text="category"
-            :value="category"
-          >
-            {{ category }}
-          </v-tab>
-        </v-tabs>
-
-        <!-- 각 탭에 해당하는 내용 -->
-        <v-tabs-window v-model="tab">
-          <v-tabs-window-item
-            v-for="(skills, category) in skillsData"
-            :key="category"
-            :value="category"
-          >
-            <v-card color="transparent" flat style="overflow-y: auto">
-              <!-- 기술 항목들을 skillNm으로 출력 -->
-              <v-card-text class="mobile-skill-card-detail">
-                <div
-                  v-for="(skill, index) in skills"
-                  :key="index"
-                  class="mobile-skill-box"
-                >
-                  <div class="mobile-skill-nm">
-                    <img :src="skill.img" :alt="skill.skillNm" />
-                    <div>{{ skill.skillNm }}</div>
-                  </div>
-                  <div class="mobile-skill-detail">{{ skill.detail }}</div>
-                </div>
-              </v-card-text>
-            </v-card>
-          </v-tabs-window-item>
-        </v-tabs-window>
-      </v-card>
+          <div class="mobile-skill-category">{{ category }}</div>
+          <div class="mobile-skill-scroll-container" v-touch-scroll:vertical>
+            <div
+              v-for="(skill, index) in skills"
+              :key="index"
+              class="mobile-skill-box"
+            >
+              <div class="mobile-skill-nm">
+                <img :src="skill.img" :alt="skill.skillNm" />
+                <div>{{ skill.skillNm }}</div>
+              </div>
+              <div class="mobile-skill-detail">{{ skill.detail }}</div>
+            </div>
+          </div>
+        </swiper-slide>
+      </swiper>
     </section>
   </section>
 </template>
 <script setup>
 import skillsData from '@/views/mainView/components/data/skillData.json'
 import { ref, onBeforeUnmount, onMounted } from 'vue'
+import { Swiper, SwiperSlide } from 'swiper/vue'
+// import required modules
+import { EffectCube, Pagination } from 'swiper/modules'
+// Import Swiper styles
+import 'swiper/css'
+import 'swiper/css/effect-cube'
+import 'swiper/css/pagination'
 
-const tab = ref('Framework & Library')
+const modules = [EffectCube, Pagination]
 </script>
 <style lang="scss">
 .mobile-skills-wrap {
@@ -112,38 +110,67 @@ const tab = ref('Framework & Library')
   }
 
   .mobile-skills-container {
-    .mobile-skill-card {
-      border-radius: 20px !important;
-      background-color: rgb(255, 255, 255, 0.5);
-      .mobile-skill-card-tabs {
-        height: 50px;
-      }
-      .mobile-skill-card-detail {
-        height: calc(70vh - 50px);
-        overflow-y: scroll;
-        .mobile-skill-box {
-          margin: 0 0 10px 0;
-          display: block;
-          padding: 10px;
-          background-color: rgba(255, 255, 255);
-          height: 100px;
-          border-radius: 10px;
-          box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
-          .mobile-skill-nm {
-            display: flex;
-            padding-bottom: 8px;
-            align-items: center;
-            img {
-              width: 25px;
-              padding-right: 6px;
+    padding-top: 18px;
+    .mobile-skill-swiper {
+      width: 86vw;
+      height: 64vh;
+      .mobile-skill-swiper-slide {
+        background-color: #f0f0f0;
+        .mobile-skill-category {
+          background: linear-gradient(
+            to bottom,
+            #ffffff,
+            #e3e3e3
+          ); // 위쪽 밝은 회색 → 아래쪽 어두운 회색
+          -webkit-background-clip: text; // 텍스트에만 그라데이션 적용
+          -webkit-text-fill-color: transparent; // 텍스트 색상을 투명으로 만들어 그라데이션 적용
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); // 살짝 입체감 추가
+          position: absolute;
+          top: -32px;
+          left: 50%;
+          transform: translateX(-50%) skewX(-20deg);
+          text-align: center;
+          white-space: nowrap; // 긴 텍스트 줄바꿈 방지
+          font-size: 1.2rem;
+          font-weight: bold;
+        }
+        .mobile-skill-scroll-container {
+          overflow-y: scroll;
+          height: 100%;
+          .mobile-skill-box {
+            margin: 0 10px 10px 10px;
+            display: block;
+            padding: 10px;
+            background-color: rgba(255, 255, 255);
+            height: 90px;
+            border-radius: 10px;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+            &:first-child {
+              margin: 10px; // 첫 번째 요소만 적용
             }
-          }
-          .mobile-skill-detail {
-            color: #4b5563;
+            .mobile-skill-nm {
+              display: flex;
+              padding-bottom: 8px;
+              align-items: center;
+              font-size: 0.8rem;
+              img {
+                width: 25px;
+                padding-right: 6px;
+              }
+            }
+            .mobile-skill-detail {
+              color: #4b5563;
+              font-size: 0.86rem;
+            }
           }
         }
       }
     }
   }
+}
+</style>
+<style lang="scss">
+.swiper-pagination {
+  bottom: -36px !important;
 }
 </style>
