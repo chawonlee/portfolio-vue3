@@ -21,7 +21,7 @@
     <section class="mobile-home-container">
       <heart />
     </section>
-    <div class="mobile-home-detail">🩷하트를 터뜨려보세요!🩷</div>
+    <div class="mobile-home-detail">🩷하트를 빠르게 터뜨려보세요!🩷</div>
 
     <!-- 별들 -->
     <div ref="starContainer" class="stars"></div>
@@ -88,7 +88,7 @@ const createStars = () => {
   // 기존 별들 삭제
   starContainer.innerHTML = ''
 
-  for (let i = 0; i < 60; i++) {
+  for (let i = 0; i < 80; i++) {
     const star = document.createElement('div')
     star.classList.add('star')
 
@@ -106,7 +106,7 @@ const createStars = () => {
     star.style.left = `${x}%`
     star.style.top = `${y}%`
 
-    const randomDuration = Math.random() * 2 + 3
+    const randomDuration = Math.random() * 1 + 0.8
     star.style.animationDuration = `${randomDuration}s`
     star.style.animationTimingFunction = 'ease-in-out'
     starContainer.appendChild(star)
@@ -136,16 +136,16 @@ const createStars = () => {
     .star {
       z-index: 0;
       position: absolute;
-      width: 2px;
-      height: 2px;
+      width: 2.8px;
+      height: 2.8px;
       background-color: white;
       border-radius: 50%;
       opacity: 0;
-      animation: twinkle 1.5s infinite alternate;
+      animation: twinkle 0.8s infinite alternate;
 
       @keyframes twinkle {
         0% {
-          opacity: 0.2;
+          opacity: 0.1;
         }
         100% {
           opacity: 1;
