@@ -10,7 +10,11 @@
       />
     </section>
     <div class="about-container">
-      <div class="myPhoto" ref="threeContainer"></div>
+      <div class="intro-img">
+        <div class="myPhoto" ref="threeContainer"></div>
+        <div class="drag-instruction">캐릭터를 좌우로 드래그 해보세요</div>
+      </div>
+
       <div class="intro">
         <div class="title">The journey is the reward</div>
         <div class="main-text">
@@ -43,11 +47,6 @@
         </div>
       </div>
     </div>
-    <img
-      src="@/assets/image/dragMe.png"
-      class="drag-instruction"
-      alt="dragMe"
-    />
   </section>
 </template>
 <script setup>
@@ -88,7 +87,7 @@ const zoomSpeed = 0.1
 onMounted(() => {
   // 이미지가 왼쪽에서 서서히 등장
   gsap.fromTo(
-    '.myPhoto',
+    '.intro-img',
     {
       opacity: 0, // 처음에는 투명
       x: -150, // 왼쪽에서 시작
@@ -307,15 +306,6 @@ const stopShuffle = () => {
   align-items: center;
   width: 100vw; /* 원하는 너비 조정 */
   pointer-events: none; /* 마우스 이벤트를 차단 */
-  .drag-instruction {
-    z-index: 1;
-    width: 5vw;
-    min-width: 120px;
-    max-width: 160px;
-    position: absolute;
-    left: 25vw;
-    top: 16vw;
-  }
   .about-title {
     position: relative; /* 자식 요소들의 기준점 설정 */
     font-family: 'Black Han Sans', sans-serif;
@@ -355,28 +345,57 @@ const stopShuffle = () => {
     width: auto;
     justify-content: center;
     align-items: center;
-    grid-template-columns: 400px 700px; /* 첫 번째 칸은 1fr, 두 번째 칸은 2fr */
+    grid-template-columns: 400px 700px;
     grid-template-rows: auto; /* 세로는 1칸 */
     display: grid;
     transform-origin: center bottom; /* 애니메이션 기준점 아래로 설정 */
     will-change: transform, opacity, clip-path; /* 애니메이션 최적화 */
-
-    .myPhoto {
+    .intro-img {
       display: block;
       height: 100%;
       pointer-events: auto !important;
-      z-index: 2;
-      #myPhotoCanvas {
-        -webkit-user-select: auto;
-        -moz-user-select: auto;
-        -ms-user-select: auto;
-        user-select: auto;
-        touch-action: auto !important; /* 터치 이벤트를 허용 */
-        pointer-events: auto !important; /* 마우스 이벤트도 허용 */
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        padding: 0;
+      position: relative;
+      .myPhoto {
+        pointer-events: auto !important;
+        z-index: 2;
+        #myPhotoCanvas {
+          -webkit-user-select: auto;
+          -moz-user-select: auto;
+          -ms-user-select: auto;
+          user-select: auto;
+          touch-action: auto !important; /* 터치 이벤트를 허용 */
+          pointer-events: auto !important; /* 마우스 이벤트도 허용 */
+          width: 100%;
+          height: 100%;
+          transform: scale(0.7);
+          margin: 0;
+          padding: 0;
+        }
+      }
+      .drag-instruction {
+        color: rgba(255, 255, 255, 0.8);
+        z-index: 1;
+        font-size: 1rem;
+        font-weight: 600;
+        text-align: center; /* 텍스트 중앙 정렬 */
+        width: 100%; /* 너비 100%로 설정하여 부모 요소 전체 너비 사용 */
+        position: absolute; /* 절대 위치로 설정 */
+        top: 50%; /* 상단에서 10% 위치에 배치 */
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+        animation: fadeInOut 3s infinite ease-in-out; /* 깜빡이는 애니메이션 추가 */
+        pointer-events: none;
+      }
+      /* 깜빡이는 애니메이션 정의 */
+      @keyframes fadeInOut {
+        0% {
+          opacity: 0.5; /* 시작: 거의 투명 */
+        }
+        50% {
+          opacity: 0.8; /* 중간: 반투명 */
+        }
+        100% {
+          opacity: 0.5; /* 끝: 다시 거의 투명 */
+        }
       }
     }
 
