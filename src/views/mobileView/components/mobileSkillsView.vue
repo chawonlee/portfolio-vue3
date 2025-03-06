@@ -11,6 +11,7 @@
     </section>
     <section class="mobile-skills-container">
       <swiper
+        :pagination="{ clickable: true }"
         :effect="'cube'"
         :loop="true"
         :parallax="true"
@@ -21,7 +22,6 @@
           shadowOffset: 20,
           shadowScale: 0.94,
         }"
-        :pagination="true"
         :modules="modules"
         class="mobile-skill-swiper"
       >
