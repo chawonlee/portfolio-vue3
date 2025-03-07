@@ -146,8 +146,13 @@ onMounted(() => {
       },
     })
   }
+  const calculateHeightRatio = () => {
+    return window.innerWidth > 1920 ? 0.5 : 0.8 //창 크기에 따라 캐릭터 크기 조절
+  }
   const width = threeContainer.value.clientWidth || window.innerWidth
-  const height = threeContainer.value.clientHeight || window.innerHeight
+  const height =
+    (threeContainer.value.clientHeight || window.innerHeight) *
+    calculateHeightRatio()
   // Renderer
   renderer = new THREE.WebGLRenderer()
   renderer.domElement.id = 'myPhotoCanvas'
@@ -195,7 +200,7 @@ onMounted(() => {
       scene.add(model)
 
       // 카메라 위치 조정
-      camera.position.set(0, 1.5, 3)
+      camera.position.set(0, 1.5, 4)
       camera.lookAt(0, 1, 0)
     },
     xhr => {
@@ -352,7 +357,6 @@ const stopShuffle = () => {
     will-change: transform, opacity, clip-path; /* 애니메이션 최적화 */
     .intro-img {
       display: block;
-      height: 100%;
       pointer-events: auto !important;
       position: relative;
       .myPhoto {
@@ -365,9 +369,7 @@ const stopShuffle = () => {
           user-select: auto;
           touch-action: auto !important; /* 터치 이벤트를 허용 */
           pointer-events: auto !important; /* 마우스 이벤트도 허용 */
-          width: 100%;
-          height: 100%;
-          transform: scale(0.7);
+          transform: scale(1);
           margin: 0;
           padding: 0;
         }
