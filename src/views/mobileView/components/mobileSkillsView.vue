@@ -117,18 +117,37 @@ const modules = [EffectCube, Pagination]
       .mobile-skill-swiper-slide {
         background-color: #f0f0f0;
         .mobile-skill-category {
-          background: linear-gradient(to bottom, #ffffff, #e3e3e3);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
           position: absolute;
-          top: -32px;
+          top: -35px;
           left: 50%;
           transform: translateX(-50%) skewX(-20deg);
           text-align: center;
-          white-space: nowrap; // 긴 텍스트 줄바꿈 방지
+          white-space: nowrap;
           font-size: 1.2rem;
           font-weight: bold;
+          padding: 5px 10px;
+          color: #fff; // 기본 텍스트 색상
+          text-shadow:
+            0 0 5px #ffff00,
+            0 0 10px #ffff00,
+            0 0 15px #ffff00,
+            0 0 20px #ffff00,
+            0 0 25px #ffff00,
+            0 0 30px #ffff00,
+            0 0 35px #ffff00; // 형광 노랑 그림자
+          animation: neonGlow 1.5s infinite;
+        }
+        @keyframes neonGlow {
+          from {
+            text-shadow:
+              0 0 1px #fff,
+              0 0 2px #ffff00;
+          }
+          to {
+            text-shadow:
+              0 0 2px #fff,
+              0 0 3px #ffff00;
+          }
         }
         .mobile-skill-scroll-container {
           overflow-y: scroll;
