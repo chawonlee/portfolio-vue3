@@ -112,8 +112,8 @@ const modules = [EffectCube, Pagination]
   .mobile-skills-container {
     padding-top: 18px;
     .mobile-skill-swiper {
-      width: 86vw;
-      height: 64vh;
+      width: 76vw;
+      height: 60vh;
       .mobile-skill-swiper-slide {
         background-color: #f0f0f0;
         .mobile-skill-category {
@@ -138,7 +138,7 @@ const modules = [EffectCube, Pagination]
             display: block;
             padding: 10px;
             background-color: rgba(255, 255, 255);
-            height: 90px;
+            height: 96px;
             border-radius: 10px;
             box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
             &:first-child {
