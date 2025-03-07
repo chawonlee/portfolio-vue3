@@ -7,8 +7,8 @@
         class="icon-transition"
         :class="{ rotate: isMenuOpen }"
         size="x-large"
-      /> </v-btn
-    >👉모바일 버전 구현 중 입니다👈
+      />
+    </v-btn>
     <div class="mobile-marquee" v-if="!isMenuOpen">
       <p class="mobile-marquee-text">
         THIS PORTFOLIO MADE BY Vue | Vuetify | Vue-Toastify | GSAP | Three.js |
@@ -95,7 +95,7 @@ const scrollToSection = id => {
   background: rgba(255, 255, 255, 0.566);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   border-bottom: 1px solid #f8f0fc;
-  z-index: 101;
+  z-index: 100;
   align-items: center;
   .icon-transition {
     transition: transform 0.3s ease-in-out;
