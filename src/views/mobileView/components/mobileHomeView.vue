@@ -2,7 +2,7 @@
   <section class="mobile-home-wrap">
     <section class="mobile-home-title">
       <div class="mobile-home-title-main">
-        <span>웹</span>
+        <span class="color-yellow">웹</span>
         <span class="color-purple">-</span>
         <span class="color-purple">프</span>
         <span class="color-purple">론</span>
@@ -169,15 +169,15 @@ const createStars = () => {
       1px 25px 35px rgba(16, 16, 16, 0.2),
       1px 30px 60px rgba(16, 16, 16, 0.4);
     .mobile-home-title-main {
-      font-family: 'Galmuri9';
+      font-family: 'ClimateCrisisKRVF';
       display: flex;
       justify-content: center;
       align-items: center;
       font-size: clamp(45px, 6vw, 120px);
     }
     .mobile-home-title-sub {
-      font-family: 'GalmuriMono11';
-      color: #ffc107;
+      font-family: 'ClimateCrisisKRVF';
+      color: #ff8383;
       display: flex;
       justify-content: center;
       align-items: center;

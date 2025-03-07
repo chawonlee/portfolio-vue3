@@ -95,7 +95,10 @@ body {
 }
 
 .color-purple {
-  color: #433878;
+  color: #a19ad3;
+}
+.color-yellow {
+  color: #fada7a;
 }
 
 ::selection {
