@@ -208,9 +208,7 @@ onBeforeUnmount(() => {
 .mobile-projects-popup {
   background-color: #f5f7fa;
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* 중앙 정렬 */
+  top: 0;
   width: 100vw; /* 화면 크기에 맞춰 적절한 크기로 설정 */
   height: 100vh;
   z-index: 9999; /* 가장 위로 */
