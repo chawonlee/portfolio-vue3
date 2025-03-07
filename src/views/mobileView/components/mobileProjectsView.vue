@@ -14,6 +14,7 @@
         v-for="(project, projectIdx) in projectsData.list"
         :key="projectIdx"
         class="mobile-project-box"
+        @click="handleProjectClick(project)"
       >
         <h3 class="project-title">{{ project.projectNm }}</h3>
         <div class="project-skills">
@@ -36,11 +37,24 @@
         </p>
       </div>
     </section>
+    <mobileProjectPopup
+      v-if="isPopupOpen"
+      :project="selectedProject"
+      @closePopup="closePopup"
+    />
   </section>
 </template>
 <script setup>
 import projectsData from '@/views/mainView/components/data/projectsData.json'
+import mobileProjectPopup from './components/mobileProjectsPopup.vue'
+import { ref } from 'vue'
 
+//선택한 프로젝트
+const selectedProject = ref(null)
+//팝업 오픈 여부
+const isPopupOpen = ref(false)
+
+//프로젝트 목적 (일부 소개)
 const getProjectDescription = project => {
   const overview = project.detail.find(item => item.title === '프로젝트 개요')
   if (!overview) return ''
@@ -50,6 +64,17 @@ const getProjectDescription = project => {
 
   const content = purpose.content[0] || ''
   return content.length > 70 ? content.slice(0, 70) + '...' : content
+}
+
+//프로젝트 클릭 시 선택된 프로젝트 팝업 오픈
+const handleProjectClick = project => {
+  selectedProject.value = project
+  isPopupOpen.value = true
+}
+
+//팝업 닫기
+const closePopup = () => {
+  isPopupOpen.value = false
 }
 </script>
 <style lang="scss">
@@ -111,6 +136,7 @@ const getProjectDescription = project => {
 
     .mobile-project-box {
       display: flex;
+      cursor: pointer;
       flex-direction: column;
       padding: 20px;
       background: white;
