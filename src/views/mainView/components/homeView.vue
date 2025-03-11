@@ -9,13 +9,9 @@
     />
     <section class="home-title">
       <div class="home-title-main">
-        <span class="color-yellow">웹</span>
-        <span class="color-purple">-</span>
-        <span class="color-purple">프</span>
-        <span class="color-purple">론</span>
-        <span class="color-purple">트</span>
-        <span class="color-purple">엔</span>
-        <span class="color-purple">드</span>
+        <span class="color-purple">W</span>
+        <span class="color-purple">E</span>
+        <span class="color-purple">B</span>
       </div>
       <div class="home-title-sub">
         <span>포</span>

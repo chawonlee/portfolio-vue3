@@ -2,13 +2,9 @@
   <section class="mobile-home-wrap">
     <section class="mobile-home-title">
       <div class="mobile-home-title-main">
-        <span class="color-yellow">웹</span>
-        <span class="color-purple">-</span>
-        <span class="color-purple">프</span>
-        <span class="color-purple">론</span>
-        <span class="color-purple">트</span>
-        <span class="color-purple">엔</span>
-        <span class="color-purple">드</span>
+        <span class="color-purple">W</span>
+        <span class="color-purple">E</span>
+        <span class="color-purple">B</span>
       </div>
       <div class="mobile-home-title-sub">
         <span>포</span>
