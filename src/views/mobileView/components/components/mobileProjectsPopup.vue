@@ -95,7 +95,14 @@
               <div class="content-title">{{ '■ ' + content.title }}</div>
               <ul>
                 <li v-for="(item, iIndex) in content.content" :key="iIndex">
-                  {{ item }}
+                  <template v-if="content.title === '참고 링크'">
+                    <a :href="item" target="_blank" class="reference-link">{{
+                      item
+                    }}</a>
+                  </template>
+                  <template v-else>
+                    {{ item }}
+                  </template>
                 </li>
               </ul>
             </div>

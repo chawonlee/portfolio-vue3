@@ -60,7 +60,17 @@
                         :key="detailIdx"
                         class="item-detail"
                       >
-                        {{ '-' + detail }}
+                        <template v-if="sub.title === '참고 링크'">
+                          <a
+                            :href="detail"
+                            target="_blank"
+                            class="reference-link"
+                            >{{ '-' + detail }}</a
+                          >
+                        </template>
+                        <template v-else>
+                          {{ '-' + detail }}
+                        </template>
                       </div>
                     </div>
                   </div>
