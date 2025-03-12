@@ -299,7 +299,7 @@ onBeforeUnmount(() => {
 }
 
 .mobile-project-section {
-  margin-bottom: 24px;
+  margin-bottom: 32px;
   background-color: #fff;
   padding: 16px;
   border-radius: 12px;
