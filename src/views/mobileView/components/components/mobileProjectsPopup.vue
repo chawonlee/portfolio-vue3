@@ -360,6 +360,13 @@ onBeforeUnmount(() => {
       li {
         font-size: 14px;
         margin-bottom: 4px;
+        word-break: break-all; // 긴 URL이 영역을 벗어나지 않도록 설정
+
+        a {
+          word-wrap: break-word; // URL 줄바꿈 허용
+          display: inline-block; // 인라인 블록으로 변경하여 줄바꿈 지원
+          max-width: 100%; // 부모 요소 너비를 넘지 않도록 제한
+        }
 
         &:last-child {
           margin-bottom: 8px;
